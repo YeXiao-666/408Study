@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>408计算机 · 模拟卷C（跨学科融合拔高卷）</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;background:#f5f5f5;line-height:1.6}.header{background:linear-gradient(135deg,#6a1b9a,#ab47bc);color:#fff;padding:24px;text-align:center}.toolbar{display:flex;justify-content:center;gap:8px;padding:12px;background:#fff;border-bottom:2px solid #e1bee7}.btn{padding:6px 16px;border:none;border-radius:15px;cursor:pointer;font-size:12px;margin:0 4px}.btn-show{background:#e8f5e9;color:#2e7d32}.btn-hide{background:#fce4ec;color:#c62828}.btn-score{background:#e3f2fd;color:#1565c0}.stats{max-width:800px;margin:12px auto;padding:12px;background:#f3e5f5;border-radius:8px;display:flex;justify-content:space-around}.card{max-width:800px;margin:10px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.1)}.card-h{padding:10px 16px;color:#fff;font-weight:700}.ds{background:#7b1fa2}.co{background:#f57c00}.os{background:#5e35b1}.cn{background:#00897b}.q{padding:14px;border-bottom:1px solid #eee}.q-kp{font-size:11px;color:#6a1b9a;background:#f3e5f5;padding:2px 8px;border-radius:8px;display:inline-block;margin:4px 0}.opt{display:block;padding:6px 12px;margin:4px 0;border:1px solid #ddd;border-radius:6px;cursor:pointer}.opt:hover{background:#f3e5f5}.opt.sel{background:#e1bee7;border-color:#6a1b9a}.ans{display:none;padding:10px;background:#f1f8e9;border-left:3px solid #4caf50;margin-top:8px}.big{padding:16px;border:2px solid #ddd;border-radius:8px;margin:12px 0}.analysis{max-width:800px;margin:16px auto;padding:20px;background:#fff9c4;border-radius:8px}pre{background:#f5f5f5;padding:8px;font-size:11px;overflow-x:auto}
+</style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']]}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<div class="header"><h1>📚 408 模拟卷 C · 跨学科融合拔高卷</h1><div>考试时间：180分钟 | 满分：150分 | 特色：软硬件协同+系统综合</div></div>
+
+<div class="toolbar">
+<button class="btn btn-show" onclick="showAll()">✅ 显示答案</button>
+<button class="btn btn-hide" onclick="hideAll()">🙈 隐藏答案</button>
+<button class="btn btn-score" onclick="score()">📊 统计得分</button>
+</div>
+
+<div class="stats">
+<div><div id="tQ">47</div><small>总题数</small></div>
+<div><div id="tA">0</div><small>已答</small></div>
+<div><div id="tC">0</div><small>正确</small></div>
+<div><div id="tW">0</div><small>错误</small></div>
+<div><div id="tS">--/150</div><small>得分</small></div>
+</div>
+
+<!-- DS -->
+<div class="card"><div class="card-h ds">📘 数据结构（1~11题，22分）</div><div class="q-card-body">
+
+<div class="q" data-a="B">
+<div class="q-num">1.</div>
+<div>某 B+ 树阶数为 m=5，则每个非根结点最少包含的关键字个数为（），最多为（）</div>
+<div class="q-kp">【考点：B+树的阶数与关键字数量约束】</div>
+<div class="opt" onclick="sel(this)">A. 1, 4</div><div class="opt" onclick="sel(this)">B. 2, 4</div><div class="opt" onclick="sel(this)">C. 2, 5</div><div class="opt" onclick="sel(this)">D. 3, 5</div>
+<div class="ans">✅ B | 解析：m阶B+树非根结点关键字数范围 [⌈m/2⌉-1, m-1] = [2, 4]</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">2.</div>
+<div>采用开放定址法（线性探测）处理冲突的散列表，装填因子 α = 0.7。查找成功的平均查找长度 ASL 约为（）</div>
+<div class="q-kp">【考点：散列表性能分析 — 装填因子与ASL关系】</div>
+<div class="opt" onclick="sel(this)">A. 1/(1-α)</div><div class="opt" onclick="sel(this)">B. -ln(1-α)/α</div><div class="opt" onclick="sel(this)">C. (1+1/(1-α))/2</div><div class="opt" onclick="sel(this)">D. α/(1-α)</div>
+<div class="ans">✅ C | 解析：线性探测成功ASL ≈ (1+1/(1-α))/2 = (1+1/0.3)/2 ≈ 2.17</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">3.</div>
+<div>关键路径法（CPM）中，若活动 aᵢ 的最早开始时间 e(i) = 15，最晚开始时间 l(i) = 18，则该活动的总时差为（）</div>
+<div class="q-kp">【考点：AOE网关键路径 — 时差计算】</div>
+<div class="opt" onclick="sel(this)">A. 3</div><div class="opt" onclick="sel(this)">B. 5</div><div class="opt" onclick="sel(this)">C. 0</div><div class="opt" onclick="sel(this)">D. 18</div>
+<div class="ans">✅ A | 解析：总时差 = l(i) - e(i) = 18 - 15 = 3</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">4.</div>
+<div>对 n 个元素进行堆排序，建堆的时间复杂度为（），排序总时间复杂度为（）</div>
+<div class="q-kp">【考点：堆排序复杂度分析】</div>
+<div class="opt" onclick="sel(this)">A. O(n log n), O(n log n)</div><div class="opt" onclick="sel(this)">B. O(log n), O(n log n)</div><div class="opt" onclick="sel(this)">C. O(n), O(n)</div><div class="opt" onclick="sel(this)">D. O(n), O(n log n)</div>
+<div class="ans">✅ D | 解析：Floyd 建堆算法自底向上调整，复杂度 O(n)；每次取堆顶后调整 O(log n)，共 n 次 → O(n log n)</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">5.</div>
+<div>红黑树与 AVL 树相比，下列说法正确的是（）</div>
+<div class="q-kp">【考点：平衡二叉搜索树变体对比】</div>
+<div class="opt" onclick="sel(this)">A. 红黑树更严格平衡，查询更快</div><div class="opt" onclick="sel(this)">B. 红黑树插入/删除旋转次数更少，适合频繁修改场景</div><div class="opt" onclick="sel(this)">C. AVL 树高度上限更高</div><div class="opt" onclick="sel(this)">D. 两者空间复杂度不同</div>
+<div class="ans">✅ B | 解析：红黑树是"近似平衡"，允许更大高度换取更少旋转，Linux 内核 rbtree、C++ std::map 均采用红黑树</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">6.</div>
+<div>KMP 算法中，模式串 "ababaca" 的 next 数组（从下标 0 开始）为（）</div>
+<div class="q-kp">【考点：KMP 模式匹配 — next 数组手工计算】</div>
+<div class="opt" onclick="sel(this)">A. [-1,0,0,1,2,3,0]</div><div class="opt" onclick="sel(this)">B. [0,1,1,2,3,4,1]</div><div class="opt" onclick="sel(this)">C. [-1,0,0,1,2,3,1]</div><div class="opt" onclick="sel(this)">D. [0,0,1,2,3,4,0]</div>
+<div class="ans">✅ C | 解析：逐位计算最长公共前后缀长度，注意 next[0]=-1 的约定</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">7.</div>
+<div>对有向图进行拓扑排序，若图中存在环，则（）</div>
+<div class="q-kp">【考点：拓扑排序的存在条件】</div>
+<div class="opt" onclick="sel(this)">A. 无法得到完整的拓扑序列</div><div class="opt" onclick="sel(this)">B. 可以得到多个拓扑序列</div><div class="opt" onclick="sel(this)">C. 拓扑序列唯一</div><div class="opt" onclick="sel(this)">D. 不影响拓扑排序结果</div>
+<div class="ans">✅ A | 解析：拓扑排序仅适用于 DAG（有向无环图），有环则必然存在顶点入度永不为 0</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">8.</div>
+<div>外部排序中，若内存可容纳 M 个记录，文件共 N 个记录，采用置换 - 选择排序产生的初始归并段平均长度为（）</div>
+<div class="q-kp">【考点：外排序 — 置换选择排序特性】</div>
+<div class="opt" onclick="sel(this)">A. M</div><div class="opt" onclick="sel(this)">B. 1.5M</div><div class="opt" onclick="sel(this)">C. N/M</div><div class="opt" onclick="sel(this)">D. 2M</div>
+<div class="ans">✅ D | 解析：置换 - 选择排序利用两个缓冲区，平均产生 2M 长度的初始归并段</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">9.</div>
+<div>n 个顶点的强连通有向图至少有（）条边</div>
+<div class="q-kp">【考点：图的连通性 — 强连通图最小边数】</div>
+<div class="opt" onclick="sel(this)">A. n-1</div><div class="opt" onclick="sel(this)">B. n</div><div class="opt" onclick="sel(this)">C. n(n-1)/2</div><div class="opt" onclick="sel(this)">D. n(n-1)</div>
+<div class="ans">✅ B | 解析：n 个顶点围成一个有向环即可强连通，需要 n 条边</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">10.</div>
+<div>下列排序算法中，<strong>不稳定</strong>的是（）</div>
+<div class="q-kp">【考点：排序算法稳定性辨析】</div>
+<div class="opt" onclick="sel(this)">A. 冒泡排序</div><div class="opt" onclick="sel(this)">B. 归并排序</div><div class="opt" onclick="sel(this)">C. 快速排序</div><div class="opt" onclick="sel(this)">D. 插入排序</div>
+<div class="ans">✅ C | 解析：快速排序的分区操作可能改变相等元素的相对顺序，是不稳定排序</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">11.</div>
+<div>用迪杰斯特拉（Dijkstra）算法求单源最短路径，若图中存在负权边，则（）</div>
+<div class="q-kp">【考点：Dijkstra 算法的适用范围】</div>
+<div class="opt" onclick="sel(this)">A. 可能得到错误结果</div><div class="opt" onclick="sel(this)">B. 一定能得到正确结果</div><div class="opt" onclick="sel(this)">C. 算法无法执行</div><div class="opt" onclick="sel(this)">D. 时间复杂度降低</div>
+<div class="ans">✅ A | 解析：Dijkstra 基于贪心策略，假设一旦确定某点最短路径就不再更新，负权边会破坏这一前提</div>
+</div>
+
+</div></div>
+
+<!-- CO -->
+<div class="card"><div class="card-h co">📙 计组（12~20题，18分）</div><div class="q-card-body">
+
+<div class="q" data-a="B">
+<div class="q-num">12.</div>
+<div>某浮点数格式：阶码 6 位（含 1 位阶符，补码表示），尾数 10 位（含 1 位数符，补码规格化）。则该格式能表示的最大正数为（）</div>
+<div class="q-kp">【考点：自定义浮点格式 — 最大正值计算】</div>
+<div class="opt" onclick="sel(this)">A. $2^{31} \times (1-2^{-9})$</div><div class="opt" onclick="sel(this)">B. $2^{31} \times (1-2^{-9})$</div><div class="opt" onclick="sel(this)">C. $2^{32} \times (1-2^{-10})$</div><div class="opt" onclick="sel(this)">D. $2^{63} \times (1-2^{-9})$</div>
+<div class="ans">✅ B | 解析：阶码 5 位数值→最大 2⁵-1=31；尾数 9 位数值→最大 1-2⁻⁹</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">13.</div>
+<div>CPU 中通用寄存器的数目主要取决于（）</div>
+<div class="q-kp">【考点：寄存器设计 — ISA vs 微架构决策】</div>
+<div class="opt" onclick="sel(this)">A. 主存容量</div><div class="opt" onclick="sel(this)">B. 机器字长</div><div class="opt" onclick="sel(this)">C. 指令集体系结构定义</div><div class="opt" onclick="sel(this)">D. 编译器优化策略</div>
+<div class="ans">✅ C | 解析：通用寄存器数目由 ISA 规定（如 x86-64 有 16 个 GPR），属于软硬件接口的一部分</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">14.</div>
+<div>Cache 采用<strong>写回法（Write-Back）</strong>与<strong>写通法（Write-Through）</strong>相比，优点是（）</div>
+<div class="q-kp">【考点：Cache 写策略对比】</div>
+<div class="opt" onclick="sel(this)">A. 减少主存访问次数，提高效率</div><div class="opt" onclick="sel(this)">B. 实现更简单</div><div class="opt" onclick="sel(this)">C. 数据一致性更好保证</div><div class="opt" onclick="sel(this)">D. 不需要 dirty 位</div>
+<div class="ans">✅ A | 解析：写回法只在块被替换时写回主存，显著减少写操作引起的主存访问</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">15.</div>
+<div>在 MIPS 流水线中，<strong>加载 - 使用冒险（Load-Use Hazard）</strong>发生在（）</div>
+<div class="q-kp">【考点：流水线数据冒险 — LOAD-USE特例】</div>
+<div class="opt" onclick="sel(this)">A. 两条 ALU 指令相邻</div><div class="opt" onclick="sel(this)">B. 分支指令后紧跟 ALU 指令</div><div class="opt" onclick="sel(this)">C. 两条 STORE 指令相邻</div><div class="opt" onclick="sel(this)">D. LOAD 指令后紧跟使用该数据的指令</div>
+<div class="ans">✅ D | 解析：LOAD 在 MEM 阶段才从主存取到数据，而下一条指令在 EX 阶段就需要该数据，即使转发也无法满足时序，必须 stall 1 周期</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">16.</div>
+<div>某磁盘转速为 7200 RPM，平均寻道时间为 4ms，数据传输率为 100MB/s。读取一个 4KB 扇区的平均访问时间约为（）</div>
+<div class="q-kp">【考点：磁盘性能 — 寻道 + 旋转 + 传输延时计算】</div>
+<div class="opt" onclick="sel(this)">A. 4ms</div><div class="opt" onclick="sel(this)">B. 8.04ms</div><div class="opt" onclick="sel(this)">C. 12ms</div><div class="opt" onclick="sel(this)">D. 20ms</div>
+<div class="ans">✅ B | 解析：平均旋转延时 = (60/7200)/2 = 4.17ms；传输 4KB = 4/100000 = 0.04ms；总计≈4+4.17+0.04≈8.2ms</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">17.</div>
+<div>关于<strong>虚拟缓存（Virtually Indexed, Virtually Tagged）</strong>与<strong>物理缓存</strong>，下列说法错误的是（）</div>
+<div class="q-kp">【考点：Cache 索引方式 — VIPT/PIPT/VIVT 对比】</div>
+<div class="opt" onclick="sel(this)">A. 虚拟缓存可以避免 TLB miss 导致的额外访存</div><div class="opt" onclick="sel(this)">B. 虚拟缓存需要同步处理进程切换时的地址空间变化</div><div class="opt" onclick="sel(this)">C. 虚拟缓存不存在同义词（aliasing）问题</div><div class="opt" onclick="sel(this)">D. 现代处理器多采用 VIPT（虚拟索引物理标记）折中方案</div>
+<div class="ans">✅ C | 解析：虚拟缓存的同义词问题是指不同虚拟地址映射到同一物理地址但缓存为多份副本，需要特殊机制（如 page coloring）解决</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">18.</div>
+<div>某 CPU 支持<strong>超标量（Superscalar）</strong>和<strong>乱序执行（Out-of-Order）</strong>，下列说法正确的是（）</div>
+<div class="q-kp">【考点：高级流水线技术 — 超标量/乱序执行概念】</div>
+<div class="opt" onclick="sel(this)">A. 超标量指每周期发射多条指令</div><div class="opt" onclick="sel(this)">B. 乱序执行会改变程序的语义</div><div class="opt" onclick="sel(this)">C. 超标量必须配合乱序执行</div><div class="opt" onclick="sel(this)">D. 乱序执行不需要重排序缓冲区（ROB）</div>
+<div class="ans">✅ A | 解析：超标量通过多发射提高 ILP；乱序执行通过动态调度挖掘指令间并行性，但提交时必须按序以保证语义</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">19.</div>
+<div>CPU 响应 DMA 请求的时机是（）</div>
+<div class="q-kp">【考点：DMA 与 CPU 的总线仲裁时机】</div>
+<div class="opt" onclick="sel(this)">A. 每条指令执行结束后</div><div class="opt" onclick="sel(this)">B. 每个时钟周期结束时</div><div class="opt" onclick="sel(this)">C. 每个机器周期结束时</div><div class="opt" onclick="sel(this)">D. 每个存储周期（访存周期）结束时</div>
+<div class="ans">✅ D | 解析：DMA 通常在 CPU 不使用总线时（如访存间隙）介入，即存储周期结束时申请总线使用权</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">20.</div>
+<div>RISC-V 指令集中，<strong>伪指令（Pseudo-instruction）</strong>的特点是（）</div>
+<div class="q-kp">【考点：RISC-V ISA — 真指令 vs 伪指令】</div>
+<div class="opt" onclick="sel(this)">A. 硬件直接支持，无需转换</div><div class="opt" onclick="sel(this)">B. 汇编器将其展开为一条或多条真指令</div><div class="opt" onclick="sel(this)">C. 执行速度比真指令慢</div><div class="opt" onclick="sel(this)">D. 占用更多编码空间</div>
+<div class="ans">✅ B | 解析：伪指令是为方便编程而设的语法糖，如 `mv rd, rs` 展开为 `addi rd, rs, 0`</div>
+</div>
+
+</div></div>
+
+<!-- OS -->
+<div class="card"><div class="card-h os">📕 操作系统（21~31题，22分）</div><div class="q-card-body">
+
+<div class="q" data-a="C">
+<div class="q-num">21.</div>
+<div>采用<strong>多级反馈队列调度</strong>算法，新到达的进程总是先进入（）</div>
+<div class="q-kp">【考点：多级反馈队列 — 调度策略】</div>
+<div class="opt" onclick="sel(this)">A. 最低优先级队列</div><div class="opt" onclick="sel(this)">B. 中间优先级队列</div><div class="opt" onclick="sel(this)">C. 最高优先级队列</div><div class="opt" onclick="sel(this)">D. 随机选择一个队列</div>
+<div class="ans">✅ C | 解析：多级反馈队列假设新进程可能是 I/O 密集型，先给高优先级短量子，若未完成再降级</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">22.</div>
+<div>文件系统采用<strong>日志结构（Log-Structured File System）</strong>的主要优点是（）</div>
+<div class="q-kp">【考点：LFS日志文件系统特性】</div>
+<div class="opt" onclick="sel(this)">A. 顺序写入，适合 SSD 和大容量 HDD</div><div class="opt" onclick="sel(this)">B. 随机读写性能最优</div><div class="opt" onclick="sel(this)">C. 实现最简单</div><div class="opt" onclick="sel(this)">D. 不需要垃圾回收</div>
+<div class="ans">✅ A | 解析：LFS 将所有写入追加到日志尾部，转化为顺序 I/O，大幅提升写入吞吐</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">23.</div>
+<div>在 Linux 中，<code>mmap()</code> 系统调用创建匿名映射（MAP_ANONYMOUS）通常用于（）</div>
+<div class="q-kp">【考点：mmap 匿名映射的应用场景】</div>
+<div class="opt" onclick="sel(this)">A. 文件 I/O 加速</div><div class="opt" onclick="sel(this)">B. 父子进程共享大内存区域</div><div class="opt" onclick="sel(this)">C. 设备驱动映射</div><div class="opt" onclick="sel(this)">D. 网络套接字缓冲</div>
+<div class="ans">✅ B | 解析：匿名映射不关联文件，常用于 fork() 后的父子进程共享内存（替代 IPC）</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">24.</div>
+<div>页式存储管理中，<strong>抖动（Thrashing）</strong>现象的根本原因是（）</div>
+<div class="q-kp">【考点：虚拟存储性能 — 抖动成因与防治】</div>
+<div class="opt" onclick="sel(this)">A. 页面置换算法选择不当</div><div class="opt" onclick="sel(this)">B. 磁盘速度太慢</div><div class="opt" onclick="sel(this)">C. CPU 速度太快</div><div class="opt" onclick="sel(this)">D. 多道程序度过高，工作集超过可用物理内存</div>
+<div class="ans">✅ D | 解析：抖动的本质是进程频繁缺页，大部分时间花在换页而非执行。解决方法是降低多道程序度或增加物理内存</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">25.</div>
+<div>读者 - 写者问题中，若要求<strong>写者优先</strong>，则实现机制是（）</div>
+<div class="q-kp">【考点：经典同步问题 — 读写锁变种】</div>
+<div class="opt" onclick="sel(this)">A. 写者到达时阻塞后续读者</div><div class="opt" onclick="sel(this)">B. 读者到达时阻塞写者</div><div class="opt" onclick="sel(this)">C. 读写完全平等</div><div class="opt" onclick="sel(this)">D. 只允许一个读者</div>
+<div class="ans">✅ A | 解析：写者优先的实现需要一个额外的信号量控制读者进入，当写者等待时不再允许新读者进入</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">26.</div>
+<div>UNIX 系统中，<strong>管道（pipe）</strong>的本质是（）</div>
+<div class="q-kp">【考点：IPC机制 — 管道的内核实现】</div>
+<div class="opt" onclick="sel(this)">A. 一块共享内存区域</div><div class="opt" onclick="sel(this)">B. 一个特殊的设备文件</div><div class="opt" onclick="sel(this)">C. 内核中的一个环形缓冲区 + 两个文件描述符</div><div class="opt" onclick="sel(this)">D. 一个消息队列</div>
+<div class="ans">✅ C | 解析：pipe() 返回两个 fd（读端和写端），底层是内核管理的固定大小环形缓冲区</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">27.</div>
+<div>RAID 5 至少需要（）块磁盘，其空间利用率为（）</div>
+<div class="q-kp">【考点：磁盘阵列 — RAID5特性】</div>
+<div class="opt" onclick="sel(this)">A. 2块，100%</div><div class="opt" onclick="sel(this)">B. 3块，(n-1)/n</div><div class="opt" onclick="sel(this)">C. 4块，50%</div><div class="opt" onclick="sel(this)">D. 5块，80%</div>
+<div class="ans">✅ B | 解析：RAID5 至少 3 块盘，分布式奇偶校验，可用容量 = (n-1) 块盘的容量</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">28.</div>
+<div>下列关于<strong>Capability-Based Security</strong>（基于能力的安全模型）的描述，正确的是（）</div>
+<div class="q-kp">【考点：操作系统安全 — 能力模型 vs ACL】</div>
+<div class="opt" onclick="sel(this)">A. 权限与对象引用绑定，不可伪造</div><div class="opt" onclick="sel(this)">B. 每个对象维护一个访问控制列表</div><div class="opt" onclick="sel(this)">C. 用户身份是唯一认证依据</div><div class="opt" onclick="sel(this)">D. 必须有中央授权服务器</div>
+<div class="ans">✅ A | 解析：能力模型中，持有 capability token 即拥有对应权限，token 本身是不可伪造的内核对象引用</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">29.</div>
+<div>实时操作系统（RTOS）中，<strong>最坏情况执行时间（WCET）</strong>分析的目的是（）</div>
+<div class="q-kp">【考点：实时系统 — WCET分析意义】</div>
+<div class="opt" onclick="sel(this)">A. 优化平均性能</div><div class="opt" onclick="sel(this)">B. 降低功耗</div><div class="opt" onclick="sel(this)">C. 减少代码体积</div><div class="opt" onclick="sel(this)">D. 保证任务在最坏情况下也能满足截止期</div>
+<div class="ans">✅ D | 解析：硬实时系统必须证明所有任务在任何情况下都能按时完成，WCET 是关键指标</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">30.</div>
+<div>容器技术（如 Docker）与虚拟机的主要区别是（）</div>
+<div class="q-kp">【考点：虚拟化技术 — 容器vsVM架构差异】</div>
+<div class="opt" onclick="sel(this)">A. 容器不支持网络隔离</div><div class="opt" onclick="sel(this)">B. 虚拟机启动更快</div><div class="opt" onclick="sel(this)">C. 容器共享宿主机内核，无 Guest OS 开销</div><div class="opt" onclick="sel(this)">D. 虚拟机资源利用率更高</div>
+<div class="ans">✅ C | 解析：容器通过 namespace 和 cgroups 实现隔离，共享宿主内核；VM 需要完整的 Guest OS 和 Hypervisor</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">31.</div>
+<div>Linux 的<strong>完全公平调度器（CFS）</strong>的核心思想是（）</div>
+<div class="q-kp">【考点：Linux调度器 — CFS算法原理】</div>
+<div class="opt" onclick="sel(this)">A. 基于优先级的抢占式轮转</div><div class="opt" onclick="sel(this)">B. 使用红黑树维护进程的虚拟运行时间 vruntime，选择 vruntime 最小的进程运行</div><div class="opt" onclick="sel(this)">C. 多级反馈队列</div><div class="opt" onclick="sel(this)">D. 时间片固定为 100ms</div>
+<div class="ans">✅ B | 解析：CFS 用 vruntime 量化每个进程的"应得 CPU 时间"，始终运行 vruntime 最小的进程以实现长期公平</div>
+</div>
+
+</div></div>
+
+<!-- CN -->
+<div class="card"><div class="card-h cn">📗 计网（32~40题，18分）</div><div class="q-card-body">
+
+<div class="q" data-a="C">
+<div class="q-num">32.</div>
+<div>TCP 的<strong>拥塞避免（Congestion Avoidance）</strong>阶段，cwnd 的增长方式是（）</div>
+<div class="q-kp">【考点：TCP 拥塞控制 — AIMD 算法】</div>
+<div class="opt" onclick="sel(this)">A. 指数增长</div><div class="opt" onclick="sel(this)">B. 保持不变</div><div class="opt" onclick="sel(this)">C. 线性增长（每 RTT 加 1 MSS）</div><div class="opt" onclick="sel(this)">D. 随机波动</div>
+<div class="ans">✅ C | 解析：拥塞避免采用加法增大（AIMD 中的 AI），每个 RTT 增加 1 个 MSS</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">33.</div>
+<div>BGP 协议中，<strong>iBGP</strong>与<strong>eBGP</strong>的区别是（）</div>
+<div class="q-kp">【考点：BGP — 内部 vs 外部 BGP】</div>
+<div class="opt" onclick="sel(this)">A. iBGP 在同一 AS 内，eBGP 在不同 AS 之间</div><div class="opt" onclick="sel(this)">B. iBGP 使用 TCP，eBGP 使用 UDP</div><div class="opt" onclick="sel(this)">C. iBGP 不支持路由聚合</div><div class="opt" onclick="sel(this)">D. eBGP 优先级更低</div>
+<div class="ans">✅ A | 解析：iBGP 用于 AS 内部路由器交换 BGP 路由，eBGP 用于 AS 之间</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">34.</div>
+<div>HTTPS 中，TLS 握手过程的目的是（）</div>
+<div class="q-kp">【考点：TLS/SSL — 安全握手流程】</div>
+<div class="opt" onclick="sel(this)">A. 仅验证服务器身份</div><div class="opt" onclick="sel(this)">B. 协商加密套件、交换密钥、双向认证（可选）</div><div class="opt" onclick="sel(this)">C. 压缩 HTTP 头部</div><div class="opt" onclick="sel(this)">D. 建立 TCP 连接</div>
+<div class="ans">✅ B | 解析：TLS 握手完成密码套件协商、证书验证、密钥交换（如 ECDHE）、生成会话密钥</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">35.</div>
+<div>关于<strong>QUIC 协议</strong>（HTTP/3的基础），下列说法错误的是（）</div>
+<div class="q-kp">【考点：QUIC/HTTP3 — 新一代传输协议特性】</div>
+<div class="opt" onclick="sel(this)">A. 基于 UDP 实现可靠传输</div><div class="opt" onclick="sel(this)">B. 支持 0-RTT 连接建立</div><div class="opt" onclick="sel(this)">C. 内置加密（TLS 1.3）</div><div class="opt" onclick="sel(this)">D. 队头阻塞问题比 TCP 更严重</div>
+<div class="ans">✅ D | 解析：QUIC 通过多路复用 + 独立流解决了 TCP 的队头阻塞问题，是其核心优势之一</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">36.</div>
+<div>SDN（软件定义网络）的核心思想是（）</div>
+<div class="q-kp">【考点：SDN — 控制平面与数据平面分离】</div>
+<div class="opt" onclick="sel(this)">A. 控制平面与数据平面分离，集中式控制器管理</div><div class="opt" onclick="sel(this)">B. 所有路由器独立计算路由</div><div class="opt" onclick="sel(this)">C. 只支持 OpenFlow 协议</div><div class="opt" onclick="sel(this)">D. 必须使用专用硬件交换机</div>
+<div class="ans">✅ A | 解析：SDN 将控制逻辑从设备中抽离到控制器，实现网络可编程和集中管理</div>
+</div>
+
+<div class="q" data-a="C">
+<div class="q-num">37.</div>
+<div>NAT  traversal 技术中，<strong>STUN</strong>协议的作用是（）</div>
+<div class="q-kp">【考点：NAT穿透 — STUN/TURN/ICE机制】</div>
+<div class="opt" onclick="sel(this)">A. 中继转发数据</div><div class="opt" onclick="sel(this)">B. 分配公网 IP 地址</div><div class="opt" onclick="sel(this)">C. 帮助客户端发现自己的 NAT 类型和公网映射地址</div><div class="opt" onclick="sel(this)">D. 加密 P2P 通信</div>
+<div class="ans">✅ C | 解析：STUN 服务器告诉客户端"你从我的视角看是哪个 IP:Port"，用于打洞建立 P2P 连接</div>
+</div>
+
+<div class="q" data-a="B">
+<div class="q-num">38.</div>
+<div>无线局域网 802.11 中，<strong>隐藏终端问题</strong>的解决方案是（）</div>
+<div class="q-kp">【考点：无线 MAC — 隐藏终端/RTS-CTS机制】</div>
+<div class="opt" onclick="sel(this)">A. 增加发射功率</div><div class="opt" onclick="sel(this)">B. RTS/CTS 握手机制</div><div class="opt" onclick="sel(this)">C. 频分多址 FDMA</div><div class="opt" onclick="sel(this)">D. 增大帧长度</div>
+<div class="ans">✅ B | 解析：RTS-CTS 通过预约信道告知隐藏终端"我要发了，请保持沉默"</div>
+</div>
+
+<div class="q" data-a="A">
+<div class="q-num">39.</div>
+<div>MPLS（多协议标签交换）中，数据包转发依据是（）</div>
+<div class="q-kp">【考点：MPLS — 标签交换原理】</div>
+<div class="opt" onclick="sel(this)">A. 固定长度的标签</div><div class="opt" onclick="sel(this)">B. 目的 IP 地址</div><div class="opt" onclick="sel(this)">C. MAC 地址</div><div class="opt" onclick="sel(this)">D. 端口号</div>
+<div class="ans">✅ A | 解析：MPLS 在 IP 层和链路层之间添加 shim 头，路由器根据标签查 LFIB 转发表高速转发</div>
+</div>
+
+<div class="q" data-a="D">
+<div class="q-num">40.</div>
+<div>内容分发网络（CDN）的核心技术不包括（）</div>
+<div class="q-kp">【考点：CDN — 内容分发架构】</div>
+<div class="opt" onclick="sel(this)">A. DNS 智能解析（GSLB）</div><div class="opt" onclick="sel(this)">B. 边缘节点缓存</div><div class="opt" onclick="sel(this)">C. 负载均衡</div><div class="opt" onclick="sel(this)">D. 端到端加密</div>
+<div class="ans">✅ D | 解析：CDN 关注内容就近分发，加密是 TLS 层的职责，不是 CDN 的核心技术</div>
+</div>
+
+</div></div>
+
+<!-- 综合题精简版 -->
+<h2 style="text-align:center;margin:20px;">二、综合应用题（41~47题，70分）</h2>
+
+<div class="big">
+<strong>41.（DS，12 分）</strong>设计算法判断两棵二叉树是否同构（结构相同且对应结点值相等）。要求写出递归和迭代两种实现思路。
+<div class="ans"><strong>要点：</strong>递归：同时遍历两棵树比较；迭代：双队列同步 BFS。时间复杂度 O(min(n1,n2))。</div>
+</div>
+
+<div class="big">
+<strong>42.（DS，10 分）</strong>给定一个整数数组，找出其中<strong>最长递增子序列（LIS）</strong>的长度。分别给出 O(n²) DP 解法和 O(n log n) 贪心 + 二分查找解法。
+<div class="ans"><strong>O(n²)DP：</strong>dp[i]=max(dp[j]+1) for j<i and a[j]<a[i]。<strong>O(n log n)：</strong>维护 tails 数组，tails[k] 存储长度为 k+1 的 LIS 的最小末尾元素。</div>
+</div>
+
+<div class="big">
+<strong>43.（CO，13 分）</strong>某 5 级流水线 CPU，分支预测准确率为 90%，错误预测惩罚为 3 个周期。若程序中分支指令占比 20%，求实际 CPI（理想 CPI=1）。
+<div class="ans"><strong>解：</strong>额外 CPI = 0.2 × (1-0.9) × 3 = 0.06 → 实际 CPI = 1.06</div>
+</div>
+
+<div class="big">
+<strong>44.（CO，12 分）</strong>设计一个 2 路组相联 Cache 的 Verilog 模块框架，包含地址解析、Tag 比较、LRU 更新逻辑。
+<div class="ans"><strong>要点：</strong>input addr[31:0], clk, rst; output hit, data; reg tag_ram, lru_bit; always@(posedge clk) begin 地址解析→查表→比较→更新 LRU end</div>
+</div>
+
+<div class="big">
+<strong>45.（OS，13 分）</strong>某系统采用<br>
+<code>ext4</code> 文件系统，盘块大小 4KB，inode 中含 12 个直接块、1 个间接块、1 个双重间接块。文件大小为 1GB 时，索引结构占用多少盘块？
+<div class="ans"><strong>解：</strong>1GB/4KB = 262144 个数据块。12 个直接块不够，需启用间接块。1 个间接块可指向 1024 个数据块... 需计算完整三级索引覆盖范围。</div>
+</div>
+
+<div class="big">
+<strong>46.（OS，10 分）</strong>设计一个基于 FUSE（Filesystem in Userspace）的加密文件系统框架，说明 mount/unmount 流程和加解密钩子的位置。
+<div class="ans"><strong>要点：</strong>FUSE 提供 userspace 回调接口；read/write 时调用 crypto 库（如 AES-256-GCM）；密钥从 keyring 或 TPM 获取。</div>
+</div>
+
+<div class="big">
+<strong>47.（CN，9 分）</strong>某数据中心采用 Fat-Tree 拓扑（k=4），计算核心层、汇聚层、接入层交换机数量及总带宽。若采用 SDN 控制，画出控制器与交换机的连接示意图。
+<div class="ans"><strong>解：</strong>k=4 时，核心层 k²/4=4 台，汇聚层 k×k/2=8 台，接入层 k×k/2=8 台。总带宽 = 各层链路带宽之和。SDN 控制器通过 OpenFlow 通道连接所有交换机。</div>
+</div>
+
+<!-- 考点分析 -->
+<div class="analysis">
+<h3 style="text-align:center;color:#f57f17;">📋 模拟卷 C · 跨学科融合特色分析</h3>
+<p><strong>卷 C 定位：</strong>在前两套基础上进一步提升难度，侧重跨科目知识联动和前沿技术视野。</p>
+<ul style="margin:10px 20px">
+<li><strong>DS+OS 融合：</strong>第 41/42 题（树同构/LIS）是经典算法，第 45/46 题（ext4/FUSE）结合文件系统实战</li>
+<li><strong>CO+OS 融合：</strong>第 43 题（流水线 CPI 计算）需要理解硬件性能对 OS 调度的影响</li>
+<li><strong>CN+ 前沿：</strong>QUIC/SDN/MPLS/CDN 等现代网络技术纳入考查范围</li>
+<li><strong>工程实践导向：</strong>Verilog 框架、FUSE 加密文件系统、Fat-Tree 拓扑设计均来源于真实工程项目</li>
+</ul>
+<p><strong>备考建议：</strong>卷 C 适合冲刺高分考生。除掌握基础考点外，需阅读 Linux 内核源码片段、了解 RISC-V/MIPS 指令集手册、熟悉 Wireshark 抓包分析 TCP/TLS 流程。</p>
+</div>
+
+<script>
+function sel(e){var p=e.parentElement.querySelectorAll('.opt');p.forEach(function(x){x.classList.remove('sel')});e.classList.add('sel');document.getElementById('tA').textContent=document.querySelectorAll('.opt.sel').length}
+function showAll(){document.querySelectorAll('.ans').forEach(function(a){a.style.display='block'})}
+function hideAll(){document.querySelectorAll('.ans').forEach(function(a){a.style.display='none'})}
+function score(){var c=0,w=0;document.querySelectorAll('.q[data-a]').forEach(function(q){var s=q.querySelector('.opt.sel');if(s){var ans=q.getAttribute('data-a');if(s.textContent.trim().charAt(0)===ans)c++;else w++;s.classList.add(c>0?'correct':'wrong')}});document.getElementById('tC').textContent=c;document.getElementById('tW').textContent=w;document.getElementById('tS').textContent=(c*2)+'/80';showAll()}
+</script>
+</body>
+</html>

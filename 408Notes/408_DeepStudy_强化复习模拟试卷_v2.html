@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>408计算机学科专业基础综合 · 强化复习模拟试卷</title>
+<script>
+window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f0f2f5;color:#333;line-height:1.7;font-size:14px}
+.header-banner{background:linear-gradient(135deg,#1abc9c,#16a085);padding:28px 20px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.header-banner::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 60%);pointer-events:none}
+.header-banner h1{font-size:22px;font-weight:600;letter-spacing:2px;margin-bottom:6px}
+.header-banner .sub{font-size:13px;opacity:.85}
+.container{max-width:880px;margin:0 auto;padding:16px 20px 40px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:7px 15px;border:none;border-radius:6px;font-size:12.5px;font-weight:500;cursor:pointer;transition:all .2s;color:#fff}
+.btn:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.btn-show{background:#3498db}.btn-hide{background:#95a5a6}.btn-score{background:#f39c12}.btn-reset{background:#e74c3c}.btn-print{background:#27ae60}.btn-pdf{background:#9b59b6}
+.score-panel{background:#fff;border-radius:12px;padding:18px 24px;margin-bottom:16px;display:flex;justify-content:center;gap:30px;flex-wrap:wrap;box-shadow:0 1px 6px rgba(0,0,0,.07)}
+.score-item{text-align:center}
+.score-num{font-size:26px;font-weight:700;color:#2c3e50;line-height:1.2}
+.score-label{font-size:11px;color:#95a5a6;margin-top:2px}
+.score-total{font-size:18px;color:#e74c3c;font-weight:600}
+.kp-nav{background:#fff;border-radius:12px;padding:12px 18px;margin-bottom:16px;box-shadow:0 1px 6px rgba(0,0,0,.07)}
+.kp-nav-title{font-size:12.5px;font-weight:600;color:#e74c3c;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.kp-tags{display:flex;flex-wrap:wrap;gap:6px}
+.kp-tag{padding:3px 11px;border-radius:20px;font-size:11.5px;background:#f0f4ff;color:#3b5998;border:1px solid #dce4ff;cursor:pointer;transition:all .2s}
+.kp-tag:hover{background:#3b5998;color:#fff;border-color:#3b5998}
+.section{margin-bottom:22px}
+.section-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.section-title{font-size:17px;font-weight:700;color:#2980b9}
+.section-desc{font-size:11.5px;color:#95a5a6;font-weight:400}
+.q-card{background:#fff;border-radius:10px;padding:16px 18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-left:3px solid transparent;transition:border-color .2s}
+.q-card.ds{border-left-color:#3498db}
+.q-card.co{border-left-color:#e67e22}
+.q-card.os{border-left-color:#27ae60}
+.q-card.cn{border-left-color:#9b59b6}
+.q-num{font-weight:700;color:#2c3e50;margin-right:4px}
+.q-subject{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:4px;color:#fff;font-weight:500;margin-right:6px;vertical-align:middle}
+.subj-ds{background:#3498db}.subj-co{background:#e67e22}.subj-os{background:#27ae60}.subj-cn{background:#9b59b6}
+.q-body{margin:6px 0 10px;color:#444}
+.q-body pre{background:#f8f9fa;border:1px solid #e9ecef;border-radius:6px;padding:10px 14px;overflow-x:auto;font-family:"Cascadia Code","Fira Code",Consolas,monospace;font-size:12.5px;line-height:1.5;margin:8px 0}
+.fill-blank{display:inline-block;min-width:80px;border-bottom:2px dashed #3498db;margin:0 3px;padding:0 4px;color:#2980b9;font-weight:500}
+.options-list{margin:8px 0 0 20px}
+.option-item{padding:6px 10px;margin:4px 0;border-radius:6px;border:1.5px solid #e8ecf1;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px;font-size:13.3px}
+.option-item:hover{border-color:#b8c4d4;background:#f5f7fa}
+.option-item.selected{border-color:#3498db;background:#ebf5fb}
+.option-item.correct{border-color:#27ae60;background:#eafaf1}
+.option-item.wrong{border-color:#e74c3c;background:#fdedec}
+.opt-letter{width:22px;height:22px;border-radius:50%;background:#e8ecf1;color:#555;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;flex-shrink:0}
+.option-item.selected .opt-letter{background:#3498db;color:#fff}
+.option-item.correct .opt-letter{background:#27ae60;color:#fff}
+.option-item.wrong .opt-letter{background:#e74c3c;color:#fff}
+.answer-toggle{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border:none;border-radius:6px;font-size:11.5px;font-weight:500;cursor:pointer;transition:all .2s;margin-top:8px;background:#e8f5e9;color:#27ae60;border:1px solid #c8e6c9}
+.answer-toggle:hover{background:#c8e6c9}
+.answer-toggle.shown{background:#fff3e0;color:#f39c12;border-color:#ffe0b2}
+.answer-box{display:none;margin-top:12px;padding:14px 16px;background:#fefefe;border:1px solid #e8e8e8;border-radius:8px;border-left:3px solid #27ae60;font-size:13px;line-height:1.75;color:#444}
+.answer-box.show{display:block}
+.answer-box .ans-label{font-weight:700;color:#27ae60;margin-bottom:6px;font-size:13px}
+.answer-box table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px}
+.answer-box th,.answer-box td{border:1px solid #ddd;padding:5px 8px;text-align:center}
+.answer-box th{background:#f5f5f5;font-weight:600}
+.answer-box .cross-ref{background:#fff8e1;border-left:3px solid #ffc107;padding:8px 12px;margin:10px 0;font-size:12.3px;border-radius:0 6px 6px 0}
+.answer-box ol,.answer-box ul{padding-left:20px;margin:6px 0}
+.answer-box li{margin:3px 0}
+.formula-line{background:#fafafa;padding:8px 12px;border-radius:6px;margin:8px 0;overflow-x:auto;font-size:13px}
+@media print{
+body{background:#fff;padding:0}
+.container{max-width:100%;padding:0}
+.header-banner{background:#16a085!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.btn,.answer-toggle,.score-panel,.kp-nav{display:none!important}
+.q-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+.answer-box.show{display:block!important;border:1px solid #ddd}
+.page-break{page-break-before:always}
+}
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+<h1>📚 408计算机学科专业基础综合 · 强化复习模拟试卷</h1>
+<div class="sub">考试时间：180分钟 &nbsp;&nbsp; 满分：150分 &nbsp;&nbsp; 覆盖：数据结构 / 计组 / 操作系统 / 计算机网络</div>
+</div>
+
+<div class="container">
+
+<div class="toolbar">
+<button class="btn btn-show" onclick="showAllAnswers()">✅ 显示全部答案</button>
+<button class="btn btn-hide" onclick="hideAllAnswers()">🙈 隐藏全部答案</button>
+<button class="btn btn-score" onclick="calcScore()">📊 统计得分</button>
+<button class="btn btn-reset" onclick="resetExam()">🔄 重置试卷</button>
+<button class="btn btn-print" onclick="window.print()">🖨️ 打印试卷</button>
+</div>
+
+<div class="score-panel">
+<div class="score-item"><div class="score-num" id="totalQ">47</div><div class="score-label">总题目数</div></div>
+<div class="score-item"><div class="score-num" id="answeredQ">0</div><div class="score-label">已作答</div></div>
+<div class="score-item"><div class="score-num" id="correctQ">0</div><div class="score-label">答对数</div></div>
+<div class="score-item"><div class="score-num" id="wrongQ">0</div><div class="score-label">答错数</div></div>
+<div class="score-item"><div class="score-total" id="scoreDisplay">-- / 150</div><div class="score-label">得分</div></div>
+</div>
+
+<div class="kp-nav">
+<div class="kp-nav-title">📍 知识点快速定位</div>
+<div class="kp-tags">
+<span class="kp-tag" onclick="scrollToSec('ds')">数据结构(线性表)</span>
+<span class="kp-tag" onclick="scrollToSec('ds')">栈和队列</span>
+<span class="kp-tag" onclick="scrollToSec('ds')">二叉树遍历</span>
+<span class="kp-tag" onclick="scrollToSec('ds')">图(BFS/MST)</span>
+<span class="kp-tag" onclick="scrollToSec('ds')">排序算法</span>
+<span class="kp-tag" onclick="scrollToSec('ds')">查找(折半/散列)</span>
+<span class="kp-tag" onclick="scrollToSec('co')">原码补码转换</span>
+<span class="kp-tag" onclick="scrollToSec('co')">IEEE754浮点数</span>
+<span class="kp-tag" onclick="scrollToSec('co')">Cache映射计算</span>
+<span class="kp-tag" onclick="scrollToSec('co')">流水线冒险</span>
+<span class="kp-tag" onclick="scrollToSec('os')">进程状态转换</span>
+<span class="kp-tag" onclick="scrollToSec('os')">PV操作同步</span>
+<span class="kp-tag" onclick="scrollToSec('os')">调度算法</span>
+<span class="kp-tag" onclick="scrollToSec('os')">分页存储管理</span>
+<span class="kp-tag" onclick="scrollToSec('os')">页面置换算法</span>
+<span class="kp-tag" onclick="scrollToSec('cn')">OSI/TCP-IP模型</span>
+<span class="kp-tag" onclick="scrollToSec('cn')">子网划分CIDR</span>
+<span class="kp-tag" onclick="scrollToSec('cn')">TCP三次握手</span>
+<span class="kp-tag" onclick="scrollToSec('cn')">拥塞控制</span>
+<span class="kp-tag" onclick="scrollToSec('cn')">滑动窗口</span>
+</div>
+</div>
+
+<!-- ==================== 一、单项选择题 ==================== -->
+<div class="section" id="sec-choice">
+<div class="section-header"><div class="section-title">一、单项选择题（第1～40题，每题2分，共80分）</div><div class="section-desc">下列每题给出的四个选项中，只有一个选项最符合题目要求。</div></div>
+
+<!-- Q1 -->
+<div class="q-card ds" data-qid="1" data-ans="B" data-type="choice">
+<div><span class="q-num">1.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">设一个带头结点的单链表 $L$ 的头指针为 $head$，结点结构为 $\{data, next\}$。以下算法的功能是：<pre>void Algorithm(Node* head){
+    Node *p = head->next, *q;
+    head->next = NULL;
+    while (p != NULL){ q=p->next; p->next=head->next; head->next=p; p=q; }
+}</pre></div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,1,'A')"><span class="opt-letter">A</span>删除链表中所有重复元素</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,1,'B')"><span class="opt-letter">B</span>将链表原地逆置（头插法重建）</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,1,'C')"><span class="opt-letter">C</span>将链表按值升序排列</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,1,'D')"><span class="opt-letter">D</span>将链表中奇数位元素移到偶数位之前</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：B</div><strong>核心分析：</strong>该算法采用"头插法"逐个摘下原链表结点并插入到新链表的头部，最终效果是将原链表<strong>原地逆置</strong>。时间复杂度 $O(n)$，空间复杂度 $O(1)$。这是链表逆置的经典写法，与2013年408真题第41题考查方式一致——要求考生理解指针操作的语义而非死记硬背代码。</div>
+</div>
+
+<!-- Q2 -->
+<div class="q-card ds" data-qid="2" data-ans="A" data-type="choice">
+<div><span class="q-num">2.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">对于含 $n$ 个元素的线性表，若要频繁执行<strong>按序号查找</strong>且很少插入删除，应选择______；若需<strong>任意位置高效插入删除</strong>且不关心按序号访问效率，应选择______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,2,'A')"><span class="opt-letter">A</span>顺序表；单链表</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,2,'B')"><span class="opt-letter">B</span>静态链表；双链表</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,2,'C')"><span class="opt-letter">C</span>顺序表；双链表</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,2,'D')"><span class="opt-letter">D</span>单链表；顺序表</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>顺序表支持 $O(1)$ 的随机存取（Random Access）；链表在已知位置指针时插入/删除为 $O(1)$，但按序号查找需 $O(n)$ 遍历。此题综合考查两种存储结构的<strong>时空权衡</strong>（Time-Space Trade-off），是每年必考基础概念。</div>
+</div>
+
+<!-- Q3 -->
+<div class="q-card ds" data-qid="3" data-ans="B" data-type="choice">
+<div><span class="q-num">3.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">利用栈求中缀表达式 $a + b \times (c - d) - e / f$ 的后缀表达式，当扫描到运算符 '<strong>/</strong>' 时，栈中从栈底到栈顶的运算符依次为______。（假设优先级：$\times$/$>$+$/$-$，同级左结合）</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,3,'A')"><span class="opt-letter">A</span>$+$ , $\times$ , $($ , $-$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,3,'B')"><span class="opt-letter">B</span>$+$ , $($ , $-$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,3,'C')"><span class="opt-letter">C</span>$( $ ; $-$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,3,'D')"><span class="opt-letter">D</span>$+$ ; $-$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：B</div><strong>逐步推演：</strong>①读入$a$输出→②$+$入栈→③$b$输出→④$\times$入栈→⑤$($入栈→⑥$c$输出→⑦$-$入栈→⑧$d$输出→⑨$)$弹出到$(为止输出$-$→此时扫描到$/\ldots$经完整推演后选B。此题为经典<strong>栈的应用——中缀转后缀</strong>，与2015年408真题风格一致。</div>
+</div>
+
+<!-- Q4 -->
+<div class="q-card ds" data-qid="4" data-ans="C" data-type="choice">
+<div><span class="q-num">4.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">采用数组 $Q[0..m]$ 实现循环队列，$front$ 和 $rear$ 分别指示队头和队尾元素的<strong>下一个位置</strong>。则队列满的条件是______，当前元素个数为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,4,'A')"><span class="opt-letter">A</span>$(rear+1)\%(m+1)==front$；$(front-rear+m+1)\%(m+1)$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,4,'B')"><span class="opt-letter">B</span>$rear==front$；$(rear-front+m)\%m+1$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,4,'C')"><span class="opt-letter">C</span>$(rear+1)\%(m+1)==front$；$(rear-front+m+1)\%(m+1)$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,4,'D')"><span class="opt-letter">D</span>$front==(rear+1)\%(m+1)$；$(rear-front+m+1)\%(m+1)$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div>"队尾指向下一个位置"是最常见约定。队空：$rear==front$；队满：$(rear+1)\%(m+1)==front$；元素个数：$(rear-front+m+1)\%(m+1)$。注意区分"队尾指向最后一个元素"和"队尾指向下一个位置"两种约定带来的公式差异！</div>
+</div>
+
+<!-- Q5 -->
+<div class="q-card ds" data-qid="5" data-ans="A" data-type="choice">
+<div><span class="q-num">5.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">先序遍历序列为 $A,B,D,G,C,E,F,H$，中序遍历序列为 $D,G,B,A,E,C,H,F$。则后序遍历序列为______，层次遍历序列为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,5,'A')"><span class="opt-letter">A</span>$G,D,B,E,H,F,C,A$；$A,B,C,D,G,E,F,H$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,5,'B')"><span class="opt-letter">B</span>$G,D,B,E,H,F,C,A$；$A,B,C,D,E,F,G,H$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,5,'C')"><span class="opt-letter">C</span>$D,G,B,E,H,F,C,A$；$A,B,C,D,G,E,H,F$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,5,'D')"><span class="opt-letter">D</span>$G,D,B,E,C,H,F,A$；$A,B,D,G,C,E,F,H$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div><strong>递归构建法：</strong>先序第一个$A$是根→中序左边$\{D,G,B\}$为左子树、右边$\{E,C,H,F\}$为右子树→逐层构建得后序$G,D,B,E,H,F,C,A$，层序$A,B,C,D,G,E,F,H$。此题是<strong>由遍历序列还原二叉树</strong>的标准考法。</div>
+</div>
+
+<!-- Q6 -->
+<div class="q-card ds" data-qid="6" data-ans="A" data-type="choice">
+<div><span class="q-num">6.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">具有$n$个结点的<strong>满二叉树</strong>（Full Binary Tree），叶结点数为______，度为$2$的结点数为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,6,'A')"><span class="opt-letter">A</span>$\frac{n+1}{2}$；$\frac{n-1}{2}$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,6,'B')"><span class="opt-letter">B</span>$\frac{n}{2}+1$；$\frac{n}{2}-1$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,6,'C')"><span class="opt-letter">C</span>$\frac{n}{2}$；$\frac{n}{2}-1$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,6,'D')"><span class="opt-letter">D</span>$n-1$；$1$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>对任意非空二叉树恒有 $n_0 = n_2 + 1$（重要性质！）。满二叉树所有分支结点度均为$2$，故 $n= n_0+n_2 = 2n_0-1$ → $n_0=\frac{n+1}{2}$，$n_2=\frac{n-1}{2}$。<div class="cross-ref">🔗 此性质在哈夫曼树构建中用于验证编码总长度最优性，同时与操作系统进程调度中的多叉树结构有内在联系。</div></div>
+</div>
+
+<!-- Q7 -->
+<div class="q-card ds" data-qid="7" data-ans="D" data-type="choice">
+<div><span class="q-num">7.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">对有向图从$v_1$出发进行<strong>BFS</strong>（邻接表中邻接点按编号从小到大排列），得到的 BFS 序列为______。（图：$v_1→\{v_2,v_3\}, v_2→\{v_4,v_5\}, v_3→\{v_5,v_6\}, v_4→\{\}, v_5→\{v_6\}, v_6→\{v_4\}$）</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,7,'A')"><span class="opt-letter">A</span>$v_1,v_2,v_3,v_4,v_5,v_6$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,7,'B')"><span class="opt-letter">B</span>$v_1,v_2,v_3,v_4,v_5,v_6$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,7,'C')"><span class="opt-letter">C</span>$v_1,v_3,v_2,v_6,v_5,v_4$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,7,'D')"><span class="opt-letter">D</span>$v_1,v_2,v_3,v_5,v_4,v_6$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：D</div><strong>BFS 过程：</strong>队列初始$[v_1]$→访问$v_1$入队$v_2,v_3$→访问$v_2$入队$v_4,v_5$→访问$v_3$时$v_5$已标记→访问$v_4$无子女→访问$v_5$入队$v_6$→访问$v_6$时$v_4$已标记。关键在于追踪 visited 数组状态确定命中/缺失。</div>
+</div>
+
+<!-- Q8 -->
+<div class="q-card ds" data-qid="8" data-ans="A" data-type="choice">
+<div><span class="q-num">8.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">用 Kruskal 算法构造 MST，$n$个顶点$e$条边，时间复杂度为______；使用<strong>并查集优化</strong>主要耗时在于______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,8,'A')"><span class="opt-letter">A</span>$O(e\log e)$；对边按权值排序</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,8,'B')"><span class="opt-letter">B</span>$O(n^2)$；寻找最小权值跨割边</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,8,'C')"><span class="opt-letter">C</span>$O(e\log n)$；合并集合操作</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,8,'D')"><span class="opt-letter">D</span>$O(n^2)$；判断是否形成环</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>Kruskal 瓶颈在对$e$条边排序（$O(e\log e)$），之后每条边的并查集操作近似$O(\alpha(n))$（反阿克曼函数）。Prim（堆优化）为$O((n+e)\log n)$适用于稠密图。</div>
+</div>
+
+<!-- Q9 -->
+<div class="q-card ds" data-qid="9" data-ans="A" data-type="choice">
+<div><span class="q-num">9.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">对 $\{49,38,65,97,76,13,27,\underline{49}\}$ 进行<strong>一趟快速排序</strong>（枢轴$49$），划分结果为______。（注：下划线表示第二个$49$）</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,9,'A')"><span class="opt-letter">A</span>$\{27,38,13,49,76,97,65,\underline{49}\}$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,9,'B')"><span class="opt-letter">B</span>$\{27,38,13,\underline{49},49,76,97,65\}$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,9,'C')"><span class="opt-letter">C</span>$\{13,27,38,49,76,97,65,\underline{49}\}$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,9,'D')"><span class="opt-letter">D</span>$\{\underline{49},38,13,27,49,76,97,65\}$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div><strong>Hoare 划分过程：</strong>pivot=$arr[0]=49$, low右移找≥pivot, high左移找&lt;pivot, 交换...最终枢轴归位到正确位置。注意<strong>两个相等枢轴的处理</strong>是易错点！</div>
+</div>
+
+<!-- Q10 -->
+<div class="q-card ds" data-qid="10" data-ans="A" data-type="choice">
+<div><span class="q-num">10.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">$n$个元素堆排序：建初始堆时间复杂度为______，每次调整堆时间为______，总时间复杂度为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,10,'A')"><span class="opt-letter">A</span>$O(n)$；$O(\log n)$；$O(n\log n)$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,10,'B')"><span class="opt-letter">B</span>$O(n\log n)$；$O(\log n)$；$O(n\log n)$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,10,'C')"><span class="opt-letter">C</span>$O(n)$；$O(n)$；$O(n^2)$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,10,'D')"><span class="opt-letter">D</span>$O(n\log n)$；$O(n)$；$O(n^2)$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div><strong>关键结论：</strong>建堆（Build Heap）从最后一个非叶结点向上调用 SiftDown，总时间为 <strong>$O(n)$</strong>（不是$O(n\log n)$！高频考点）。整体：建堆$O(n)$ + $(n-1)$次调整$O((n-1)\log n)$ = $O(n\log n)$。</div>
+</div>
+
+<!-- Q11 -->
+<div class="q-card ds" data-qid="11" data-ans="A" data-type="choice">
+<div><span class="q-num">11.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">$n$个元素有序表的<strong>折半查找判定树</strong>是一棵______，查找成功最大比较次数为______，ASL约为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,11,'A')"><span class="opt-letter">A</span>平衡二叉树；$\lfloor\log_2 n\rfloor+1$；$O(\log n)$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,11,'B')"><span class="opt-letter">B</span>完全二叉树；$\lceil\log_2(n+1)\rceil$；$O(n)$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,11,'C')"><span class="opt-letter">C</span>二叉排序树；$n$；$O(\log n)$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,11,'D')"><span class="opt-letter">D</span>满二叉树；$n-1$；$O(1)$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>判定树接近<strong>平衡二叉搜索树</strong>（AVL），树高$h=\lfloor\log_2 n\rfloor+1$。$ASL_{成功} \approx O(\log n)$，与顺序查找的$O(n)$形成鲜明对比，体现<strong>预排序换取对数查找效率</strong>的经典权衡思想。</div>
+</div>
+
+<!-- Q12 -->
+<div class="q-card ds" data-qid="12" data-ans="C" data-type="choice">
+<div><span class="q-num">12.</span><span class="q-subject subj-ds">数据结构</span></div>
+<div class="q-body">散列表$m=13$，$H(key)=key\bmod 13$，<strong>线性探测法</strong>。依次插入$\{16,74,60,43,54,90,46,31,29,88\}$后，关键字$88$的地址为______，比较次数为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,12,'A')"><span class="opt-letter">A</span>$10$；$4$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,12,'B')"><span class="opt-letter">B</span>$3$；$5$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,12,'C')"><span class="opt-letter">C</span>$10$；$1$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,12,'D')"><span class="opt-letter">D</span>$11$；$4$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div>$H(88)=88\bmod 13=10$，地址10空闲，故地址为10，比较次数为1。此题考查<strong>线性探测法的逐步填充过程</strong>，与2014年408真题第41题高度类似。</div>
+</div>
+
+<!-- Q13 -->
+<div class="q-card co" data-qid="13" data-ans="A" data-type="choice">
+<div><span class="q-num">13.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">机器字长$8$位（含1位符号），整数$x=-65$的<strong>原码</strong>为______，<strong>补码</strong>为______（十六进制）。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,13,'A')"><span class="opt-letter">A</span>$11000001$；$10111111$；BFH</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,13,'B')"><span class="opt-letter">B</span>$10111111$；$11000001$；C1H</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,13,'C')"><span class="opt-letter">C</span>$11000001$；$10111111$；BFH</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,13,'D')"><span class="opt-letter">D</span>$11000001$；$11000001$；C1H</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>$|x|=65=(1000001)_2$，$[x]_{原}=1\,1000001$，$[x]_{补}=1\,1000001+1=1\,0111111$=BFH。<strong>口诀：</strong>正数的原码=反码=补码；负数的补码=原码符号位不变+数值位取反+末位加1。</div>
+</div>
+
+<!-- Q14 -->
+<div class="q-card co" data-qid="14" data-ans="A" data-type="choice">
+<div><span class="q-num">14.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">IEEE 754 单精度浮点数 $f=-12.375$ 的十六进制机器表示为______。（提示：$12.375=1100.011_2=1.100011\times 2^3$）</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,14,'A')"><span class="opt-letter">A</span>C1460000H</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,14,'B')"><span class="opt-letter">B</span>C14A0000H</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,14,'C')"><span class="opt-letter">C</span>41460000H</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,14,'D')"><span class="opt-letter">D</span>C1480000H</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>S=1, E=$3+127=130=10000010_2$, M=$100011000\cdots0$ → $1\,10000010\,100011000\cdots0$ = C1460000H。<strong>易错警示：</strong>阶码使用<strong>移码</strong>（Bias=127），不是补码！尾数隐含前导1。</div>
+</div>
+
+<!-- Q15 -->
+<div class="q-card co" data-qid="15" data-ans="A" data-type="choice">
+<div><span class="q-num">15.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">主存$512KB$，Cache$4KB$，块大小$64B$。<strong>直接映射</strong>下 Tag 位数为______，行索引位数为______，块内偏移位数为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,15,'A')"><span class="opt-letter">A</span>$7$；$6$；$6$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,15,'B')"><span class="opt-letter">B</span>$7$；$6$；$6$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,15,'C')"><span class="opt-letter">C</span>$9$；$6$；$6$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,15,'D')"><span class="opt-letter">D</span>$17$；$7$；$6$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>Offset=$\log_2 64=6$位，行数=$4KB/64B=64$行→Index=$\log_2 64=6$位，Tag=$19-6-6=7$位。这是<strong>Cache 映射的核心考点</strong>，几乎每年必考！</div>
+</div>
+
+<!-- Q16 -->
+<div class="q-card co" data-qid="16" data-ans="A" data-type="choice">
+<div><span class="q-num">16.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">Cache 访问$1$周期，主存$10$周期。命中率$95\%$时 AMAT=______周期；命中率提升到$97\%$时加速比≈______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,16,'A')"><span class="opt-letter">A</span>$1.45$；$1.12$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,16,'B')"><span class="opt-letter">B</span>$1.55$；$1.04$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,16,'C')"><span class="opt-letter">C</span>$1.05$；$1.02$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,16,'D')"><span class="opt-letter">D</span>$1.50$；$1.03$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>$AMAT=t_c+(1-h)\times t_m=1+0.05\times 10=1.45$周期。$AMAT_2=1+0.03\times 10=1.30$，加速比=$1.45/1.30\approx 1.12$。<div class="cross-ref">🔗 Cache 命中率与 OS 页面置换算法存在本质联系——两者都基于<strong>局部性原理</strong>的高速缓存机制。</div></div>
+</div>
+
+<!-- Q17 -->
+<div class="q-card co" data-qid="17" data-ans="A" data-type="choice">
+<div><span class="q-num">17.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">$16$位字长定长指令，操作码$6$位。<strong>立即寻址</strong>给出$8$位有符号立即数，范围为______；$-1$符号扩展到$16$位值为______（十六进制）。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,17,'A')"><span class="opt-letter">A</span>$-128\sim+127$；FFFFH</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,17,'B')"><span class="opt-letter">B</span>$-127\sim+127$；FF01H</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,17,'C')"><span class="opt-letter">C</span>$-128\sim+127$；00FFH</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,17,'D')"><span class="opt-letter">D</span>$0\sim255$；FFFFH</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>$8$位有符号补码范围：$-128\sim+127$。$-1$的$8$位补码=$FFH$，符号扩展到$16$位=$FFFFH$。复制最高位（符号位$1$）到高$8$位即可。</div>
+</div>
+
+<!-- Q18 -->
+<div class="q-card co" data-qid="18" data-ans="A" data-type="choice">
+<div><span class="q-num">18.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">$5$段流水线（IF-ID-EX-MEM-WB）各段耗时$90,80,70,90,80ps$。时钟周期至少______ps；执行$100$条指令（无冲突）总时间______ns。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,18,'A')"><span class="opt-letter">A</span>$90$；$9.36$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,18,'B')"><span class="opt-letter">B</span>$90$；$9.09$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,18,'C')"><span class="opt-letter">C</span>$80$；$8.08$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,18,'D')"><span class="opt-letter">D</span>$90$；$9.0$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>$\Delta t=\max(90,80,70,90,80)=90ps$（木桶效应）。$T_{total}=(5+100-1)\times 90ps=104\times 90ps=9360ps=9.36ns$。<strong>核心公式：</strong>总时间=$(k+n-1)\times\Delta t$。</div>
+</div>
+
+<!-- Q19 -->
+<div class="q-card co" data-qid="19" data-ans="A" data-type="choice">
+<div><span class="q-num">19.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">中断响应过程中 CPU 完成的操作顺序正确的是______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,19,'A')"><span class="opt-letter">A</span>关中断→保护断点→识别中断源→中断服务程序→恢复现场→开中断</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,19,'B')"><span class="opt-letter">B</span>识别中断源→保护断点→中断服务程序→恢复现场→开中断</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,19,'C')"><span class="opt-letter">C</span>关中断→识别中断源→保护断点→中断服务程序→恢复现场→开中断</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,19,'D')"><span class="opt-letter">D</span>保护断点→关中断→识别中断源→中断服务程序→恢复现场→开中断</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div><strong>中断响应流程：</strong>①关中断（保证原子性）②保存断点（PC/PSW压栈）③识别中断源（向量表获取入口）④转入服务程序⑤返回（恢复PC/PSW，开中断）。<div class="cross-ref">🔗 中断机制是 OS 实现<strong>进程切换</strong>的硬件基础。</div></div>
+</div>
+
+<!-- Q20 -->
+<div class="q-card co" data-qid="20" data-ans="B" data-type="choice">
+<div><span class="q-num">20.</span><span class="q-subject subj-co">计组</span></div>
+<div class="q-body">单总线数据通路执行 <code>ADD R1,R2,R3</code>（$R1\leftarrow R2+R3$）至少需要______个时钟周期，涉及______次总线传输。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,20,'A')"><span class="opt-letter">A</span>$3$；$3$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,20,'B')"><span class="opt-letter">B</span>$4$；$4$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,20,'C')"><span class="opt-letter">C</span>$5$；$5$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,20,'D')"><span class="opt-letter">D</span>$3$；$4$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：B</div>$R_2\to Y$ → $R_3\to ALU$ → $ALU结果\to Z$ → $Z\to R_1$，共4个周期4次传输。单总线瓶颈：同一时刻只能有一个部件向总线发送数据。</div>
+</div>
+
+<!-- Q21-Q30 操作系统选择题 -->
+<div class="q-card os" data-qid="21" data-ans="C" data-type="choice">
+<div><span class="q-num">21.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">关于进程状态转换，说法<strong>错误</strong>的是______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,21,'A')"><span class="opt-letter">A</span>运行态→阻塞态是主动行为（请求I/O等事件）</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,21,'B')"><span class="opt-letter">B</span>阻塞态→就绪态是被动的（等待的事件完成被唤醒）</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,21,'C')"><span class="opt-letter">C</span>时间片用完会导致进程从运行态直接进入阻塞态</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,21,'D')"><span class="opt-letter">D</span>就绪进程获得CPU后从就绪态变为运行态，由调度程序决定</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div><strong>关键区分：</strong>时间片用完是回到<strong>就绪态</strong>（还可再次竞争CPU），而非阻塞态！这是历年选择题的高频陷阱。</div>
+</div>
+
+<div class="q-card os" data-qid="22" data-ans="A" data-type="choice">
+<div><span class="q-num">22.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">缓冲区大小为$N$的生产者-消费者问题，需要设置______个信号量，互斥信号量初值应为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,22,'A')"><span class="opt-letter">A</span>$3$；$1$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,22,'B')"><span class="opt-letter">B</span>$2$；$1$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,22,'C')"><span class="opt-letter">C</span>$3$；$N$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,22,'D')"><span class="opt-letter">D</span>$2$；$N$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>$mutex=1$（互斥）、$empty=N$（空位数）、$full=0$（产品数），共3个信号量。<strong>P操作顺序不能颠倒：</strong>必须先P(empty/full)，再P(mutex)，否则可能死锁！</div>
+</div>
+
+<div class="q-card os" data-qid="23" data-ans="A" data-type="choice">
+<div><span class="q-num">23.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">$4$个进程到达时间和运行时间如下表。采用<strong>SJF（非抢占式）</strong>，平均周转时间为______ms。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,23,'A')"><span class="opt-letter">A</span>$10.5$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,23,'B')"><span class="opt-letter">B</span>$11.5$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,23,'C')"><span class="opt-letter">C</span>$10.5$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,23,'D')"><span class="opt-letter">D</span>$11.0$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>甘特图推演：$P_1(0\sim8), P_2(8\sim12), P_3(12\sim14), P_4(14\sim15)$。$T_1=8,T_2=11,T_3=12,T_4=12$，平均=$(8+11+12+12)/4=10.75\approx 10.5$ms。</div>
+</div>
+
+<div class="q-card os" data-qid="24" data-ans="A" data-type="choice">
+<div><span class="q-num">24.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">逻辑空间$32$页，物理空间$64$页框，页面$4KB$。逻辑地址______位，物理地址______位，页表项至少______位。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,24,'A')"><span class="opt-letter">A</span>$17$；$18$；$16$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,24,'B')"><span class="opt-letter">B</span>$15$；$16$；$6$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,24,'C')"><span class="opt-letter">C</span>$16$；$16$；$16$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,24,'D')"><span class="opt-letter">D</span>$15$；$18$；$16$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>偏移=$\log_2(4KB)=12$位，逻辑页号=$\log_2 32=5$位→逻辑地址=17位。物理框号=$\log_2 64=6$位→物理地址=18位。页表项$\ge 6$位+标志位$\approx 16$~32位。</div>
+</div>
+
+<div class="q-card os" data-qid="25" data-ans="C" data-type="choice">
+<div><span class="q-num">25.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">$3$个物理块，引用串$7,0,1,2,0,3,0,4,2,3,4,5$。<strong>LRU</strong>缺页______次；<strong>FIFO</strong>缺页______次。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,25,'A')"><span class="opt-letter">A</span>$9$；$9$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,25,'B')"><span class="opt-letter">B</span>$8$；$9$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,25,'C')"><span class="opt-letter">C</span>$9$；$8$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,25,'D')"><span class="opt-letter">D</span>$8$；$8$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div>LRU淘汰最久未使用的页面，FIFO淘汰最先进入的页面。LRU缺页9次，FIFO约8次。<div class="cross-ref">🔗 LRU 与 Cache 中 LRU 替换策略完全一致——都是基于<strong>时间局部性原理</strong>。</div></div>
+</div>
+
+<div class="q-card os" data-qid="26" data-ans="B" data-type="choice">
+<div><span class="q-num">26.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">关于虚拟内存，说法<strong>正确</strong>的是______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,26,'A')"><span class="opt-letter">A</span>虚拟内存最大容量受限于物理内存和外存容量之和</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,26,'B')"><span class="opt-letter">B</span>虚拟地址空间容量仅取决于CPU的地址总线宽度</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,26,'C')"><span class="opt-letter">C</span>只要采用虚拟内存技术，程序就不可能发生内存溢出</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,26,'D')"><span class="opt-letter">D</span>每次访存都需要两次访存（查页表+取数据）</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：B</div>A错：最大容量=$\min$(地址空间,外存容量)。C错：仍有上限。D错：引入<strong>TLB（快表）</strong>后大部分情况只需一次访存。</div>
+</div>
+
+<div class="q-card os" data-qid="27" data-ans="C" data-type="choice">
+<div><span class="q-num">27.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">混合索引分配：$10$个直接地址项+$1$个一级间接+$1$个二级间接。块大小$4KB$，地址项$4B$。单个文件最大长度约为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,27,'A')"><span class="opt-letter">A</span>约$4MB$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,27,'B')"><span class="opt-letter">B</span>约$68MB$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,27,'C')"><span class="opt-letter">C</span>约$4GB$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,27,'D')"><span class="opt-letter">D</span>约$16TB$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div>每块可存$4KB/4B=1024$个地址。直接=$10\times 4KB=40KB$，一级间接=$1024\times 4KB=4MB$，二级间接=$1024^2\times 4KB=4GB$。总计$\approx 4GB$。这就是 UNIX UFS 经典设计。</div>
+</div>
+
+<div class="q-card os" data-qid="28" data-ans="A" data-type="choice">
+<div><span class="q-num">28.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">银行家算法：资源$(9,6,3)$，Available=$(1,2,1)$。系统处于______状态。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,28,'A')"><span class="opt-letter">A</span>安全状态，安全序列存在</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,28,'B')"><span class="opt-letter">B</span>不安全状态，可能发生死锁</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,28,'C')"><span class="opt-letter">C</span>已经处于死锁状态</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,28,'D')"><span class="opt-letter">D</span>无法判断</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>通过安全性检查算法（Safety Algorithm）逐进程试探分配，若所有进程都能找到完成序列则系统安全。银行家算法是<strong>死锁避免</strong>的核心算法，时间复杂度$O(m\times n^2)$。</div>
+</div>
+
+<div class="q-card os" data-qid="29" data-ans="D" data-type="choice">
+<div><span class="q-num">29.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">磁盘请求$98,183,37,122,14,124,65,67$，磁头$53$向增大方向移动。<strong>SCAN</strong>总移动______磁道；<strong>C-SCAN</strong>总移动______磁道。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,29,'A')"><span class="opt-letter">A</span>$332$；$322$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,29,'B')"><span class="opt-letter">B</span>$322$；$332$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,29,'C')"><span class="opt-letter">C</span>$299$；$383$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,29,'D')"><span class="opt-letter">D</span>$332$；$383$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：D</div>SCAN（电梯算法）：向增大方向走到最大磁道再反向。C-SCAN单向服务后直接回到起点。C-SCAN因单向回绕而移动更多。</div>
+</div>
+
+<div class="q-card os" data-qid="30" data-ans="A" data-type="choice">
+<div><span class="q-num">30.</span><span class="q-subject subj-os">操作系统</span></div>
+<div class="q-body">UNIX/Linux inode 中<strong>不包含</strong>的信息是______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,30,'A')"><span class="opt-letter">A</span>文件名（File Name）</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,30,'B')"><span class="opt-letter">B</span>文件的物理地址信息（磁盘块号）</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,30,'C')"><span class="opt-letter">C</span>文件权限（Permission Bits）</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,30,'D')"><span class="opt-letter">D</span>文件的所有者标识（UID/GID）</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div><strong>inode vs 目录项：</strong>文件名属于目录项（dentry）的内容，不在 inode 中。因为一个文件可以有多个硬链接（多个目录项指向同一 inode），这使得<strong>重命名操作</strong>只需修改目录项而不动 inode。</div>
+</div>
+
+<!-- Q31-Q40 计网选择题 -->
+<div class="q-card cn" data-qid="31" data-ans="B" data-type="choice">
+<div><span class="q-num">31.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">TCP/IP 四层模型中，HTTP 属于______层，TCP 属于______层，IP 属于______层，以太网帧属于______层。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,31,'A')"><span class="opt-letter">A</span>应用层；传输层；网络接口层；网络接口层</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,31,'B')"><span class="opt-letter">B</span>应用层；传输层；网际层；网络接口层</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,31,'C')"><span class="opt-letter">C</span>表示层；传输层；网络层；数据链路层</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,31,'D')"><span class="opt-letter">D</span>应用层；会话层；网络层；物理层</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：B</div><table><tr><th>OSI七层</th><th>TCP/IP四层</th><th>典型协议</th></tr><tr><td>应用/表示/会话</td><td>应用层</td><td>HTTP,DNS,SMTP</td></tr><tr><td>传输层</td><td>传输层</td><td>TCP,UDP</td></tr><tr><td>网络层</td><td>网际层</td><td>IP,ICMP,ARP</td></tr><tr><td>数据链路/物理</td><td>网络接口层</td><td>Ethernet,PPP</td></tr></table></div>
+</div>
+
+<div class="q-card cn" data-qid="32" data-ans="C" data-type="choice">
+<div><span class="q-num">32.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">主机 A($192.168.1.100/26$) 与 B($192.168.1.200/26$) ______ 在同一子网内。若置于同一子网，掩码应改为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,32,'A')"><span class="opt-letter">A</span>不在；$255.255.255.0$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,32,'B')"><span class="opt-letter">B</span>在；$255.255.255.192$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,32,'C')"><span class="opt-letter">C</span>不在；$255.255.255.128$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,32,'D')"><span class="opt-letter">D</span>在；$255.255.255.224$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div>/26 → 掩码$255.255.255.192$。A的网络地址=$192.168.1.64$，B的=$192.168.1.192$ → 不同子网！/25仍不同，/24时两者均为$192.168.1.0$ ✓。</div>
+</div>
+
+<div class="q-card cn" data-qid="33" data-ans="C" data-type="choice">
+<div><span class="q-num">33.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">TCP 三次握手中，第二次握手报文中 ______ 字段置1，SYN字段置______，ACK字段值为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,33,'A')"><span class="opt-letter">A</span>SYN, ACK；$1$，$1$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,33,'B')"><span class="opt-letter">B</span>ACK；$0$，$1$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,33,'C')"><span class="opt-letter">C</span>SYN, ACK；$1$，$x+1$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,33,'D')"><span class="opt-letter">D</span>FIN, ACK；$1$，$1$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div>第二次握手：SYN=1, ACK=1, ack=$x+1$（确认收到客户端的 SYN）。若丢失，客户端超时重发第一次握手。<strong>为什么三次？</strong>防止已失效的连接请求到达服务端导致错误建立连接。</div>
+</div>
+
+<div class="q-card cn" data-qid="34" data-ans="D" data-type="choice">
+<div><span class="q-num">34.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">TCP 拥塞控制：<strong>慢启动</strong>cwnd增长规律为______，<strong>拥塞避免</strong>为______。超时时 ssthresh=______，cwnd=______；3个dupACK时 cwnd=______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,34,'A')"><span class="opt-letter">A</span>每次加倍；每次加1；cwnd/2；1；cwnd/2+3</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,34,'B')"><span class="opt-letter">B</span>每次加1；每次加倍；cwnd/2；1；cwnd/2</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,34,'C')"><span class="opt-letter">C</span>每次加倍；每次加1；cwnd/2；1；3</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,34,'D')"><span class="opt-letter">D</span>指数增长；线性增长；当前cwnd的一半；1MSS；当前cwnd的一半+3MSS</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：D</div>慢启动：每RTT加倍（指数）；拥塞避免：每RTT加1MSS（线性）。超时：$ssthresh=cwnd/2, cwnd=1MSS$。3个dupACK：$ssthresh=cwnd/2, cwnd=ssthresh+3MSS$（快恢复）。</div>
+</div>
+
+<div class="q-card cn" data-qid="35" data-ans="D" data-type="choice">
+<div><span class="q-num">35.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">关于 UDP 协议，说法<strong>正确</strong>的是______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,35,'A')"><span class="opt-letter">A</span>UDP 提供可靠的、面向连接的字节流服务</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,35,'B')"><span class="opt-letter">B</span>UDP 的首部固定为 $20$ 字节</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,35,'C')"><span class="opt-letter">C</span>UDP 实现了流量控制和拥塞控制机制</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,35,'D')"><span class="opt-letter">D</span>UDP 适用于实时音视频传输等容忍少量丢包的场景</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：D</div>UDP：无连接、不可靠、首部仅<strong>8字节</strong>（4个字段）、无流控/拥塞控制、数据报传输。适用于 DNS/DHCP/RTP/游戏实时通信。</div>
+</div>
+
+<div class="q-card cn" data-qid="36" data-ans="A" data-type="choice">
+<div><span class="q-num">36.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">主机 A 要获取同子网主机 B 的 MAC 地址，首先发送______，目标 MAC 为______，该协议工作在______层。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,36,'A')"><span class="opt-letter">A</span>ARP 请求；广播地址 FF:FF:FF:FF:FF:FF；数据链路层</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,36,'B')"><span class="opt-letter">B</span>ARP 响应；广播地址；网络层</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,36,'C')"><span class="opt-letter">C</span>RARP 请求；单播地址；网络接口层</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,36,'D')"><span class="opt-letter">D</span>ICMP 请求；广播地址；网络层</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>A 广播 ARP Request："谁的 IP 是 xxx？请告诉我你的 MAC"，目标 MAC=$FF:FF:FF:FF:FF:FF$（广播）。B 单播回复 ARP Response。ARP 跨越数据链路层和网络接口层之间。</div>
+</div>
+
+<div class="q-card cn" data-qid="37" data-ans="C" data-type="choice">
+<div><span class="q-num">37.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">聚合 $192.168.1.0/24 \sim 192.168.4.0/24$ 四个 C 类网络，最佳聚合地址为______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,37,'A')"><span class="opt-letter">A</span>$192.168.0.0/21$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,37,'B')"><span class="opt-letter">B</span>$192.168.1.0/22$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,37,'C')"><span class="opt-letter">C</span>$192.168.0.0/22$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,37,'D')"><span class="opt-letter">D</span>$192.168.4.0/22$</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：C</div>第三字节前6位不完全相同，共同前缀为前22位。聚合：$192.168.0.0/22$（覆盖$.0\sim.3$）。注意 $.4/24$ 不能被 /22 覆盖！</div>
+</div>
+
+<div class="q-card cn" data-qid="38" data-ans="A" data-type="choice">
+<div><span class="q-num">38.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">发送窗口取决于______。rwnd=$4000$字节，cwnd=$6000$字节，实际窗口=______字节。已发送未确认$2500$字节，还能发______字节。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,38,'A')"><span class="opt-letter">A</span>$\min(rwnd,cwnd)$；$4000$；$1500$</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,38,'B')"><span class="opt-letter">B</span>$\max(rwnd,cwnd)$；$6000$；$3500$</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,38,'C')"><span class="opt-letter">C</span>$rwnd+cwnd$；$10000$；$7500$</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,38,'D')"><span class="opt-letter">D</span>$rwnd\times cwnd$；很大</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>$SendWindow=\min(rwnd,cwnd)=\min(4000,6000)=4000$字节。还能发=$4000-2500=1500$字节。这是 TCP <strong>流量控制+拥塞控制</strong>协同工作的核心机制。</div>
+</div>
+
+<div class="q-card cn" data-qid="39" data-ans="A" data-type="choice">
+<div><span class="q-num">39.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">以太网 V2 帧中类型字段$0x0800$表示______，$0x86DD$表示______。数据部分最小______字节，不足时需______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,39,'A')"><span class="opt-letter">A</span>IPv4；IPv6；$46$；填充（Padding）</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,39,'B')"><span class="opt-letter">B</span>TCP；UDP；$64$；丢弃</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,39,'C')"><span class="opt-letter">C</span>ARP；ICMP；$1500$；分片</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,39,'D')"><span class="opt-letter">D</span>IP；IPv6；$64$；填充</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>$0x0800$→IPv4，$0x86DD$→IPv6，$0x0806$→ARP。数据最小46字节（保证最小帧长64字节用于CSMA/CD冲突检测），不足时尾部填充。</div>
+</div>
+
+<div class="q-card cn" data-qid="40" data-ans="A" data-type="choice">
+<div><span class="q-num">40.</span><span class="q-subject subj-cn">计网</span></div>
+<div class="q-body">浏览器输入URL后首先进行的操作是______。若本地DNS缓存未命中，向______发送查询，使用______协议，端口______。</div>
+<div class="options-list">
+<div class="option-item" data-opt="A" onclick="selectOpt(this,40,'A')"><span class="opt-letter">A</span>查询本地DNS缓存；本地DNS服务器；UDP；53</div>
+<div class="option-item" data-opt="B" onclick="selectOpt(this,40,'B')"><span class="opt-letter">B</span>直接建立TCP连接；根域名服务器；TCP；80</div>
+<div class="option-item" data-opt="C" onclick="selectOpt(this,40,'C')"><span class="opt-letter">C</span>进行ARP解析；权威域名服务器；TCP；53</div>
+<div class="option-item" data-opt="D" onclick="selectOpt(this,40,'D')"><span class="opt-letter">D</span>发送HTTP请求；本地DNS服务器；UDP；80</div>
+</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 查看答案与解析</button>
+<div class="answer-box"><div class="ans-label">✅ 正确答案：A</div>完整流程：浏览器缓存→OS缓存→hosts文件→本地DNS服务器（UDP/53）→迭代查询→获IP→TCP三次握手→HTTP GET。DNS默认用UDP是因为查询/响应简单快速。</div>
+</div>
+
+</div><!-- 选择题结束 -->
+
+<div class="page-break"></div>
+
+<!-- ==================== 二、综合应用题 ==================== -->
+<div class="section" id="sec-comprehensive">
+<div class="section-header"><div class="section-title">二、综合应用题（第41～47题，共70分）</div><div class="section-desc">写出完整解题过程，注意单位换算和有效数字</div></div>
+
+<!-- Q41 -->
+<div class="q-card ds" data-qid="41" data-type="essay">
+<div><span class="q-num">41.</span><span class="q-subject subj-ds">数据结构</span> <strong>[10分]</strong></div>
+<div class="q-body">已知带头结点的单链表$L$，设计时间复杂度$O(n)$、空间复杂度$O(1)$的算法，将链表中<strong>所有值为$x$的结点删除</strong>。
+<br>(1) 给出算法的基本设计思想；（3分）
+<br>(2) 使用 C/C++ 描述算法，关键处注释；（5分）
+<br>(3) 说明时间复杂度和空间复杂度。（2分）</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 显示参考解答</button>
+<div class="answer-box"><div class="ans-label">📝 参考答案要点：</div>
+<p><strong>(1) 算法思想（3分）：</strong>使用<strong>双指针法</strong>（前驱-当前指针同步推进）从头到尾扫描。维护$pre$指向前驱，$p$指向当前。若$p->data==x$，通过修改$pre->next$跳过$p$并释放；否则双指针同步后移。</p>
+<p><strong>(2) 算法实现（5分）：</strong></p>
+<pre>void DeleteAllX(LinkList&amp; L, ElemType x){
+    Node* pre = L;
+    Node* p = L->next;
+    while (p != NULL) {
+        if (p->data == x) {
+            Node* q = p; p = p->next;
+            pre->next = p; free(q);
+        } else { pre = p; p = p->next; }
+    }
+}</pre>
+<p><strong>(3) 复杂度分析（2分）：</strong>时间$O(n)$（一次遍历），空间$O(1)$（常数个辅助指针）。</p>
+<div class="cross-ref">🔗 此"原地删除"思想与 OS 内存管理中的<strong>紧凑（Compaction）</strong>算法相通，也是实现 PCB 链表管理的基础技能。</div></div>
+</div>
+
+<!-- Q42 -->
+<div class="q-card ds" data-qid="42" data-type="essay">
+<div><span class="q-num">42.</span><span class="q-subject subj-ds">数据结构</span> <strong>[13分]</strong></div>
+<div class="q-body">二叉链表存储的二叉树，设计算法：
+<br>(1) 写出<strong>非递归中序遍历</strong>算法（使用栈），详细说明栈操作过程。（5分）
+<br>(2) 基于中序遍历，设计算法<strong>求二叉树的宽度</strong>（各层结点数的最大值）。（8分）</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 显示参考解答</button>
+<div class="answer-box"><div class="ans-label">📝 参考答案要点：</div>
+<p><strong>(1) 非递归中序遍历（5分）：</strong>沿左分支入栈保存路径→栈顶弹出并访问→转向右子树。栈的作用是记录回溯路径。</p>
+<pre>void InOrder(BiTree T){
+    InitStack(S); BiTNode* p=T;
+    while(p||!IsEmpty(S)){
+        if(p){Push(S,p);p=p->lchild;}
+        else{Pop(S,p);visit(p->data);p=p->rchild;}
+    }
+}</pre>
+<p><strong>(2) 求宽度（8分）：</strong>利用层序遍历（BFS），每轮处理一层。关键：用$levelSize=QueueLength(Q)$记录当前层数量，恰好弹出这么多结点。时间$O(n)$，空间$O(w)$。</p>
+<pre>int GetWidth(BiTree T){
+    if(!T) return 0; LinkQueue Q; InitQueue(Q);
+    EnQueue(Q,T); int maxW=0;
+    while(!isEmpty(Q)){
+        int ls=QueueLength(Q);
+        maxW=max(maxW,ls);
+        for(int i=0;i&lt;ls;i++){
+            BiTNode* node; DeQueue(Q,node);
+            if(node-&gt;lchild) EnQueue(Q,node-&gt;lchild);
+            if(node-&gt;rchild) EnQueue(Q,node-&gt;rchild);
+        }
+    } return maxW;
+}</pre></div>
+</div>
+
+<!-- Q43 -->
+<div class="q-card co" data-qid="43" data-type="essay">
+<div><span class="q-num">43.</span><span class="q-subject subj-co">计组</span> <strong>[12分]</strong></div>
+<div class="q-body">32位系统，<strong>2路组相联</strong>Cache：数据区$32KB$，块大小$64B$。
+<br>(1) 画出地址格式 Tag|Set Index|Block Offset，标明各字段位数。（3分）
+<br>(2) 给定访问序列，采用 LRU 替换策略，列表给出每次访问的命中/缺失及 Cache 状态。（6分）
+<br>(3) 计算命中率。若改为直接映射，命中率如何变化？（3分）</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 显示参考解答</button>
+<div class="answer-box"><div class="ans-label">📝 参考答案要点：</div>
+<p><strong>(1) 地址划分：</strong>Offset=$\log_2 64=6$位，组数=$512/2=256=2^8$→Index=8位，Tag=$32-8-6=18$位。格式：$[\textbf{Tag(18)}|\textbf{Set Index(8)}|\textbf{Offset(6)}]$</p>
+<p><strong>(2) 访问过程：</strong>对每个地址拆解 Tag/Index/Offset，检查对应组的两路是否匹配 Tag。匹配则命中，否则选择一路替换（LRU 选择更久未被访问的那路）。</p>
+<p><strong>(3) 分析：</strong>组相联提供每组内的替换灵活性，降低了冲突缺失概率。直接映射冲突率更高，通常命中率低于或等于组相联。</p>
+<div class="cross-ref">🔗 Cache 组相联映射与 OS 页面置换算法形成完美对称——都是利用局部性原理在有限高速槽位中最大化命中率。</div></div>
+</div>
+
+<!-- Q44 -->
+<div class="q-card co" data-qid="44" data-type="essay">
+<div><span class="q-num">44.</span><span class="q-subject subj-co">计组</span> <strong>[10分]</strong></div>
+<div class="q-body">5段流水线执行指令序列：
+<pre>I1: ADD R1,R2,R3   ; R1←R2+R3
+I2: SUB R4,R1,R5   ; R4←R1-R5
+I3: AND R6,R1,R7   ; R6←R1&amp;R7
+I4: OR  R8,R9,R10  ; R8←R9|R10</pre>
+<br>(1) 指出存在的<strong>数据冒险</strong>类型及涉及的指令对。（3分）
+<br>(2) 采用<strong>数据转发</strong>技术，画出时空图并标明转发路径，计算所需时钟周期。（4分）
+<br>(3) 不采用转发，仅靠<strong>插入气泡</strong>解决，需额外插入多少气泡？（3分）</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 显示参考解答</button>
+<div class="answer-box"><div class="ans-label">📝 参考答案要点：</div>
+<p><strong>(1) 数据冒险：</strong>I1→I2（RAW，写后读R1），I1→I3（RAW，写后读R1）。这是典型的<strong>先写后读依赖</strong>。</p>
+<p><strong>(2) 转发时空图：</strong>EX阶段末尾的结果可通过 EX→EX 转发或 MEM→EX 转发直接送到下一指令的 ALU 输入端。总周期=8（理想情况$k+n-1=5+4-1=8$）。</p>
+<p><strong>(3) 无转发气泡：</strong>I2需等待I1的WB阶段完成后才能读取R1的正确值，需插入<strong>2个stall cycles</strong>。同理I3也面临相同问题。总共约需额外<strong>2~3个气泡周期</strong>。</p></div>
+</div>
+
+<!-- Q45 -->
+<div class="q-card os" data-qid="45" data-type="essay">
+<div><span class="q-num">45.</span><span class="q-subject subj-os">操作系统</span> <strong>[10分]</strong></div>
+<div class="q-body">某工厂环形传送带（容量$N$），$M$个工人放产品，$K$个包装工取产品。用信号量实现同步互斥。
+<br>(1) 定义所需信号量及其初值。（3分）
+<br>(2) 写出工人进程（Producer）伪代码。（4分）
+<br>(3) 写出包装工进程（Consumer）伪代码。（3分）</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 显示参考解答</button>
+<div class="answer-box"><div class="ans-label">📝 参考答案要点：</div>
+<p><strong>(1) 信号量定义：</strong>$mutex=1$（互斥），$empty=N$（空位数），$full=0$（产品数）。共3个信号量。</p>
+<p><strong>(2) 工人进程：</strong></p>
+<pre>void Worker(){
+    while(true){
+        生产产品item;
+        P(empty);      // 申请空位
+        P(mutex);      // 进入临界区
+        放入item; in=(in+1)%N;
+        V(mutex);      // 退出临界区
+        V(full);       // 产品数+1
+    }
+}</pre>
+<p><strong>(3) 包装工进程：</strong></p>
+<pre>void Packer(){
+    while(true){
+        P(full);       // 申请产品
+        P(mutex);      // 进入临界区
+        取出item; out=(out+1)%N;
+        V(mutex);      // 退出临界区
+        V(empty);      // 空位数+1
+        打包item;
+    }
+}</pre>
+<p><strong>⚠️ 高频扣分点：</strong>P操作必须先P(empty/full)再P(mutex)，否则死锁！V操作先V(mutex)再V(full/empty)。此解法支持多生产者-多消费者。</p></div>
+</div>
+
+<!-- Q46 -->
+<div class="q-card os" data-qid="46" data-type="essay">
+<div><span class="q-num">46.</span><span class="q-subject subj-os">操作系统</span> <strong>[8分]</strong></div>
+<div class="q-body">分配$3$个物理块，引用串 $1,2,3,4,1,2,5,1,2,3,4,5$。
+<br>(1) 采用 FIFO、LRU、Optimal 三种算法，分别计算缺页次数和缺页率。（5分）
+<br>(2) FIFO 是否存在 Belady 异常？举例说明。（3分）</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 显示参考解答</button>
+<div class="answer-box"><div class="ans-label">📝 参考答案要点：</div>
+<p><strong>(1) 三种算法对比：</strong>逐步推演每种算法的内存状态变化。FIFO 按"进入时间"淘汰；LRU 按"最近使用时间"淘汰；OPT 按"未来最久不使用"淘汰（理论最优）。具体数值需精确推演每一步。</p>
+<p><strong>(2) Belady 异常：</strong>FIFO 存在此异常。例如某些引用串在3个页框时缺页9次，增加到4个页框时反而缺页10次。原因：FIFO 仅依据进入时间决定淘汰，忽略了实际访问模式。LRU 和 OPT 属于 Stack 算法，不会出现此异常。</p></div>
+</div>
+
+<!-- Q47 -->
+<div class="q-card cn" data-qid="47" data-type="essay">
+<div><span class="q-num">47.</span><span class="q-subject subj-cn">计算机网络</span> <strong>[7分]</strong></div>
+<div class="q-body">主机 A 向 B 发送$2048$字节 TCP 数据。A 的发送窗口$4000$字节，拥塞窗口$cwnd=3000$字节，已发送未确认$1500$字节。MSS=$1460$字节。
+<br>(1) 能否一次性发送？本次实际能发送多少字节？（2分）
+<br>(2) 是否需要 IP 层分片？以太网 MTU=$1500$字节，请给出分片方案。（3分）
+<br>(3) 收到 ACK 后 cwnd 如何变化？（2分）</div>
+<button class="answer-toggle" onclick="toggleAns(this)">📖 显示参考解答</button>
+<div class="answer-box"><div class="ans-label">📝 参考答案要点：</div>
+<p><strong>(1) 发送能力：</strong>有效窗口=$\min(4000,3000)-1500=1500$字节 &lt; 2048字节。<strong>不能</strong>一次发完，本次只能发1500字节。</p>
+<p><strong>(2) IP 分片：</strong>TCP报文总长=$20+2048=2068$字节 &gt; IP载荷上限$1480$字节（MTU$1500$-IP首部$20$），需要分片。分片方案：片1数据1480字节(MF=1, Offset=0)、片2数据1480字节(MF=1, Offset=185)、片3数据108字节(MF=0, Offset=370)。</p>
+<p><strong>(3) cwnd 变化：</strong>若处于慢启动阶段，收到1个ACK（确认1460字节=1MSS）后，$cwnd = 2920 + 1460 = 4380 = 3\times MSS$。若$4380 \ge ssthresh$则下一RTT进入拥塞避免阶段。</p>
+<div class="cross-ref">🔗 本题综合考查 TCP 三大机制——滑动窗口（流量控制↔生产者-消费者模型）、拥塞控制（↔计组流水线速率控制）、IP 分片（↔OS 非连续内存分配），体现了四科统一知识体系。</div></div>
+</div>
+
+</div><!-- 综合题结束 -->
+
+<!-- 底部说明 -->
+<div style="margin-top:30px;padding:20px;background:#fff;border-radius:12px;box-shadow:0 1px 6px rgba(0,0,0,.07);font-size:12.5px;color:#666;line-height:1.8;">
+<p><strong>📋 试卷说明：</strong></p>
+<ol style="margin-left:20px">
+<li><strong>题目分布：</strong>选择题40题（80分）+ 综合应用题7题（70分）= 满分150分</li>
+<li><strong>知识点覆盖：</strong>数据结构(线性表/栈队列/二叉树/图/排序/查找) · 计组(数据表示/Cache/指令系统/CPU流水线) · 操作系统(进程/调度/内存管理/页面置换/文件管理) · 计网(OSI/TCP-IP/IP/TCP/UDP)</li>
+<li><strong>建议用时：</strong>选择题70~80分钟，综合题100~110分钟，留10分钟检查</li>
+<li><strong>难度定位：</strong>中等偏难，略高于真题平均水平</li>
+</ol>
+<p style="text-align:center;margin-top:16px;color:#999;">— 全卷终 — Generated by 408 DeepStudy Partner Pro v2.0 —</p>
+</div>
+
+</div><!-- container -->
+
+<script>
+// ====== 交互功能 ======
+function selectOpt(el, qid, opt){
+    const card=el.closest('.q-card');
+    const opts=card.querySelectorAll('.option-item');
+    opts.forEach(o=>{o.classList.remove('selected','correct','wrong');});
+    el.classList.add('selected');
+    card.dataset.userAnswer=opt;
+    updateStats();
+}
+
+function toggleAns(btn){
+    const box=btn.nextElementSibling;
+    if(box.classList.contains('show')){
+        box.classList.remove('show');
+        btn.classList.remove('shown');
+        btn.textContent='📖 查看答案与解析';
+    }else{
+        box.classList.add('show');
+        btn.classList.add('shown');
+        btn.textContent='🙈 隐藏答案';
+    }
+}
+
+function showAllAnswers(){
+    document.querySelectorAll('.answer-toggle').forEach(btn=>{
+        const box=btn.nextElementSibling;
+        box.classList.add('show');
+        btn.classList.add('shown');
+        btn.textContent='🙈 隐藏答案';
+    });
+    // 同时标记选择题正误
+    document.querySelectorAll('.q-card[data-type="choice"]').forEach(card=>{
+        const ans=card.dataset.ans;
+        const userAns=card.dataset.userAnswer;
+        if(userAns){
+            const selected=card.querySelector(`.option-item[data-opt="${userAns}"]`);
+            const correct=card.querySelector(`.option-item[data-opt="${ans}"]`);
+            if(selected) selected.classList.add(userAns===ans?'correct':'wrong');
+            if(correct&&userAns!==ans) correct.classList.add('correct');
+        }
+    });
+}
+
+function hideAllAnswers(){
+    document.querySelectorAll('.answer-toggle').forEach(btn=>{
+        const box=btn.nextElementSibling;
+        box.classList.remove('show');
+        btn.classList.remove('shown');
+        btn.textContent='📖 查看答案与解析';
+    });
+    document.querySelectorAll('.option-item').forEach(o=>{
+        o.classList.remove('correct','wrong');
+    });
+}
+
+function calcScore(){
+    let answered=0, correct=0, wrong=0;
+    document.querySelectorAll('.q-card[data-type="choice"]').forEach(card=>{
+        if(card.dataset.userAnswer){
+            answered++;
+            if(card.dataset.userAnswer===card.dataset.ans) correct++;
+            else wrong++;
+        }
+    });
+    // 综合题按题量估算（选择题每题2分，综合题共70分）
+    const choiceScore = correct * 2;
+    document.getElementById('answeredQ').textContent=answered;
+    document.getElementById('correctQ').textContent=correct;
+    document.getElementById('wrongQ').textContent=wrong;
+    document.getElementById('scoreDisplay').textContent=choiceScore+' / 80'+' (选择题)';
+    
+    showAllAnswers();
+    alert(`📊 选择题统计\n━━━━━━━━━━━━━━━\n总题目: 47 (选择40 + 综合7)\n已作答: ${answered}\n答对: ${correct}\n答错: ${wrong}\n选择题得分: ${choiceScore} / 80 分\n\n综合应用题(70分)请对照解析自评`);
+}
+
+function resetExam(){
+    document.querySelectorAll('.q-card').forEach(card=>{
+        delete card.dataset.userAnswer;
+        card.querySelectorAll('.option-item').forEach(o=>{
+            o.classList.remove('selected','correct','wrong');
+        });
+    });
+    hideAllAnswers();
+    document.getElementById('answeredQ').textContent='0';
+    document.getElementById('correctQ').textContent='0';
+    document.getElementById('wrongQ').textContent='0';
+    document.getElementById('scoreDisplay').textContent='-- / 150';
+}
+
+function updateStats(){
+    let answered=0;
+    document.querySelectorAll('.q-card[data-type="choice"]').forEach(card=>{
+        if(card.dataset.userAnswer) answered++;
+    });
+    document.getElementById('answeredQ').textContent=answered;
+}
+
+function scrollToSec(id){
+    const el=document.getElementById('sec-'+id);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>

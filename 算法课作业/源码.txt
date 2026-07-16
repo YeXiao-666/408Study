@@ -1,0 +1,454 @@
+// 引入所需头文件
+#include <iostream>         // 输入输出流
+#include <vector>           // 向量容器
+#include <algorithm>        // 算法库（如排序）
+#include <queue>            // 队列容器（用于分支限界法的优先队列）
+#include <chrono>           // 时间库（用于性能测试）
+#include <random>           // 随机数生成
+#include <iomanip>          // 输入输出格式化（如固定小数点）
+#include <utility>          // 实用工具（如pair）
+using namespace std;        // 标准命名空间
+
+ //回溯法实现  
+class BacktrackSolution {
+private:
+	int maxValue; // 记录最大价值
+	vector<int> remainSum; // 后缀价值和（基于按照单位价值排序后的顺序）
+
+public:
+	int cutStone(int L, vector<int>& lengths, vector<int>& values) {
+		maxValue = 0;
+		int n = lengths.size();
+
+		vector<pair<double, int>> orders; // (单位价值, 原始索引)
+		for (int i = 0; i < n; ++i) 
+		{
+			orders.emplace_back(static_cast<double>(values[i]) / lengths[i], i);// 按单位价值降序排序（关键剪枝优化）
+		}
+		sort(orders.begin(), orders.end(), [](const auto& a, const auto& b)
+		{
+				return a.first > b.first; // 降序排序
+		});
+
+
+		vector<int> sortedLengths(n), sortedValues(n);
+		for (int i = 0; i < n; ++i) 
+		{
+			sortedLengths[i] = lengths[orders[i].second];
+			sortedValues[i] = values[orders[i].second];//按排序后的顺序重新排列 lengths 和 values
+		}
+
+		// 计算排序后的后缀价值和
+		remainSum.resize(n);
+		remainSum[n - 1] = sortedValues[n - 1];
+		for (int i = n - 2; i >= 0; --i) 
+		{
+			remainSum[i] = remainSum[i + 1] + sortedValues[i];
+		}
+
+		//调用回溯函数
+		backtrack(0, 0, 0, L, sortedLengths, sortedValues);
+		return maxValue;
+	}
+
+private:
+	void backtrack(int start, int currentLength, int currentValue,
+		int L, const vector<int>& lengths, const vector<int>& values) {
+		// 剪枝1：剩余订单的总价值无法超过当前最大值
+		if (start < lengths.size() && currentValue + remainSum[start] <= maxValue) {
+			return;
+		}
+
+		// 更新最大值
+		if (currentValue > maxValue) {
+			maxValue = currentValue;
+		}
+
+		// 遍历订单
+		for (int i = start; i < lengths.size(); ++i) {
+			// 剪枝2：长度超过限制
+			if (currentLength + lengths[i] > L) {
+				continue;
+			}
+
+			// 递归探索
+			backtrack(i + 1, currentLength + lengths[i], currentValue + values[i],
+				L, lengths, values);
+		}
+	}
+};
+// 2. 分支限界法实现
+class BranchAndBoundSolution {
+private:
+	// 定义优先队列中的节点结构
+	struct Node {
+		int currentLevel;				// 当前处理到的石材层级
+		int currentLength;				// 已使用的总长度
+		int currentValue;				// 已获得的总价值
+		double currentBound;			// 当前节点的价值上界
+
+		Node(int l, int len, int val, double b)
+			: currentLevel(l), currentLength(len), currentValue(val), currentBound(b) {
+		}
+
+		// 重载<运算符用于优先队列（最大堆）
+		bool operator<(const Node& other) const
+		{
+			return currentBound < other.currentBound;//优先队列默认是最大堆
+		}
+	};
+
+public:
+	int cutStone(int L, vector<int>& lengths, vector<int>& values)
+	{
+		int n = lengths.size();
+		vector<pair<double, int>> orders;// 存储（单位价值，索引）的向量	
+
+		for (int i = 0; i < n; i++)
+		{
+			orders.emplace_back(values[i] / (double)lengths[i], i); //存入（单位价值，索引）
+		}
+
+		// 按单位价值降序排序
+		sort(orders.begin(), orders.end(),
+			[](const pair<double, int>& a, const pair<double, int>& b)
+			{
+				return a.first > b.first;//降序排列
+			}); // lambda表达式
+
+		int maxValue = 0;// 记录最大价值
+		priority_queue<Node> heap; // 优先队列（最大堆）
+		// 初始化根节点：层级0，长度0，价值0，计算初始上界
+		heap.emplace(0, 0, 0, bound(0, 0, 0, L, lengths, values, orders));
+
+		while (!heap.empty())
+		{
+			Node node = heap.top();// 取出上界最大的节点
+			heap.pop();
+
+			// 剪枝：如果当前上界小于已知最大价值，终止搜索
+			if (node.currentBound <= maxValue) continue;
+
+			// 到达叶子节点时更新最大值
+			if (node.currentLevel == n)
+			{
+				if (node.currentValue > maxValue)
+				{
+					maxValue = node.currentValue;
+				}
+				continue;
+			}
+			// 选择当前石材的分支（如果能放入）
+			if (node.currentLength + lengths[node.currentLevel] <= L)
+			{
+				int newValue = node.currentValue + values[node.currentLevel];
+				if (newValue > maxValue)
+				{
+					maxValue = newValue;
+				}
+				// 计算新节点的上界
+				double newBound = bound(node.currentLevel + 1, node.currentLength + lengths[node.currentLevel], newValue, L, lengths, values, orders);
+				// 只有上界可能超过当前最大值时才入队
+				if (newBound > maxValue)
+				{
+					heap.emplace(node.currentLevel + 1, node.currentLength + lengths[node.currentLevel], newValue, newBound);
+				}
+			}
+
+			// 不选择当前石材的分支
+			double boundValue = bound(node.currentLevel + 1, node.currentLength, node.currentValue, L, lengths, values, orders);
+			if (boundValue > maxValue)
+			{
+				heap.emplace(node.currentLevel + 1, node.currentLength, node.currentValue, boundValue);
+			}
+		}
+
+		return maxValue;//返回结果
+	}
+
+private:
+	// 计算上界函数（贪心思想）
+	double bound(int level, int currentLength, int currentValue, int L, vector<int>& lengths, vector<int>& values, vector<pair<double, int>>& orders)
+	{
+		double boundValue = currentValue;// 初始化上界为当前价值
+		int remaining = L - currentLength;// 剩余可用长度
+		for (auto it = orders.begin(); it != orders.end(); ++it) //// 遍历排序后的石材列表
+		{
+			if (it->second < level) continue; // 跳过已处理的层级（根据索引判断）
+			if (lengths[it->second] <= remaining)
+			{
+				boundValue += values[it->second];  // 累加价值
+				remaining -= lengths[it->second]; // 减少剩余长度
+			}
+			else
+			{
+				break;// 剩余空间不足，终止计算
+			}
+		}
+
+		return boundValue;//返回估算的上界值	
+	}
+};
+
+// 3. 动态规划实现
+class DpSolution {
+public:
+	int cutStone(int L, vector<int>& lengths, vector<int>& values) {
+		int n = lengths.size();
+
+		// 二维DP表：dp[i][j]表示前i个石材在容量j时的最大价值
+		vector<vector<int>> dp(n + 1, vector<int>(L + 1, 0));
+		// 构建DP表
+		for (int i = 1; i <= n; i++) // 遍历每个石材
+		{
+			for (int j = 1; j <= L; j++) // 遍历每个容量
+			{
+				if (lengths[i - 1] <= j) // 如果当前石材可以放入
+				{
+					dp[i][j] = max(dp[i - 1][j],// 不选当前石材的情况
+						values[i - 1] + dp[i - 1][j - lengths[i - 1]]);// 选择当前石材的情况
+				}
+
+				else 
+				{
+					dp[i][j] = dp[i - 1][j];// 无法放入，继承之前的结果
+				}
+			}
+		}
+
+		return dp[n][L];  // 返回最终结果
+	}
+};
+
+// 4. 优化动态规划实现
+class OptimizedDpSolution {
+public:
+	int cutStone(int L, vector<int>& lengths, vector<int>& values)
+	{
+		int n = lengths.size();
+		vector<int> dp(L + 1, 0);// 一维DP数组
+		for (int i = 0; i < n; i++) // 遍历每个石材
+		{
+			for (int j = L; j >= lengths[i]; j--) // 逆序遍历容量（避免覆盖之前的状态）
+			{
+				dp[j] = max(dp[j], values[i] + dp[j - lengths[i]]);// 状态转移方程：max(不选当前，选当前+剩余空间的最优解)
+			}
+		}
+
+		return dp[L];// 返回最终结果
+	}
+
+};
+void performanceComparison() {
+	vector<int> sizes = { 5, 10, 15, 20, 25, 35 };
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> len_dist(1, 20);
+	uniform_int_distribution<> val_dist(1, 40);
+
+	BacktrackSolution backtrack;
+	BranchAndBoundSolution bb;
+	DpSolution dp;
+	OptimizedDpSolution optDp;
+
+	cout << "\n性能比较 (单位: 毫秒):\n";
+	cout << "大小\t回溯法\t分支限界\t动态规划\t优化DP\n";
+
+	for (int n : sizes) {
+		int L = n * 5;
+		vector<int> lengths(n);
+		vector<int> values(n);
+
+		for (int i = 0; i < n; i++) {
+			lengths[i] = len_dist(gen);
+			values[i] = val_dist(gen);
+		}
+
+		auto start = chrono::high_resolution_clock::now();
+		backtrack.cutStone(L, lengths, values);
+		auto end = chrono::high_resolution_clock::now();
+		double backtrack_time = chrono::duration_cast<chrono::microseconds>(end - start).count() / 1000.0;
+
+		start = chrono::high_resolution_clock::now();
+		bb.cutStone(L, lengths, values);
+		end = chrono::high_resolution_clock::now();
+		double bb_time = chrono::duration_cast<chrono::microseconds>(end - start).count() / 1000.0;
+
+		start = chrono::high_resolution_clock::now();
+		dp.cutStone(L, lengths, values);
+		end = chrono::high_resolution_clock::now();
+		double dp_time = chrono::duration_cast<chrono::microseconds>(end - start).count() / 1000.0;
+
+		start = chrono::high_resolution_clock::now();
+		optDp.cutStone(L, lengths, values);
+		end = chrono::high_resolution_clock::now();
+		double optDp_time = chrono::duration_cast<chrono::microseconds>(end - start).count() / 1000.0;
+
+		cout << n << "\t" << backtrack_time << "\t" << bb_time << "\t\t"
+			<< dp_time << "\t\t" << optDp_time << endl;
+	}
+}
+// 测试函数
+void testAlgorithms() {
+	// 测试用例1: 简单案例
+	int L1 = 10;
+	vector<int> lengths1 = { 2, 3, 4, 5 };
+	vector<int> values1 = { 3, 4, 5, 6 };
+
+
+
+	// 测试用例2: 较大案例
+	int L2 = 200;
+	vector<int> lengths2 = { 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12,13,14,15,16,17,18,19,20,21,22,23 };
+	vector<int> values2 = { 3, 4, 5, 6 ,7, 8, 9 , 10, 11, 12,13,14,15,16,17 ,18,19,20,21,22,23,24 };
+
+	// 测试用例2: 大案例
+	int L3 = 2000;
+	vector<int> lengths3 = { 7, 15, 28, 31, 37, 45, 47, 60, 61, 76, 91, 92, 100, 103, 115, 119, 123, 130, 144, 199 };
+
+	vector<int> values3 = { 6, 9, 10, 20, 23, 26, 30, 35, 48, 49, 70, 71, 77, 79, 81, 84, 90, 98, 100, 107 };
+
+
+	// 实例化各个算法对象
+	BacktrackSolution backtrack;
+	BranchAndBoundSolution bb;
+	DpSolution dp;
+	OptimizedDpSolution optDp;
+
+	// 输出测试结果
+	cout << "			=== 简单案例 ===" << endl;
+	cout << "				石材总长度 ：" << L1 << endl;
+	cout << "				长度数组1 ：";
+	int cnt = -1;
+	for (int i = 0; i < lengths1.size(); ++i) //// 遍历排序后的石材列表
+	{
+
+		cnt++;
+		if (cnt % 5 == 0) {
+
+			cout << endl;
+			cout << "                     			   ";
+		}
+		cout << lengths1[i] << " ";
+	}
+	cnt = -1;
+	cout << endl;
+	cout << "				价值数组1 ：";
+	for (int i = 0; i < values1.size(); ++i) //// 遍历排序后的石材列表
+	{
+
+		cnt++;
+		if (cnt % 5 == 0) {
+
+			cout << endl;
+			cout << "                     			   ";
+		}
+		cout << values1[i] << " ";
+	}
+	//cout  << endl;
+	//cout << "maxValue :  currentLength :currentValue :";
+	cout << endl;
+	cout << endl;
+	cout << "回溯法: " << backtrack.cutStone(L1, lengths1, values1) << endl;
+	//cout << "boundValue :  lengths :   values:";
+	cout << endl;
+	cout << "分支限界法: " << bb.cutStone(L1, lengths1, values1) << endl;
+	cout << endl;
+	cout << "动态规划: " << dp.cutStone(L1, lengths1, values1) << endl;
+	cout << endl;
+	cout << "优化动态规划: " << optDp.cutStone(L1, lengths1, values1) << endl;
+	cout << endl;
+
+	cout << "\n			=== 较大案例 ===" << endl;
+
+
+	cout << "				石材总长度 ：" << L2 << endl;
+	cout << "				长度数组2 ：";
+	cnt = -1;
+	for (int i = 0; i < lengths2.size(); ++i) //// 遍历排序后的石材列表
+	{
+
+		cnt++;
+		if (cnt % 5 == 0) {
+
+			cout << endl;
+			cout << "                     			   ";
+		}
+		cout << lengths2[i] << " ";
+	}
+	cnt = -1;
+	cout << endl;
+	cout << "				价值数组2 ：";
+	for (int i = 0; i < values2.size(); ++i) //// 遍历排序后的石材列表
+	{
+
+		cnt++;
+		if (cnt % 5 == 0) {
+
+			cout << endl;
+			cout << "                     			   ";
+		}
+		cout << values2[i] << " ";
+	}
+
+	cout << endl;
+	cout << "回溯法: " << backtrack.cutStone(L2, lengths2, values2) << endl;
+	cout << endl;
+	cout << "分支限界法: " << bb.cutStone(L2, lengths2, values2) << endl;
+	cout << endl;
+	cout << "动态规划: " << dp.cutStone(L2, lengths2, values2) << endl;
+	cout << endl;
+	cout << "优化动态规划: " << optDp.cutStone(L2, lengths2, values2) << endl;
+	cout << endl;
+
+
+	cout << "\n			=== 超大案例 ===" << endl;
+
+
+	cout << "				石材总长度 ：" << L3 << endl;
+	cout << "				长度数组3 ：";
+	cnt = -1;
+	for (int i = 0; i < lengths3.size(); ++i) //// 遍历排序后的石材列表
+	{
+
+		cnt++;
+		if (cnt % 10 == 0) {
+
+			cout << endl;
+			cout << "                     			   ";
+		}
+		cout << lengths3[i] << " ";
+	}
+	cnt = -1;
+	cout << endl;
+	cout << "				价值数组3 ：";
+	for (int i = 0; i < values3.size(); ++i) //// 遍历排序后的石材列表
+	{
+
+		cnt++;
+		if (cnt % 10 == 0) {
+
+			cout << endl;
+			cout << "                     			   ";
+		}
+		cout << values3[i] << " ";
+	}
+	cout << endl;
+	cout << "回溯法: " << backtrack.cutStone(L3, lengths3, values3) << endl;
+	cout << endl;
+	cout << "分支限界法: " << bb.cutStone(L3, lengths3, values3) << endl;
+	cout << endl;
+	cout << "动态规划: " << dp.cutStone(L3, lengths3, values3) << endl;
+	cout << endl;
+	cout << "优化动态规划: " << optDp.cutStone(L3, lengths3, values3) << endl;
+	cout << endl;
+}
+int main() {
+	cout << "石材切割问题算法实现\n";
+	cout << "===================\n\n";
+
+	cout << "测试不同算法的正确性:\n";
+	testAlgorithms();
+	performanceComparison();
+	return 0;
+}
