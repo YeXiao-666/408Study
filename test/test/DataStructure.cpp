@@ -9,7 +9,7 @@
 #include <cmath> 
 #include <string>
 using namespace std;
-#define MaxSize 1000
+#define MaxSize 100
 
 /// <summary>
 /// 数据结构
@@ -148,6 +148,32 @@ typedef struct
 void InitStack(SqStack& s)
 {
 	s.top = -1;
+}
+bool Empty(const SqStack& s)
+{
+	return s.top == -1;
+}
+bool Full(const SqStack& s)
+{
+	return s.top == MaxSize-1;
+}
+bool Push(SqStack& s, int num)
+{
+	if (!Full(s))
+	{
+		s.data[++s.top] = num;
+		return true;
+	}
+	else return false;
+}
+bool Push(SqStack& s,int& res)
+{
+	if (!Empty(s))
+	{
+		s.data[--s.top] = res;
+		return true;
+	}
+	else return false;
 }
 #pragma endregion
 

@@ -1,10 +1,24 @@
 # DS强化
 
+时间分配
 
+![d7d3d889-8965-497a-9222-1ff2737308ed](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/d7d3d889-8965-497a-9222-1ff2737308ed.png)
 
 ![d70aa287-7eea-483e-9aca-2fe44ecba5d3](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/d70aa287-7eea-483e-9aca-2fe44ecba5d3.png)![3816223f-7db1-46b3-8a20-e7ed6ac44296](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3816223f-7db1-46b3-8a20-e7ed6ac44296.png)
 
-![438c08a5-0aee-42eb-82ca-3d26867b719b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/438c08a5-0aee-42eb-82ca-3d26867b719b.png)![7c1e9cf4-02d3-411e-83ce-51f3dc2c000f](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7c1e9cf4-02d3-411e-83ce-51f3dc2c000f.png)![26458a4b-9c7e-47b6-8aab-1ad9806aabd9](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/26458a4b-9c7e-47b6-8aab-1ad9806aabd9.png)![07473081-e6fe-4d65-a26a-37df39895972](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/07473081-e6fe-4d65-a26a-37df39895972.png)![0752fe14-d363-439b-93f4-6a5f29f0cd3b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0752fe14-d363-439b-93f4-6a5f29f0cd3b.png) ![ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0.png)![5334c693-f2f0-42ff-abeb-a9283cdb96ae](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/5334c693-f2f0-42ff-abeb-a9283cdb96ae.png)![0d61a611-e193-4620-876e-ca36f27aebce](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0d61a611-e193-4620-876e-ca36f27aebce.png)![fe66515e-9177-4781-aaa0-58838960a479](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/fe66515e-9177-4781-aaa0-58838960a479.png)
+![438c08a5-0aee-42eb-82ca-3d26867b719b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/438c08a5-0aee-42eb-82ca-3d26867b719b.png)![7c1e9cf4-02d3-411e-83ce-51f3dc2c000f](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7c1e9cf4-02d3-411e-83ce-51f3dc2c000f.png)![26458a4b-9c7e-47b6-8aab-1ad9806aabd9](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/26458a4b-9c7e-47b6-8aab-1ad9806aabd9.png)![07473081-e6fe-4d65-a26a-37df39895972](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/07473081-e6fe-4d65-a26a-37df39895972.png)![0752fe14-d363-439b-93f4-6a5f29f0cd3b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0752fe14-d363-439b-93f4-6a5f29f0cd3b.png) ![ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0.png)![5334c693-f2f0-42ff-abeb-a9283cdb96ae](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/5334c693-f2f0-42ff-abeb-a9283cdb96ae.png)![0d61a611-e193-4620-876e-ca36f27aebce](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0d61a611-e193-4620-876e-ca36f27aebce.png)![fe66515e-9177-4781-aaa0-58838960a479](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/fe66515e-9177-4781-aaa0-58838960a479.png)![cdd22b87-94b9-4fa3-9cce-824a9f2da5b1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/cdd22b87-94b9-4fa3-9cce-824a9f2da5b1.png)![3b4471f2-5c0d-4b17-9dcf-fdb2a7d001c1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3b4471f2-5c0d-4b17-9dcf-fdb2a7d001c1.png)
+
+## 线性表
+
+### 线性表的应用：单链表
+
+![47477927-d455-4bee-bfd1-c5ed5d138eed](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/47477927-d455-4bee-bfd1-c5ed5d138eed.png)
+
+
+
+## 并查集
+
+![bbe45978-3f4f-465d-bf83-979c2b7732e0](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/bbe45978-3f4f-465d-bf83-979c2b7732e0.png)![1d83977d-c8d7-4727-94b2-4186fa0c68ca](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/1d83977d-c8d7-4727-94b2-4186fa0c68ca.png)
 
 
 
@@ -58,7 +72,7 @@
 
 # 考法
 
-
+### 定义数据结构
 
 ## 手算分析代码的执行过程/结果(10)
 

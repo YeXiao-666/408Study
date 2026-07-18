@@ -224,6 +224,7 @@ void CountSort(vector<int>& a, int exp) {
 	vector<int> out(n);
 	int cnt[10] = { 0 };
 
+	//exp取1时，取每个数的个位放入桶中
 	for (int i = 0; i < n; ++i)
 		cnt[(a[i] / exp) % 10]++;
 
@@ -241,6 +242,7 @@ void CountSort(vector<int>& a, int exp) {
 void radixSort(vector<int>& a) {
 	if (a.empty()) return;
 	int maxVal = *max_element(a.begin(), a.end());
+	//依次次从个位到最高位开始
 	for (int exp = 1; maxVal / exp > 0; exp *= 10) {
 		CountSort(a, exp);
 	}

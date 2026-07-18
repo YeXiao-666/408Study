@@ -13,6 +13,8 @@ namespace My408
 {
 #pragma region 排序算法
 
+
+    //堆排序 ： 最好最坏均为时间：O(nlogn), 空间:O(1) 不稳定
 #pragma region 堆排序
     
     void AdjustDown(int a[], int n, int root)
@@ -143,10 +145,138 @@ namespace My408
         sort(minHeap.begin(), minHeap.end(), greater<int>());
         return minHeap;
     }
+
+
+    void AdjustDown(vector<int>& a, int n, int root)
+    {
+        while (1)
+        {
+            int minIndex = root;
+
+            int l = 2 * root + 1, r = 2 * root + 2;
+
+            if (l < n && a[l] < a[minIndex]) minIndex = l;
+            if (r < n && a[r] < a[minIndex]) minIndex = r;
+
+            if (minIndex == root) break;
+
+            swap(a[root], a[minIndex]);
+            root = minIndex;
+        }
+    }
+
+    vector<int> GetTopK(int a[], int n, int k)
+    {
+        vector<int> res;
+        res.reserve(k);
+        for (int i = 0; i < n; ++i)
+        {
+            if (i < k)
+            {
+                res.push_back(a[i]);
+                /////////
+                if (i == k - 1)
+                {
+                    for (int j = (k >> 1) - 1; j >= 0; j--)
+                    {
+                        AdjustDown(res, k, j);
+                    }
+                }
+            }
+            else
+            {
+                ////////!!!!
+                if (a[i] > res[0])
+                {
+                    res[0] = a[i];
+                    AdjustDown(res, k, 0);
+                }
+
+            }
+        }
+        return res;
+    }
+
+    void GetTopK2(int a[], int n, int k, int res[])
+    {
+        if (k <= 0 || n <= 0)return;
+
+        for (int i = 0; i < k; ++i)res[i] = a[i];
+
+        if (n <= k) return;
+        Heapify(res, k);
+
+        for (int i = k; i < n; ++i)
+        {
+            if (a[i] > res[0])
+            {
+                res[0] = a[i];
+                AdjustDown(res, k, 0);
+            }
+        }
+
+    }
+
+    void DeleteHeap(int a[], int& n, int k)
+    {
+        if (k < 0 || k >= n)return;
+
+        // 用最后一个元素覆盖被删元素
+        a[k] = a[n - 1];
+        --n;   // 堆大小减 1
+        // 如果删除的就是最后一个，不需要调整
+        if (k == n) return;
+
+        // 从 k 开始，先尝试向下调整
+        int parent = (k - 1) / 2;
+        // 小顶堆：如果当前节点比父节点小，则向上调整（上滤）
+        if (k > 0 && a[k] < a[parent]) {
+            while (k > 0 && a[k] < a[(k - 1) / 2]) {
+                swap(a[k], a[(k - 1) / 2]);
+                k = (k - 1) / 2;
+            }
+        }
+        else {
+            // 否则向下调整
+            AdjustDown(a, n, k);
+        }
+    }
+#pragma endregion
+    //归并排序 ：最好最坏均为 时间：O(nlogn), 暂存数组空间:O(n) 稳定
+#pragma region 归并排序
+    void MergeSort(int a[], int n, int l, int r)
+    {
+        if (l >= r)return; // 划分至最小的子数组，只有一个元素
+
+        int m = (l + r) / 2;
+        //分治，二路归并，划分左右子数组
+        //划分右数组
+        MergeSort(a, n, l, m);
+        MergeSort(a, n, m + 1, r);
+        //合并
+
+        //暂存左右子数组待合并元素， 通过比较修改主数组的元素，从而排序
+        int* tmp = new int[r - l + 1];
+
+        for (int i = l; i <= r; ++i)tmp[i - l] = a[i];
+        // i为tmp左端点 即 左子数组的第一个元素, j 为右子树组的第一个元素
+        int i = 0, j = m - l + 1;
+        // 遍历主数组的元素，通过比较暂存数组的值，进行排序
+        for (int k = l; k <= r; ++k)
+        {
+            //左子数组排序完毕，右子数组未完成
+            if (i == m - l + 1) a[k] = tmp[j++];
+            //右子数组排序完毕，左子数组未完成，或者 相同元素 i下标小放前面，稳定！！大于等于
+            else if (j == r - l + 1 || tmp[j] >= tmp[i]) a[k] = tmp[i++];
+            //左右数组均为排序完毕
+            else a[k] = tmp[j++];
+        }
+        delete[] tmp;
+
+    }
 #pragma endregion
 
-
-   //!!!不考察代码!!! 
+   //!!!不考察代码!!! O(n²)
     /// <summary>
     /// 插入排序 
     /// </summary>
@@ -182,23 +312,28 @@ namespace My408
             while (l <= r)   //闭区间 小于等于
             {
                 int m = (r + l) / 2;
+                //!!!!如果改为 大于等于会破坏稳定性!!!!!
+                //! //!!!!如果改为 大于等于会破坏稳定性!!!!!
+                //! //!!!!如果改为 大于等于会破坏稳定性!!!!!
                 if (a[m] > key)r = m - 1;   //m-1
 
                 else l = m + 1;    // m + 1
             }
 
             // 大头 O n
+            //a[l] 第一个大于key的数,需要将其向后移动, 所以要注意大于等于!!!!!!
             for (int j = i - 1; j >= l; --j)
             {
                 if (a[j] == key) cout << "不稳定" << endl;
                 a[j + 1] = a[j];
                 
             }
-                
+            //l为插入的位置,即第一个大于key的位置
             a[l] = key;                   // 1  2 2  5
         }
     }
 
+    //快速排序 ： 最好平均时间：O(nlogn) 最坏为有序时，O(n²), 空间:O(logn 到 n 之间) 不稳定
 #pragma region 快速排序
     int patition(vector<int>& a, int l, int r)
     {
@@ -207,7 +342,7 @@ namespace My408
 
         while (i < j)
         {
-            //注意要大于等于，小于等于，否则遇到与基准元素相同的元素时会死循环，ij不动
+            //注意要大于等于，小于等于，不稳定！！否则遇到与基准元素相同的元素时会死循环，ij不动
             //如 1 3 4 5 6 1 2 3 4 2 1
             while (i < j && a[j] >= a[l]) --j;
             while (i < j && a[i] <= a[l]) ++i;
@@ -227,7 +362,7 @@ namespace My408
     }
     
 #pragma endregion
-
+    //希尔排序 ：最好均为 时间：O(n1.3方),最坏为有序时，O(n²)， 空间:O(1)不稳定
 #pragma region ShellSort
 
 
@@ -270,7 +405,107 @@ namespace My408
 #pragma endregion
 
 
+    void SelectSort(vector<int>& arr) {
+        int n = arr.size();
+        for (int i = 0; i < n - 1; i++) {
+            int min_idx = i;
+            // 寻找最小元素的索引
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[min_idx]) {
+                    min_idx = j;
+                }
+            }
+            // 将最小元素交换到已排序部分的末尾
+            if (min_idx != i) {
+                std::swap(arr[i], arr[min_idx]);
+            }
+        }
+    }
 
+#pragma region 基数排序
+    //基数排序
+    ////LinkTable 为什么声明时不带 * 号？
+    //因为* LinkTable 中的* 号已经包含在 typedef 的定义里了。
+    //Node 是结构体本身的类型。
+    //LinkTable 是 Node* （即指向 Node 结构体的指针）的类型别名。
+    //所以，当你写 LinkTable table = new Node[n]; 时，编译器看到的其实等效于 Node* table = new Node[n]; 
+    typedef struct
+    {
+        int next;
+        int data;
+    }Node, * LinkTable;
+    void RadixSort(int a[], int n)
+    {
+
+        LinkTable table = new Node[n];
+        int maxValue = a[0];
+        for (int i = 0; i < n; ++i)
+        {
+            table[i].data = a[i];
+            if (table[i].data > maxValue) maxValue = table[i].data;
+            table[i].next = (i == n - 1) ? -1 : i + 1;
+        }
+        // 初始为空 -1
+        int front[10], rear[10];
+        int head = 0; // 链表头游标
+        for (int exp = 1; (maxValue / exp) > 0; exp *= 10)
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                front[i] = rear[i] = -1;
+            }
+            int p = head;
+            while (p != -1)
+            {
+                int digit = (table[p].data / exp) % 10;
+                int next = table[p].next;
+                table[p].next = -1;
+
+                if (front[digit] == -1) front[digit] = p; //初始化为队头队尾
+                else table[rear[digit]].next = p; //将该元素连接到队尾
+                rear[digit] = p;//置为队尾
+
+                p = next;
+            }
+
+            head = -1;
+            int tail = -1;
+
+            for (int i = 0; i < 10; ++i)
+            {
+                //如果当前桶有元素
+                if (front[i] != -1)
+                {
+                    //如果收集的是第一个元素
+                    if (head == -1)
+                    {
+                        head = front[i]; //收集队列的队头
+                    }
+                    else
+                    {
+                        //将整个链表挂在上个链表的尾部
+                        table[tail].next = front[i];
+                    }
+                    //将队尾置为当前链表的尾部
+                    tail = rear[i];
+
+                }
+            }
+
+
+        }
+        //最后的排序完毕的队列头结点
+        int p = head;
+        for (int i = 0; i < n; ++i)
+        {
+            a[i] = table[p].data;
+            p = table[p].next;
+        }
+
+        // 释放内存池，防止内存泄漏
+        delete[] table;
+    }
+#pragma endregion
 
 
 
@@ -668,16 +903,16 @@ typedef struct ArcNode {
     unsigned int destIP;    // 目标IP：相邻路由器IP地址 或 直连网络前缀
     unsigned int metric;    // 权重：到达目的地的费用 (Metric)
     int type;               // 节点类型：0代表路由器(Link)，1代表直连网络(Net) - [注：此项为工程完善项，考场写出前两项即可满分]
-    struct ArcNode* next;   // 指针：指向下一条链路信息
+    ArcNode* next;   // 指针：指向下一条链路信息
 } ArcNode;
 
 // --------------------------------------------------------
 // 2. 顶点表结点 (VNode)：对应LSI表中的 Router ID
 // --------------------------------------------------------
-typedef struct VNode {
+typedef struct{
     unsigned int routerID;  // 顶点标识：路由器ID (如 10.1.1.1)
     ArcNode* firstArc;      // 头指针：指向该路由器的第一条链路信息
-} VNode, AdjList[MAX_ROUTER_NUM];
+} VNode, *AdjList;
 
 // --------------------------------------------------------
 // 3. 邻接表图结构 (ALGraph)：完整包装整个网络拓扑
@@ -690,6 +925,361 @@ typedef struct {
 #pragma endregion
 
 
+
+
+void InsertSort(int a[], int n)
+{
+    for (int i = 1; i < n; ++i)
+    {
+        int t = a[i];
+        int j;
+        for (j = i - 1; j >=0 && a[j] > t; --j)
+        {
+            a[j + 1] = a[j];
+        }
+        a[j + 1] = t;///!!!!
+    }
+}
+void InsertSort2(int a[], int n)
+{
+    for (int i = 1; i < n; ++i)
+    {
+        int t = a[i];
+        
+        int l = 0, r = i - 1;
+        while (l <= r)
+        {
+            int m = (l + r) / 2;
+            if (a[m] > t) r = m - 1;
+            else l = m + 1;
+        }
+        for (int j = i - 1; j >= l && a[j] > t; --j)
+        {
+            a[j + 1] = a[j];
+        }
+        a[l] = t;///!!!!
+    }
+}
+void ShellSort(int a[], int n, int step)
+{
+    for (int gap = step; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n; ++i)
+        {
+            int t = a[i];
+            int j;
+            for (j = i - gap; j >= 0 && a[j] > t; j -= gap)
+            {
+                a[j + gap] = a[j];
+            }
+            a[j + gap] = t;
+        }
+    }
+}
+
+int Patition(int a[], int n, int l, int r)
+{
+    
+    int i = l, j = r;
+
+    while (i < j)
+    {
+        while (i < j && a[j] >= a[l])--j;
+        while (i < j && a[i] <= a[l])++i;
+        swap(a[i], a[j]);
+    }
+    swap(a[i], a[l]);
+    for (int i = 0; i < n; ++i)cout << a[i] << " ";
+    cout << endl;
+
+    return i;
+}
+void QuickSort(int a[], int n, int l, int r)
+{
+    if (l >= r) return;//子数组中只剩下一个元素，排序完毕
+
+    int i = Patition(a, n, l, r);
+
+    QuickSort(a, n, l, i - 1);
+    QuickSort(a, n, i+1, r);
+}
+
+void AdjustDown(int a[], int n, int root)
+{
+    while (1)
+    {
+        int minIndex = root;
+        int l = root * 2 + 1, r = root * 2 + 2;
+        if (l < n && a[l] < a[minIndex]) minIndex = l;
+        if (r < n && a[r] < a[minIndex]) minIndex = r;
+
+        if (root == minIndex) break;
+        swap(a[root], a[minIndex]);
+        root = minIndex;
+    }
+}
+void Heapify(int a[], int n)
+{
+    for (int i = (n >> 1) - 1; i >= 0; --i)
+    {
+        AdjustDown(a, n, i); //从0开始下沉，将大值下沉，小值浮上
+    }
+}
+
+void HeapSort(int a[], int n)
+{
+    if (n <= 1) return;
+
+    //建堆，最小值堆顶
+    Heapify(a, n);
+    //最后一个元素已经排好序
+    for (int i = n - 1; i > 0; --i)
+    {
+        swap(a[0], a[i]);
+        AdjustDown(a, i, 0);
+    }
+
+}
+
+#pragma region 多项式
+//一、
+typedef struct Node
+{
+    int co;
+    int ex;
+    int cnt;
+    Node* next;
+}* Polynomial;
+
+Polynomial createPolynomial(const int coefs[], const int exps[], int n) {
+    Polynomial head = new Node(); // 建立头结点
+    head->next = nullptr;
+    head->cnt = 0;
+
+    Node* tail = head; // 尾指针，用于尾插法保持输入顺序
+    for (int i = 0; i < n; ++i) {
+        if (coefs[i] == 0) continue; // 忽略系数为0的无效项
+
+        Node* newNode = new Node();
+        newNode->co = coefs[i];
+        newNode->ex = exps[i];
+        newNode->next = nullptr;
+
+        tail->next = newNode; // 接入链表尾部
+        tail = newNode;       // 尾指针后移
+        head->cnt++;          // 计数器递增
+    }
+    return head;
+}
+
+Polynomial Add_Optimized(Polynomial& p1, Polynomial& p2) {
+    if (!p1 || !p2) return p1 ? p1 : p2;
+
+    Node* pa = p1->next;      // pa 遍历 p1 有效项
+    Node* pb = p2->next;      // pb 遍历 p2 有效项
+    Node* tail = p1;          // tail 作为结果链表的尾指针，直接复用 p1 的头结点
+    p1->cnt = 0;              // 重置有效项计数
+
+    while (pa != nullptr && pb != nullptr) {
+        if (pa->ex > pb->ex) {
+            tail->next = pa;  // 牵走 pa 节点
+            tail = pa;
+            pa = pa->next;
+            p1->cnt++;
+        }
+        else if (pa->ex < pb->ex) {
+            tail->next = pb;  // 牵走 pb 节点
+            tail = pb;
+            pb = pb->next;
+            p1->cnt++;
+        }
+        else { // 指数相等
+            int sum = pa->co + pb->co;
+            if (sum != 0) {
+                pa->co = sum;     // 就地修改 pa 的系数作为保留节点
+                tail->next = pa;
+                tail = pa;
+                pa = pa->next;
+                p1->cnt++;
+
+                Node* del_b = pb; // 冗余的 pb 节点必须被释放
+                pb = pb->next;
+                delete del_b;
+            }
+            else {
+                // 系数抵消为 0，两个节点均失效，必须全部释放
+                Node* del_a = pa;
+                Node* del_b = pb;
+                pa = pa->next;
+                pb = pb->next;
+                delete del_a;
+                delete del_b;
+            }
+        }
+    }
+
+    // 极简拼接：将未遍历完的一条链表直接挂载到 tail 后面
+    tail->next = (pa != nullptr) ? pa : pb;
+
+    // 统计剩余挂载片段的节点数量以更新 cnt（408 若无明确要求可省略此步，但工程上必须严谨）
+    Node* curr = tail->next;
+    while (curr != nullptr) {
+        p1->cnt++;
+        curr = curr->next;
+    }
+
+    delete p2;    // p2 的节点已全部融合或被销毁，释放其孤立的头结点
+    p2 = nullptr; // 防止野指针
+
+    return p1;
+}
+#pragma endregion
+
+#pragma region 并查集
+class DSU {
+private:
+    // 408大纲标准单数组设计：
+    // 若 S[i] >= 0，代表其父节点索引；若 S[i] < 0，代表其为根节点，且绝对值为该集合的节点总数。
+    std::vector<int> S;
+    int cnt;
+
+public:
+    // 构造函数：初始化 n 个节点
+    DSU(int n) {
+        S.resize(n, -1); // 初始状态，所有节点自成一派，大小为1（表现为-1）
+    }
+
+    // 核心操作 1：Find (带路径压缩迭代版)
+    int find(int x) {
+        int root = x;
+        // 寻根跳跃：只要值大于等于0，说明是常规子节点
+        while (S[root] >= 0) {
+            root = S[root];
+        }
+
+        // 路径压缩跳跃：将查找路径上的所有节点直接挂载到 root 下
+        while (x != root) {
+            int t = S[x]; // 暂存原父节点
+            S[x] = root;  // 直接指向根
+            x = t;        // 游标上移
+        }
+        return root;
+    }
+
+    // 核心操作 2：Union (按规模合并，Union by Weight/Size)
+    bool unite(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+
+        if (rootX == rootY) {
+            return false; // 已在同一集合（图论中连边即成环）
+        }
+
+        // 按规模合并核心逻辑：
+        // 注意 S 中存的是负数！数值越大（越接近0），绝对值越小，代表树的规模越小。
+        // 我们强制让 rootX 成为“大树”（即 S[rootX] 更小，更负）。
+        if (S[rootX] > S[rootY]) {
+            std::swap(rootX, rootY);
+        }
+
+        S[rootX] += S[rootY]; // 更新大树的总节点数 (负数累加)
+        S[rootY] = rootX;     // 将小树的根节点指向大树的根节点
+
+        return true;
+    }
+
+    bool connected(int x, int y) {
+        return find(x) == find(y);
+    }
+
+    int getSize(int x) {
+        return -S[find(x)]; // 根节点存储的负数取绝对值
+    }
+    int GetConnectedComponents()
+    {
+        int cnt = 0;
+        for (int i = 0; i < S.size(); ++i)
+            if (S[i] < 0) cnt++;
+
+        return cnt;
+    }
+};
+
+int ComponentCnt(int g[5][5])
+{
+    int S[5] = { -1,-1,-1,-1,-1 };
+
+    
+}
+#pragma endregion
+
+#pragma region 共享栈
+#define MaxSize 100
+struct SharedStack
+{
+    int data[MaxSize]; // 静态数组存放数据
+    int top;
+    int bom;
+};
+void InitStack(SharedStack& s)
+{
+    s.top = MaxSize;
+    s.bom = -1;
+}
+bool Full(const SharedStack& s)
+{
+    if (s.top - 1 == s.bom) return true;
+    else return false;
+}
+// 修复点 3：拆分判空逻辑，根据 flag 判断指定的栈是否为空
+bool Empty(const SharedStack& s, int flag) {
+    if (flag == 1) return s.top == MaxSize; // 右栈空
+    if (flag == 0) return s.bom == -1;      // 左栈空
+    return false; // 非法栈号
+}
+bool Push(SharedStack& s, int flag, int num)
+{
+    if (!Full(s))
+    {
+        if (flag == 1)
+        {
+            s.top--;
+            s.data[s.top] = num;
+        }
+        else if (flag == 0)
+        {
+            s.bom++;
+            s.data[s.bom] = num;
+        }
+        else
+        {
+            return false;
+        }
+        return true;
+    }
+    else return false;
+}
+
+bool Pop(SharedStack& s, int flag, int& e) {
+    // 1. 边界防护：判空（防止下溢出 Underflow）
+    if (Empty(s, flag)) {
+        return false; // 栈空，出栈失败
+    }
+
+    // 2. 执行出栈逻辑
+    if (flag == 1) {
+        // 右栈：先提取当前栈顶元素，随后指针向右退回（自增）
+        e = s.data[s.top++];
+    }
+    else {
+        // 左栈：先提取当前栈顶元素，随后指针向左退回（自减）
+        e = s.data[s.bom--];
+    }
+
+    return true; // 出栈成功
+}
+
+#pragma endregion
 
 
 
@@ -787,8 +1377,10 @@ int main() {
     //runTest("Test 5: 边界测试 (空链表)", {});
 #pragma endregion
     vector<int> arr = { 3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 33 };
-    vector<int> arr1 = { 3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 34, 23, 22 ,22 ,231, 222 };
-    int a[9] = { 23,17,72,60,25,8,68,71,52 };
+    //vector<int> arr1 = { 3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 34, 23, 22 ,22 ,231, 222 };
+    int arr1[19] = {3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 34, 23, 22 ,22 ,231, 222};
+    int a[11] = { 23,17,72,60,25,8,2, 5, 13, 6, 3};
+    int a1[15] = {36, 18, 10, 2, 88, 53, 27, 99,0,38,46,77,78,55,40};
    // My408::Heapify(arr);
     //vector<int> res = My408::getTopK(arr);
     ////for (int x : arr) cout << x << " ";
@@ -796,22 +1388,121 @@ int main() {
     //// 输出：1 1 2 3 4 5 6 9
 
 
-    My408::InsertSort2(arr);
-    for (int x : arr) cout << x << " ";
-    //My408::InsertSort(arr1);
+    //My408::InsertSort2(arr);
+    //for (int x : arr) cout << x << " ";
+    ////My408::InsertSort(arr1);
+    ////for (int x : arr1) cout << x << " ";
+    //cout << endl;
+    ////My408::QuickSort(arr1, 0, arr1.size()-1);
+    ////for (int x : arr1) cout << x << " ";
+    //
+    //My408::ShellSort(arr1,(arr1.size() + 1) / 2);
     //for (int x : arr1) cout << x << " ";
-    cout << endl;
-    //My408::QuickSort(arr1, 0, arr1.size()-1);
-    //for (int x : arr1) cout << x << " ";
-    
-    My408::ShellSort(arr1,(arr1.size() + 1) / 2);
-    for (int x : arr1) cout << x << " ";
-    cout << endl;
-    My408::HeapSort(a,9);
-    for (int i = 0; i < 9; ++i)
-        cout << a[i] << " ";
+    //cout << endl;
+    //My408::HeapSort(a,9);
+    //for (int i = 0; i < 9; ++i)
+    //    cout << a[i] << " ";
 
+    //InsertSort2(a, 6);
+    //for (int x : a) cout << x << " ";
     
+   /* My408::RadixSort(a, 11);
+    for (int x : a) cout << x << " ";
+
+    cout << endl;*/
+
+    /*QuickSort(arr1, 19, 0, 18);*/
+    //HeapSort(arr1, 19);
+    //for (int x : arr1) cout << x << " ";
+    //cout << endl;
+    //int res[3];
+    //GetTopK2(a, 6, 3, res);
+
+    //for (int x : res) cout << x << " ";
+
+    // 第一个多项式：3x^2 + 2x + 1
+
+    //Node p2;
+    //int co1[] = { 3, 2, 1 };
+    //int ex1[] = { 2, 1, 0 };
+    //Polynomial poly1 = createPolynomial(co1, ex1, 3);
+
+    //// 第二个多项式：4x^3 + x (注意降序排列是链表多项式相加的前提)
+    //int co2[] = { 4, 1 };
+    //int ex2[] = { 3, 1 };
+    //Polynomial poly2 = createPolynomial(co2, ex2, 2);
+
+    /*QuickSort(a1, 15, 0, 14);*/
+    std::cout << "==================================================\n";
+    std::cout << "         408数据结构：一元多项式就地相加评测          \n";
+    std::cout << "==================================================\n\n";
+
+    // ---- 【测试样例一：指数完全错开】 ----
+    {
+        std::cout << "【测试样例一：指数完全错开】\n";
+        Polynomial p1 = createPolynomial({ 3, 2 }, { 5, 3 });
+        Polynomial p2 = createPolynomial({ 5, 1 }, { 4, 1 });
+        std::cout << "多项式 A: "; printPolynomial(p1);
+        std::cout << "多项式 B: "; printPolynomial(p2);
+        p1 = Add_Optimized(p1, p2);
+        std::cout << "相加结果: "; printPolynomial(p1);
+        std::cout << "--------------------------------------------------\n";
+    }
+
+    // ---- 【测试样例二：指数相同系数不为0】 ----
+    {
+        std::cout << "【测试样例二：存在同次项合并】\n";
+        Polynomial p1 = createPolynomial({ 4, 2 }, { 4, 2 });
+        Polynomial p2 = createPolynomial({ 3, 1 }, { 4, 2 });
+        std::cout << "多项式 A: "; printPolynomial(p1);
+        std::cout << "多项式 B: "; printPolynomial(p2);
+        p1 = Add_Optimized(p1, p2);
+        std::cout << "相加结果: "; printPolynomial(p1);
+        std::cout << "--------------------------------------------------\n";
+    }
+
+    // ---- 【测试样例三：高频陷阱-系数抵消为0】 ----
+    {
+        std::cout << "【测试样例三：高频陷阱-系数抵消】\n";
+        Polynomial p1 = createPolynomial({ 5, 3, 2 }, { 6, 4, 1 });
+        Polynomial p2 = createPolynomial({ -5, 1 }, { 6, 2 });
+        std::cout << "多项式 A: "; printPolynomial(p1);
+        std::cout << "多项式 B: "; printPolynomial(p2);
+        p1 = Add_Optimized(p1, p2);
+        std::cout << "相加结果: "; printPolynomial(p1);
+        std::cout << "--------------------------------------------------\n";
+    }
+
+    // ---- 【测试样例四：一长一短且短链表先耗尽】 ----
+    {
+        std::cout << "【测试样例四：短链表先耗尽】\n";
+        int a1[3] = { 9, 7, 5 };
+        int a2[3] = { 8, 7, 5 };
+        int a3[1] = { 2 };
+        int a4[3] = { 7 };
+        Polynomial p1 = createPolynomial(a1, a2, 3);
+        Polynomial p2 = createPolynomial(a3, a4, 1);
+        std::cout << "多项式 A: "; printPolynomial(p1);
+        std::cout << "多项式 B: "; printPolynomial(p2);
+        p1 = Add_Optimized(p1, p2);
+        std::cout << "相加结果: "; printPolynomial(p1);
+        std::cout << "--------------------------------------------------\n";
+    }
+
+    // ---- 【测试样例五：极端边界-空链表输入】 ----
+    {
+        std::cout << "【测试样例五：极端边界-存在空多项式】\n";
+        Polynomial p1 = createPolynomial({}, {}); // 空
+        Polynomial p2 = createPolynomial({ 3, 1 }, { 2, 0 });
+        std::cout << "多项式 A: "; printPolynomial(p1);
+        std::cout << "多项式 B: "; printPolynomial(p2);
+        p1 = Add_Optimized(p1, p2);
+        std::cout << "相加结果: "; printPolynomial(p1);
+        std::cout << "==================================================\n";
+    }
+
+
+
 
     return 0;
 
