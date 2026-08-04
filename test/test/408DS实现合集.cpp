@@ -253,7 +253,7 @@ namespace My408
         //划分右数组
         MergeSort(a, n, l, m);
         MergeSort(a, n, m + 1, r);
-        //合并
+        //合并 
 
         //暂存左右子数组待合并元素， 通过比较修改主数组的元素，从而排序
         int* tmp = new int[r - l + 1];
@@ -276,7 +276,7 @@ namespace My408
     }
 #pragma endregion
 
-   //!!!不考察代码!!! O(n²)
+   //!!!不考察代码!!! O(n²)稳定
     /// <summary>
     /// 插入排序 
     /// </summary>
@@ -404,7 +404,7 @@ namespace My408
     }
 #pragma endregion
 
-
+    //不稳定
     void SelectSort(vector<int>& arr) {
         int n = arr.size();
         for (int i = 0; i < n - 1; i++) {
@@ -422,7 +422,7 @@ namespace My408
         }
     }
 
-#pragma region 基数排序
+#pragma region 基数排序稳定
     //基数排序
     ////LinkTable 为什么声明时不带 * 号？
     //因为* LinkTable 中的* 号已经包含在 typedef 的定义里了。
@@ -509,6 +509,21 @@ namespace My408
 
 
 
+    void BubbleSort(int a[], int n)
+    {
+        for (int i = 0; i < n - 1; ++i)
+        {
+            int flag = 1;
+            for (int j = 0; j < n - i - 1; ++j)
+            {
+                if (a[j] > a[j + 1]) {
+                    swap(a[j], a[j + 1]);
+                    flag = 0;
+                }
+            }
+            if (flag) break;
+        }
+    }
 #pragma endregion
 
 #pragma region 迪杰斯特拉算法
@@ -786,46 +801,107 @@ namespace My408
 
     void reorderList(NODE* head)
     {
-        if (head == nullptr || head->next == nullptr || head->next->next == nullptr) return;
 
 
-        // 第一步：快慢指针找中点
-    // 【修正】必须从首元结点开始，而不是头结点
-        NODE* slow = head->next;
-        NODE* fast = head->next;
-        while (fast->next && fast->next->next)
+        NODE* f = head->next;
+        NODE* s = head->next;
+
+        while (f->next && f->next->next)
         {
-            slow = slow->next;       // 慢指针走一步
-            fast = fast->next->next; // 快指针走两步
+            f = f->next->next;
+            s = s->next;
         }
+        NODE* p = s->next;
+        s->next = nullptr;//Divid into half pieces
 
-        // 第二步：断开链表，并就地逆置后半段
-        NODE* mid = slow->next;      // mid 是后半段的第一个有效结点
-        slow->next = nullptr;        // 【关键踩分点：断表！】彻底切断前半段和后半段
+        NODE* newHead = nullptr;
 
-        NODE* rhead = nullptr;
-        while (mid)
+        while (p)
         {
-            NODE* node = mid->next;
-            mid->next = rhead;
-            rhead = mid;
-            mid = node;
+            NODE* node = p->next;
+            p->next = newHead;
+            newHead = p;
+            p = node;
         }
 
         NODE* l = head->next;
-        NODE* r = rhead;
+        NODE* r = newHead;
 
         while (l && r)
         {
-            NODE* t1 = l->next;
+            NODE* node1 = l->next;
+            NODE* node2 = r->next;
 
+            r->next = node1;
             l->next = r;
-            NODE* t2 = r->next;
-            r->next = t1;
-            l = t1;
-            r = t2;
 
+            r = node2;
+            l = node1;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //    if (head == nullptr || head->next == nullptr || head->next->next == nullptr) return;
+
+
+    //    // 第一步：快慢指针找中点
+    //// 【修正】必须从首元结点开始，而不是头结点
+    //    NODE* slow = head->next;
+    //    NODE* fast = head->next;
+    //    while (fast->next && fast->next->next)
+    //    {
+    //        slow = slow->next;       // 慢指针走一步
+    //        fast = fast->next->next; // 快指针走两步
+    //    }
+
+    //    // 第二步：断开链表，并就地逆置后半段
+    //    NODE* mid = slow->next;      // mid 是后半段的第一个有效结点
+    //    slow->next = nullptr;        // 【关键踩分点：断表！】彻底切断前半段和后半段
+
+    //    NODE* rhead = nullptr;
+    //    while (mid)
+    //    {
+    //        NODE* node = mid->next;
+    //        mid->next = rhead;
+    //        rhead = mid;
+    //        mid = node;
+    //    }
+
+    //    NODE* l = head->next;
+    //    NODE* r = rhead;
+
+    //    while (l && r)
+    //    {
+    //        NODE* t1 = l->next;
+
+    //        l->next = r;
+    //        NODE* t2 = r->next;
+    //        r->next = t1;
+    //        l = t1;
+    //        r = t2;
+
+    //    }
 
     }
 
@@ -892,6 +968,7 @@ namespace My408
     }
 
 #pragma endregion
+
 }
 #pragma region 网络拓扑图，邻接表的定义（用于OSPF协议泛洪Dijkstra）
 #define MAX_ROUTER_NUM 100 // 定义最大路由器节点数
@@ -900,17 +977,17 @@ namespace My408
 // 1. 边表结点 (ArcNode)：对应LSI表中的 Link 和 Net 信息
 // --------------------------------------------------------
 typedef struct ArcNode {
-    unsigned int destIP;    // 目标IP：相邻路由器IP地址 或 直连网络前缀
-    unsigned int metric;    // 权重：到达目的地的费用 (Metric)
+    int destIP;    // 目标IP：相邻路由器IP地址 或 直连网络前缀
+    int metric;    // 权重：到达目的地的费用 (Metric)
     int type;               // 节点类型：0代表路由器(Link)，1代表直连网络(Net) - [注：此项为工程完善项，考场写出前两项即可满分]
     ArcNode* next;   // 指针：指向下一条链路信息
-} ArcNode;
+}ArcNode;
 
 // --------------------------------------------------------
 // 2. 顶点表结点 (VNode)：对应LSI表中的 Router ID
 // --------------------------------------------------------
 typedef struct{
-    unsigned int routerID;  // 顶点标识：路由器ID (如 10.1.1.1)
+    int routerID;  // 顶点标识：路由器ID (如 10.1.1.1)
     ArcNode* firstArc;      // 头指针：指向该路由器的第一条链路信息
 } VNode, *AdjList;
 
@@ -918,7 +995,7 @@ typedef struct{
 // 3. 邻接表图结构 (ALGraph)：完整包装整个网络拓扑
 // --------------------------------------------------------
 typedef struct {
-    AdjList vertices;       // 顶点表数组
+    AdjList vertices[10];       // 顶点表数组
     int vexNum;             // 当前网络中的路由器(顶点)数量
     int arcNum;             // 当前网络中的链路(边)数量
 } ALGraph;
@@ -1205,16 +1282,75 @@ public:
     }
 };
 
-int ComponentCnt(int g[5][5])
-{
-    int S[5] = { -1,-1,-1,-1,-1 };
+//int ComponentCnt(int g[5][5])
+//{
+//    int S[5] = { -1,-1,-1,-1,-1 };
+//
+//    
+//}
+#pragma endregion
+#pragma region 并查集数组
+#define MAX_SIZE 10   // 定义并查集的最大容量
 
-    
+// Task 1: 定义一个并查集 (用长度为n的数组实现)
+// UFS[i] < 0 表示 i 是根节点，且绝对值 |UFS[i]| 表示该集合的节点总数
+// UFS[i] >= 0 表示 i 的直接父节点是 UFS[i]
+int UFS[MAX_SIZE];
+
+// 初始化并查集
+// 考点：初始化时，必须将所有元素设为独立集合，规模均为1（存放-1）
+void Initial(int n) {
+    for (int i = 0; i < n; i++) {
+        UFS[i] = -1;
+    }
+}
+
+// Task 3: 实现并查集的基本操作 —— 查 Find (带路径压缩)
+// 作用：返回元素 x 所属集合的根节点，并顺手将路径上的节点直接挂到根上
+int Find(int x) {
+    // 递归边界：找到了根节点（值为负数）
+    if (UFS[x] < 0) {
+        return x;
+    }
+
+    // 逻辑跃迁：递归寻找根节点，并在回溯归位时执行路径压缩
+    // 这里是408大题极易漏写的得分点，将当前节点的父指针直接指向最终找到的根
+    UFS[x] = Find(UFS[x]);
+
+    return UFS[x];
+}
+
+// Task 2: 实现并查集的基本操作 —— 并 Union (按规模合并 / Union by Size)
+// 作用：将元素 x 和 y 所在的两个集合合并，小树并入大树
+void Union(int x, int y) {
+    int root_x = Find(x);
+    int root_y = Find(y);
+
+    // 若已经属于同一个集合，则无需合并
+    if (root_x == root_y) {
+        return;
+    }
+
+    // 核心心法：小树并入大树 (按规模合并)
+    // 注意：UFS中根节点存的是负数，负数越小，代表集合规模越大 (绝对值大)
+    if (UFS[root_x] < UFS[root_y]) {
+        // 此时 |UFS[root_x]| > |UFS[root_y]|，x 所在的树节点更多
+        UFS[root_x] += UFS[root_y]; // 将 y 的规模累加给 x
+        UFS[root_y] = root_x;       // y 所在树的根节点认 root_x 为父
+    }
+    else {
+        // y 所在的树规模更大，或者两者规模相等
+        UFS[root_y] += UFS[root_x]; // 将 x 的规模累加给 y
+        UFS[root_x] = root_y;       // x 所在树的根节点认 root_y 为父
+    }
 }
 #pragma endregion
 
+
+#pragma region Stack
+
 #pragma region 共享栈
-#define MaxSize 100
+#define MaxSize 10
 struct SharedStack
 {
     int data[MaxSize]; // 静态数组存放数据
@@ -1283,6 +1419,603 @@ bool Pop(SharedStack& s, int flag, int& e) {
 
 
 
+/// <summary>
+/// 顺序存储数组栈
+/// </summary>
+typedef struct
+{
+    int data[MaxSize];
+    int top;
+}SqStack;
+void InitStack(SqStack& s)
+{
+    s.top = -1;
+}
+bool Empty(const SqStack& s)
+{
+    return s.top == -1;
+}
+bool Full(const SqStack& s)
+{
+    return s.top == MaxSize - 1;
+}
+bool Push(SqStack& s, int num)
+{
+    if (!Full(s))
+    {
+        s.data[++s.top] = num;
+        return true;
+    }
+    else return false;
+}
+bool Pop(SqStack& s, int& res)
+{
+    if (!Empty(s))
+    {
+        res = s.data[s.top--];
+        return true;
+    }
+    else return false;
+}
+
+/// <summary>
+/// 无头节点链栈
+/// </summary>
+namespace SingleStack
+{
+    struct SNode
+    {
+        int val;
+        SNode* next;
+    };
+    typedef struct
+    {
+        SNode* top;
+    }SingleStack;
+
+    bool Empty(const SingleStack& s)
+    {
+        return s.top == nullptr;
+    }
+    /*bool Full(const SingleStack& s)
+    {
+
+    }*/
+    void Push(SingleStack& s, int num)
+    {
+        SNode* node = new SNode;
+        node->val = num;
+        node->next = s.top;
+        s.top = node;
+    }
+    bool Pop(SingleStack& s, int& res)
+    {
+        if (Empty(s))return false;
+
+        SNode* s1 = s.top;
+        res = s1->val;
+        s.top = s.top->next;
+        delete s1;
+        return true;
+    }
+    /// <summary>
+    /// 一定要初始化，不然s.top 为 野指针，不属于本程序的地址空间，会严重报错！！！！
+    /// </summary>
+    /// <param name="s"></param>
+    void InitStack(SingleStack& s)
+    {
+        s.top = nullptr;
+    }
+}
+/// <summary>
+/// 带头结点链栈
+/// </summary>
+namespace SingleStack2
+{
+    typedef struct SNode
+    {
+        int val;
+        SNode* next;
+    }*SingleStack;
+
+    bool Empty(const SingleStack& s)
+    {
+        return s->next == nullptr;
+    }
+    /*bool Full(const SingleStack& s)
+    {
+
+    }*/
+    void Push(SingleStack& s, int num)
+    {
+        SNode* node = new SNode;
+        node->val = num;
+
+        node->next = s->next;
+        s->next = node;
+    }
+    bool Pop(SingleStack& s, int& res)
+    {
+        if (Empty(s))return false;
+
+        SNode* s1 = s->next;
+        res = s1->val;
+        s->next = s1->next;
+        delete s1;
+        return true;
+    }
+    /// <summary>
+    /// 一定要初始化，不然s.top 为 野指针，不属于本程序的地址空间，会严重报错！！！！
+    /// </summary>
+    /// <param name="s"></param>
+    void InitStack(SingleStack& s)
+    {
+        s = new SNode;
+        s->next = nullptr;
+    }
+}
+namespace DoubleStack
+{
+    struct DNode
+    {
+        int val;
+        DNode* pre;
+        DNode* next;
+    };
+    typedef struct
+    {
+        DNode* top;
+        DNode* tail;
+    }DStack;
+
+    void InitStack(DStack& s)
+    {
+        s.top = new DNode{ 0, nullptr, nullptr }; // 分配头结点
+        s.tail = s.top;                         // 初始时栈顶(尾)即为头
+    }
+    bool Empty(const DStack& s)
+    {
+        return s.top == s.tail;
+    }
+    bool Push(DStack& s, int num)
+    {
+        DNode* node = new DNode{ num };
+
+        //头插法
+        node->pre = s.tail;
+        s.tail->next = node;
+        s.tail = node;
+        return true;
+    }
+    bool Pop(DStack& s, int& res)
+    {
+        if (Empty(s))return false;
+
+        DNode* p = s.tail;
+        res = p->val;
+
+        s.tail = p->pre;
+        p->pre->next = nullptr;
+
+        delete p;
+        return true;
+
+    }
+}
+
+#pragma endregion
+
+#pragma region 队列
+struct Queue
+{
+    int data[MaxSize];
+    int top;
+    int rear;
+};
+void InitQueue(Queue& q)
+{
+    q.top = 0;
+    q.rear = 0;
+}
+bool Full(const Queue& q)
+{
+    return (q.rear + 1) % MaxSize == q.top;
+}
+bool Empty(const Queue& q)
+{
+    return q.rear == q.top;
+}
+void Enqueue(Queue& q, int num)
+{
+    if (Full(q))
+    {
+        cout << "队满！" << endl;
+        return;
+    }
+
+    q.data[q.rear] = num;
+    q.rear = (q.rear + 1) % MaxSize;
+    cout << " 入队 ： num = " << num << endl;;
+}
+
+void Dequeue(Queue& q, int& res)
+{
+    if (Empty(q))
+    {
+        cout << " 队空！！！！" << endl;
+        return;
+    }
+
+    res = q.data[q.top];
+    q.top = (q.top + 1) % MaxSize;
+    cout << " res = " << res << endl;
+}
+
+
+struct LinkQNode
+{
+    int val;
+    LinkQNode* next;
+};
+
+struct LinkQueue
+{
+    LinkQNode* rear;
+    LinkQNode* front;
+};
+
+void InitLQueue(LinkQueue& q)
+{
+    q.rear = nullptr;
+    q.front = nullptr;
+}
+
+bool Empty(const LinkQueue& q)
+{
+    ///!!!!!!无头节点
+    return q.front == nullptr;
+}
+void EnLqueue(LinkQueue& q, int num)
+{
+    
+    LinkQNode* node = new LinkQNode;
+    node->val = num;
+    node->next = nullptr;
+    if (Empty(q))
+    {
+        q.rear = node;
+        q.front = node;
+    }
+    else
+    {
+        q.rear->next = node;
+        q.rear = node;
+    }
+  
+}
+bool DeLqueue(LinkQueue& q, int& res)
+{
+    if (Empty(q))return false;
+
+    LinkQNode* t = q.front;
+    res = t->val;
+    q.front = t->next;
+    ///!!!!
+    if (q.front == nullptr)
+        q.rear = nullptr;
+    ///!!!
+    delete t;
+    return true;
+}
+#pragma endregion
+
+
+#pragma region 二叉树
+
+typedef struct BinNode
+{
+    int data;
+    bool isEmpty;
+    struct BinNode* left;
+    struct BinNode* right;
+} BinNode, * BinTree;
+void InitBinTree(BinNode b[], int len)
+{
+    for (int i = 0; i < len; ++i) b[i].isEmpty = true;
+}
+
+bool isEmpty(const BinNode b[], int idx, int len)
+{
+    if (idx <= 0 || idx >= len) return true;
+    else return b[idx].isEmpty;
+}
+int FindPNode(const BinNode b[], int idx, int len)
+{
+    //无效索引和根节点
+    if (isEmpty(b, idx, len) || idx == 1)return -1;
+
+    //父节点
+    int p = idx / 2;
+
+    //父节点不存在
+    if (b[p].isEmpty) return -1;
+
+    //存在
+    return p;
+
+
+}
+int FindLNode(const BinNode b[], int idx, int len)
+{
+    //无效索引
+    if (isEmpty(b, idx, len))return -1;
+
+    // 左孩子
+    int l = idx * 2;
+    if (isEmpty(b, l, len))return -1;
+    //存在
+    return l;
+}
+int FindRNode(const BinNode b[], int idx, int len)
+{
+    //无效索引
+    if (isEmpty(b, idx, len))return -1;
+
+    // 左孩子
+    int r = idx * 2 + 1;
+    if (isEmpty(b, r, len))return -1;
+    //存在
+    return r;
+}
+
+void PreOrder(BinNode b[], int idx, int len, int res[], int& cnt)
+{
+    if (isEmpty(b, idx, len))return;
+    
+    res[cnt++] = b[idx].data;
+    PreOrder(b, idx * 2, len, res, cnt);
+    PreOrder(b, idx * 2 + 1, len, res, cnt);
+}
+void InOrder(BinNode b[], int idx, int len, int res[], int& cnt)
+{
+    if (isEmpty(b, idx, len))return;
+
+
+    InOrder(b, idx * 2, len, res, cnt);
+    res[cnt++] = b[idx].data;
+    InOrder(b, idx * 2 + 1, len, res, cnt);
+}
+void PostOrder(BinNode b[], int idx, int len, int res[], int& cnt)
+{
+    if (isEmpty(b, idx, len))return;
+
+   
+    PostOrder(b, idx * 2, len, res, cnt);
+    PostOrder(b, idx * 2 + 1, len, res, cnt);
+    res[cnt++] = b[idx].data;
+}
+
+void LevelOrder(BinTree b, int idx, int len, int res[], int& cnt)
+{
+    if (!b)return;
+    queue<BinNode*> q;
+
+    q.push(b);
+    while (!q.empty())
+    {
+        BinNode* top = q.front();
+        q.pop();
+        res[cnt++] = top->data;
+        if (top->left)q.push(top->left);
+        if (top->right)q.push(top->right);
+    }
+    for (int i = 0; i < cnt; ++i)cout << res[i] << " ";
+}
+
+/// <summary>
+/// 双亲表示法，树的顺序存储
+/// </summary>
+struct DPTreeNode
+{
+    int data;
+    int parent; // 双亲节点在数组中的下标，root为-1
+};
+struct DPTree
+{
+    DPTreeNode nodes[10];
+    int cnt;
+};
+struct DPTrees
+{
+    DPTree Trees[10];
+    int cnt;
+};
+
+/// <summary>
+/// 孩子表示法，树的顺序存储
+/// </summary>
+struct CTreeNode
+{
+    int data;
+    CTreeNode* next;
+};
+struct CTree
+{
+    CTreeNode nodes[10];
+    int cnt;
+};
+
+struct CTrees
+{
+    CTree Trees[10];
+    int cnt;
+};
+
+/// <summary>
+/// 孩子兄弟表示法，二叉链表，可拓广为三叉链表，遍历父节点更便利！
+/// </summary>
+
+typedef struct CBTreeNode
+{
+    int data;
+    CBTreeNode* next; //兄弟
+    CBTreeNode* firstChild;//孩子
+    CBTreeNode* parent;//父节点
+}*CBTree;
+
+
+struct CBTrees
+{
+    CBTree Trees[10];
+    int cnt;
+};
+
+#pragma region 带权路径长度
+int CalSum1(BinTree n, int dep)
+{
+    if (!n)return 0;
+
+    if (!n->left && !n->right) return dep * n->data;
+    return CalSum1(n->left, dep + 1) + CalSum1(n->right, dep + 1);
+}
+#pragma endregion
+#pragma endregion
+
+#pragma region 最小三元组2020年真题
+
+int res(int a, int b)
+{
+    if (a > b) return a - b;
+    else return b - a;
+}
+void FindMin(int a[], int b[], int c[], int l, int m, int n)
+{
+    int i = 0, j = 0, k = 0;
+
+    int minDis = INT_MAX;
+    int a1, b1, c1;
+
+    while (i < l && j < m && k < n)
+    {
+        int op1 = a[i], op2 = b[j], op3 = c[k];
+        int Dis = res(op1, op2) + res(op1, op3) + res(op2, op3);
+        if (minDis > Dis)
+        {
+            minDis = Dis;
+            a1 = i, b1 = j, c1 = k;
+        }
+
+        if (op1 <= op2 && op1 <= op3)
+        {
+            i++;
+        }
+        else if (op2 <= op1 && op2 <= op3)
+        {
+            j++;
+        }
+        else
+        {
+            ++k;
+        }
+    }
+    // 输出结果
+    cout << "最小距离为: " << minDis << endl;
+    cout << "对应的三元组为: (" << a[a1] << ", " << b[b1] << ", " << c[c1] << ")" << endl;
+}
+
+
+void FindPos(int a[], int n)
+{
+    int res = 1;
+    My408::MergeSort(a, n, 0, n-1);
+    for (int i = 0; i < n; ++i)
+    {
+        if (a[i] == res) res++;
+    }
+    cout << res;
+}
+#pragma endregion
+
+
+#pragma region 二叉树转中缀表达式2017
+typedef struct node
+{
+    char data[10];
+    struct node* left, * right;
+}BTree;
+
+void InOrderToInfix(BTree* b, int depth, char res[], int& pos)
+{
+    if (!b) return;
+
+    //当前为叶子结点
+    if (!b->left && !b->right)
+    {
+        int i = 0;
+        while (b->data[i] != '\0')
+        {
+            res[pos++] = b->data[i++];
+        }
+        return;
+    }
+
+    //当前为操作符内部结点 
+    //非根节点时，需要加上括号
+    if (depth > 0) res[pos++] = '(';
+
+    bool isNegtive = (b->right && !b->left);
+    if (isNegtive)
+    {
+        //插入运算符
+        int i = 0;
+        while (b->data[i] != '\0')
+        {
+            res[pos++] = b->data[i++];
+        }
+        InOrderToInfix(b->right, depth + 1, res, pos);
+    }
+    else
+    {
+        //左中右遍历
+        InOrderToInfix(b->left, depth + 1, res, pos);
+
+        //插入运算符
+        int i = 0;
+        while (b->data[i] != '\0')
+        {
+            res[pos++] = b->data[i++];
+        }
+
+        InOrderToInfix(b->right, depth + 1, res, pos);
+    }
+
+    if (depth > 0) res[pos++] = ')';
+}
+void PrintInExpression(BTree* B1) {
+    // 避免使用 STL 动态扩容，直接分配一块足够大的内存（例如 10000 字符）
+    // 真题树一般较小，此大小足够容纳所有括号和操作数
+    char* res = new char[10000];
+    int pos = 0; // 追踪写入到 res 数组的下标
+
+    InOrderToInfix(B1, 0, res, pos);
+
+    res[pos] = '\0'; // 务必添加 C 风格字符串的结束符
+
+    printf("%s\n", res); // 不使用 cout，直接用 C 标准输出
+
+    delete[] res; // 释放申请的内存，防止内存泄漏
+}
+// 辅助构建节点的函数
+BTree* CreateBNode(const char* data, BTree* left = nullptr, BTree* right = nullptr) {
+    BTree* node = new BTree;
+    strcpy_s(node->data, data);
+    node->left = left;
+    node->right = right;
+    return node;
+}
+#pragma endregion
+
+
 
 int main() {
     //// 使用哈希表构建无向图的邻接表表示
@@ -1312,7 +2045,6 @@ int main() {
 
     //// 运行算法，以 R1 为起点
     //dijkstra(graph, "R1");
-
 
     /*cout << myAtoi("   +1");*/
 
@@ -1358,7 +2090,7 @@ int main() {
 #pragma region 链表换序案例
     // 测试用例 1：常规偶数个节点
     // 预期输出: 1 -> 6 -> 2 -> 5 -> 3 -> 4
-    //runTest("Test 1: 偶数个节点 (6个)", { 1, 2, 3, 4, 5, 6 });
+    My408::runTest("Test 1: 偶数个节点 (6个)", { 1, 2, 3, 4, 5, 6 });
 
     //// 测试用例 2：常规奇数个节点
     //// 预期输出: 1 -> 5 -> 2 -> 4 -> 3
@@ -1376,11 +2108,11 @@ int main() {
     //// 预期输出: Empty List
     //runTest("Test 5: 边界测试 (空链表)", {});
 #pragma endregion
-    vector<int> arr = { 3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 33 };
-    //vector<int> arr1 = { 3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 34, 23, 22 ,22 ,231, 222 };
-    int arr1[19] = {3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 34, 23, 22 ,22 ,231, 222};
-    int a[11] = { 23,17,72,60,25,8,2, 5, 13, 6, 3};
-    int a1[15] = {36, 18, 10, 2, 88, 53, 27, 99,0,38,46,77,78,55,40};
+    //vector<int> arr = { 3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 33 };
+    ////vector<int> arr1 = { 3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 34, 23, 22 ,22 ,231, 222 };
+    //int arr1[19] = {3, 1, 4, 1, 5, 9, 2,6, 12, 23, 14, 11, 23, 34, 23, 22 ,22 ,231, 222};
+    //int a[11] = { 23,17,72,60,25,8,2, 5, 13, 6, 3};
+    //int a1[15] = {36, 18, 10, 2, 88, 53, 27, 99,0,38,46,77,78,55,40};
    // My408::Heapify(arr);
     //vector<int> res = My408::getTopK(arr);
     ////for (int x : arr) cout << x << " ";
@@ -1433,77 +2165,146 @@ int main() {
     //Polynomial poly2 = createPolynomial(co2, ex2, 2);
 
     /*QuickSort(a1, 15, 0, 14);*/
-    std::cout << "==================================================\n";
-    std::cout << "         408数据结构：一元多项式就地相加评测          \n";
-    std::cout << "==================================================\n\n";
+    /*SingleStack2::SingleStack s;
+    SingleStack2::InitStack(s);
 
-    // ---- 【测试样例一：指数完全错开】 ----
+    SingleStack2::Push(s, 2);
+    SingleStack2::Push(s, 1);
+    SingleStack2::Push(s, 4);
+    SingleStack2::Push(s, 5);
+    int res = 0;
+    SingleStack2::Pop(s, res);
+
+    SingleStack2::SNode* t = s->next;
+    while (t)
     {
-        std::cout << "【测试样例一：指数完全错开】\n";
-        Polynomial p1 = createPolynomial({ 3, 2 }, { 5, 3 });
-        Polynomial p2 = createPolynomial({ 5, 1 }, { 4, 1 });
-        std::cout << "多项式 A: "; printPolynomial(p1);
-        std::cout << "多项式 B: "; printPolynomial(p2);
-        p1 = Add_Optimized(p1, p2);
-        std::cout << "相加结果: "; printPolynomial(p1);
-        std::cout << "--------------------------------------------------\n";
+        cout << t->val << " ";
+        t = t->next;
+        
     }
+    cout << endl;
+    cout << res << " == res " << endl;
+    delete t;*/
 
-    // ---- 【测试样例二：指数相同系数不为0】 ----
+    /*DoubleStack::DStack s;
+    DoubleStack::InitStack(s);
+    DoubleStack::Push(s, 2);
+    DoubleStack::Push(s, 1);
+    DoubleStack::Push(s, 4);
+    DoubleStack::Push(s, 5);
+    int res = 0;
+    DoubleStack::Pop(s, res);
+    DoubleStack::DNode* t = s.top;
+    while (t)
     {
-        std::cout << "【测试样例二：存在同次项合并】\n";
-        Polynomial p1 = createPolynomial({ 4, 2 }, { 4, 2 });
-        Polynomial p2 = createPolynomial({ 3, 1 }, { 4, 2 });
-        std::cout << "多项式 A: "; printPolynomial(p1);
-        std::cout << "多项式 B: "; printPolynomial(p2);
-        p1 = Add_Optimized(p1, p2);
-        std::cout << "相加结果: "; printPolynomial(p1);
-        std::cout << "--------------------------------------------------\n";
+        cout << t->val << " ";
+        t = t->next;
+
     }
+    cout << endl;
+    cout << res << " == res " << endl;
+    delete t;*/
+    const int MAX = 20;          // 数组容量，索引0闲置，有效索引 1 ~ MAX-1
+    BinNode tree[MAX];
+    InitBinTree(tree, MAX);
+    // 构建如下二叉树（索引从1开始）
+    //         1
+    //        / \
+    //       2   3
+    //      / \   \
+    //     4   5   6
+    tree[1].data = 1;  tree[1].isEmpty = false;
+    tree[2].data = 2;  tree[2].isEmpty = false;
+    tree[3].data = 3;  tree[3].isEmpty = false;
+    tree[4].data = 4;  tree[4].isEmpty = false;
+    tree[5].data = 5;  tree[5].isEmpty = false;
+    tree[6].data = 6;  tree[6].isEmpty = false;
+     //注意：节点3的左孩子(6)为空，右孩子(7)为空，它们会保持 isEmpty=true
+    int result[MAX];    // 存放遍历结果
+    int count = 0;
+    // 先序遍历
+    count = 0;
+    PreOrder(tree, 1, MAX, result, count);
+    cout << "PreOrder:  ";
+    for (int i = 0; i < count; ++i)
+        cout << result[i] << " ";
+    cout << endl;
+    // 中序遍历
+    count = 0;
+    InOrder(tree, 1, MAX, result, count);
+    cout << "InOrder:   ";
+    for (int i = 0; i < count; ++i)
+        cout << result[i] << " ";
+    cout << endl;
+    // 后序遍历
+    count = 0;
+    PostOrder(tree, 1, MAX, result, count);
+    cout << "PostOrder: ";
+    for (int i = 0; i < count; ++i)
+        cout << result[i] << " ";
+    cout << endl;
 
-    // ---- 【测试样例三：高频陷阱-系数抵消为0】 ----
-    {
-        std::cout << "【测试样例三：高频陷阱-系数抵消】\n";
-        Polynomial p1 = createPolynomial({ 5, 3, 2 }, { 6, 4, 1 });
-        Polynomial p2 = createPolynomial({ -5, 1 }, { 6, 2 });
-        std::cout << "多项式 A: "; printPolynomial(p1);
-        std::cout << "多项式 B: "; printPolynomial(p2);
-        p1 = Add_Optimized(p1, p2);
-        std::cout << "相加结果: "; printPolynomial(p1);
-        std::cout << "--------------------------------------------------\n";
-    }
+    // 手动创建 11 个节点
+    BinNode* n1 = new BinNode{ 1, false, nullptr, nullptr };
+    BinNode* n2 = new BinNode{ 2, false, nullptr, nullptr };
+    BinNode* n3 = new BinNode{ 3, false, nullptr, nullptr };
+    BinNode* n4 = new BinNode{ 4, false, nullptr, nullptr };
+    BinNode* n5 = new BinNode{ 5, false, nullptr, nullptr };
+    BinNode* n6 = new BinNode{ 6, false, nullptr, nullptr };
+    BinNode* n7 = new BinNode{ 7, false, nullptr, nullptr };
+    BinNode* n8 = new BinNode{ 8, false, nullptr, nullptr };
+    BinNode* n9 = new BinNode{ 9, false, nullptr, nullptr };
+    BinNode* n10 = new BinNode{ 10, false, nullptr, nullptr };
+    BinNode* n11 = new BinNode{ 11, false, nullptr, nullptr };
 
-    // ---- 【测试样例四：一长一短且短链表先耗尽】 ----
-    {
-        std::cout << "【测试样例四：短链表先耗尽】\n";
-        int a1[3] = { 9, 7, 5 };
-        int a2[3] = { 8, 7, 5 };
-        int a3[1] = { 2 };
-        int a4[3] = { 7 };
-        Polynomial p1 = createPolynomial(a1, a2, 3);
-        Polynomial p2 = createPolynomial(a3, a4, 1);
-        std::cout << "多项式 A: "; printPolynomial(p1);
-        std::cout << "多项式 B: "; printPolynomial(p2);
-        p1 = Add_Optimized(p1, p2);
-        std::cout << "相加结果: "; printPolynomial(p1);
-        std::cout << "--------------------------------------------------\n";
-    }
+    // 构建树
+    n1->left = n2;  n1->right = n3;
+    n2->left = n4;  n2->right = n5;
+    n3->left = n6;  n3->right = n7;
+    n4->left = n8;  n4->right = n9;
+    n8->left = n10; n8->right = n11;
 
-    // ---- 【测试样例五：极端边界-空链表输入】 ----
-    {
-        std::cout << "【测试样例五：极端边界-存在空多项式】\n";
-        Polynomial p1 = createPolynomial({}, {}); // 空
-        Polynomial p2 = createPolynomial({ 3, 1 }, { 2, 0 });
-        std::cout << "多项式 A: "; printPolynomial(p1);
-        std::cout << "多项式 B: "; printPolynomial(p2);
-        p1 = Add_Optimized(p1, p2);
-        std::cout << "相加结果: "; printPolynomial(p1);
-        std::cout << "==================================================\n";
-    }
+    BinTree root = n1;          // 根指针
 
+    int res[20];                // 足够大的数组存放层序结果
+    int cnt = 0;
 
+    // 调用函数（idx 和 len 未使用，可传 0）
+    LevelOrder(root, 0, 0, res, cnt);
+    /*int am[3] = { -1, 0, 9 };
+    int bm[4] = { -25, -10, 10, 11 };
+    int cm[5] = { 2, 9, 17, 30, 41 };
 
+   
+    FindMin(am, bm, cm, 3, 4, 5);*/
 
-    return 0;
+//int amm[11] = { -5, 18, 24, 123, 32, 21 , 5, 13, 2,  21, 1};
+//
+////FindPos(amm, 11);
+//My408::BubbleSort(amm, 11);
+//for (int i = 0; i < 11; ++i)cout << amm[i] << " ";
+//    return 0;
+
+#pragma region 二叉树转中缀表达式2017
+//// 构造叶子节点
+    //BTree* a = CreateBNode("a");
+    //BTree* b = CreateBNode("b");
+    //BTree* c = CreateBNode("c");
+    //BTree* d = CreateBNode("d");
+    //// 构造运算符节点：-(d)
+    //BTree* neg_d = CreateBNode("-", nullptr, d);
+    //// 构造 *(c, -(d))
+    //BTree* mul_c_neg = CreateBNode("*", c, neg_d);
+    //// 构造 +(a, b)
+    //BTree* add_a_b = CreateBNode("+", a, b);
+    //// 构造根节点 *( +(a,b), *(c, -(d)) )
+    //BTree* root = CreateBNode("*", add_a_b, mul_c_neg);
+    //// 调用题目要求的输出函数
+    //cout << "算法输出结果: ";
+    //PrintInExpression(root);
+    //cout << "真题样例结果: (a+b)*(c*(-d))" << endl;
+#pragma endregion
+
+    
 
 }

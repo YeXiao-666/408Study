@@ -389,6 +389,7 @@ namespace MySTL
 		{
 			s.clear();
 			char ch;
+			//顺序存取，分配字符缓冲区，
 			char buf[129];
 			int i = 0;
 			ch = in.get();
