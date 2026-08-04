@@ -6,17 +6,97 @@
 
 ![d70aa287-7eea-483e-9aca-2fe44ecba5d3](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/d70aa287-7eea-483e-9aca-2fe44ecba5d3.png)![3816223f-7db1-46b3-8a20-e7ed6ac44296](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3816223f-7db1-46b3-8a20-e7ed6ac44296.png)
 
-![438c08a5-0aee-42eb-82ca-3d26867b719b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/438c08a5-0aee-42eb-82ca-3d26867b719b.png)![7c1e9cf4-02d3-411e-83ce-51f3dc2c000f](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7c1e9cf4-02d3-411e-83ce-51f3dc2c000f.png)![26458a4b-9c7e-47b6-8aab-1ad9806aabd9](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/26458a4b-9c7e-47b6-8aab-1ad9806aabd9.png)![07473081-e6fe-4d65-a26a-37df39895972](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/07473081-e6fe-4d65-a26a-37df39895972.png)![0752fe14-d363-439b-93f4-6a5f29f0cd3b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0752fe14-d363-439b-93f4-6a5f29f0cd3b.png) ![ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0.png)![5334c693-f2f0-42ff-abeb-a9283cdb96ae](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/5334c693-f2f0-42ff-abeb-a9283cdb96ae.png)![0d61a611-e193-4620-876e-ca36f27aebce](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0d61a611-e193-4620-876e-ca36f27aebce.png)![fe66515e-9177-4781-aaa0-58838960a479](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/fe66515e-9177-4781-aaa0-58838960a479.png)![cdd22b87-94b9-4fa3-9cce-824a9f2da5b1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/cdd22b87-94b9-4fa3-9cce-824a9f2da5b1.png)![3b4471f2-5c0d-4b17-9dcf-fdb2a7d001c1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3b4471f2-5c0d-4b17-9dcf-fdb2a7d001c1.png)
+![438c08a5-0aee-42eb-82ca-3d26867b719b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/438c08a5-0aee-42eb-82ca-3d26867b719b.png)![7c1e9cf4-02d3-411e-83ce-51f3dc2c000f](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7c1e9cf4-02d3-411e-83ce-51f3dc2c000f.png)![26458a4b-9c7e-47b6-8aab-1ad9806aabd9](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/26458a4b-9c7e-47b6-8aab-1ad9806aabd9.png)![07473081-e6fe-4d65-a26a-37df39895972](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/07473081-e6fe-4d65-a26a-37df39895972.png)![0752fe14-d363-439b-93f4-6a5f29f0cd3b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0752fe14-d363-439b-93f4-6a5f29f0cd3b.png) ![ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/ac3041cb-ad40-4a12-b818-3f7b5b7ec2f0.png)![5334c693-f2f0-42ff-abeb-a9283cdb96ae](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/5334c693-f2f0-42ff-abeb-a9283cdb96ae.png)![0d61a611-e193-4620-876e-ca36f27aebce](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/0d61a611-e193-4620-876e-ca36f27aebce.png)![fe66515e-9177-4781-aaa0-58838960a479](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/fe66515e-9177-4781-aaa0-58838960a479.png)![cdd22b87-94b9-4fa3-9cce-824a9f2da5b1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/cdd22b87-94b9-4fa3-9cce-824a9f2da5b1.png)![3b4471f2-5c0d-4b17-9dcf-fdb2a7d001c1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3b4471f2-5c0d-4b17-9dcf-fdb2a7d001c1.png)![7e92dc5c-a15c-4453-90c7-335445ff30bd](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7e92dc5c-a15c-4453-90c7-335445ff30bd.png)![c387f49c-79e2-4224-84cf-d06b83c2605d](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/c387f49c-79e2-4224-84cf-d06b83c2605d.png)
 
-## 线性表
 
-### 线性表的应用：单链表
+
+
+
+
+
+
+
+# 算法题
+
+![235594fb-e238-4314-9cc9-183ecea562a9](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/235594fb-e238-4314-9cc9-183ecea562a9.png)
+
+
+
+
+
+## 顺序表
+
+### 一、 快排 堆排 将数组变更简单
+
+![d7eac6ff-7afa-4a10-baef-105ec4d6d7d9](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/d7eac6ff-7afa-4a10-baef-105ec4d6d7d9.png)![e1592647-7430-4e14-be24-8e16af26bf17](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/e1592647-7430-4e14-be24-8e16af26bf17.png)![6ba788dc-9e8b-429e-8024-79254f17113f](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/6ba788dc-9e8b-429e-8024-79254f17113f.png)![62da894a-8a26-4d68-a495-f848faba30a5](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/62da894a-8a26-4d68-a495-f848faba30a5.png)
+
+
+
+
+
+![cff62bb2-b14c-411b-8824-024c31d090db](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/cff62bb2-b14c-411b-8824-024c31d090db.png)![de48fcdf-7c81-4020-9cbd-7eb84672857c](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/de48fcdf-7c81-4020-9cbd-7eb84672857c.png)![2a155990-0971-4934-ab66-e4bfd241f9e4](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/2a155990-0971-4934-ab66-e4bfd241f9e4.png)![900820d2-93fc-4215-9e7e-00c774b232ec](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/900820d2-93fc-4215-9e7e-00c774b232ec.png)![c51f2825-aafc-4fc1-be49-80ad7db663d8](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/c51f2825-aafc-4fc1-be49-80ad7db663d8.png)
+
+
+
+
+
+## 链表
+
+![0727f0bc-d2c2-4a22-9ad5-ea36c8568f86](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/0727f0bc-d2c2-4a22-9ad5-ea36c8568f86.png)
+
+### 题型一 ：链表原地逆置（头插法）
+
+### 题型二 ：双指针问题：
+
+#### （1）链表中间断开再逆置
+
+#### （2）两个链表的公共结点，或者倒数第k个结点（双指针步数问题）
+
+### 题型三 ：尾插法：（将链表左右半个表反转，比如1234 变为 3412 保持原序）
+
+
+
+## 树的算法备考
+
+！！！！！重点！！！！！
+
+![fb116d8a-7a6a-4cfb-a95b-4433772cbec6](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/fb116d8a-7a6a-4cfb-a95b-4433772cbec6.png)![ca4f346f-b1b1-4223-aaeb-cf52b13b7e03](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/ca4f346f-b1b1-4223-aaeb-cf52b13b7e03.png)![211dbf4e-f635-4207-ad3b-0c87ecd4976b](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/211dbf4e-f635-4207-ad3b-0c87ecd4976b.png)
+
+
+
+## 图的算法题备考策略
+
+![c7422262-a50c-4f19-9495-657c0c2665f7](file:///C:/Users/DELL/Desktop/学习笔记/408Notes/Typedown/c7422262-a50c-4f19-9495-657c0c2665f7.png)
+
+# 应用题备考策略
+
+![5334c693-f2f0-42ff-abeb-a9283cdb96ae](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/5334c693-f2f0-42ff-abeb-a9283cdb96ae.png)
+
+![cdd22b87-94b9-4fa3-9cce-824a9f2da5b1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/cdd22b87-94b9-4fa3-9cce-824a9f2da5b1.png)![fe66515e-9177-4781-aaa0-58838960a479](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/fe66515e-9177-4781-aaa0-58838960a479.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 线性表
+
+## 线性表的应用：单链表
 
 ![47477927-d455-4bee-bfd1-c5ed5d138eed](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/47477927-d455-4bee-bfd1-c5ed5d138eed.png)
 
 
 
-## 并查集
+# 并查集
 
 ![bbe45978-3f4f-465d-bf83-979c2b7732e0](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/bbe45978-3f4f-465d-bf83-979c2b7732e0.png)![1d83977d-c8d7-4727-94b2-4186fa0c68ca](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/1d83977d-c8d7-4727-94b2-4186fa0c68ca.png)
 

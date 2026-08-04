@@ -22,12 +22,6 @@
 
 
 
-# 大题
-
-
-
-
-
 ![48d51abe-7624-4c02-99fb-03ac89baeb53](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/48d51abe-7624-4c02-99fb-03ac89baeb53.png)
 
 除了IO，磁盘相关的考点有深入的变化，其他方向的重点依旧不变，pv，文件，内存管理的分页管理
@@ -36,7 +30,7 @@
 
 
 
-## 一、进程管理 PV 操作
+# 一、进程管理 PV 操作
 
 
 
@@ -44,9 +38,9 @@
 
 
 
-### 生产者消费者问题
+## 生产者消费者问题
 
-#### 解题顺序：
+### 解题顺序：
 
 
 
@@ -166,4 +160,88 @@
 
 
 
-![7b1a102b-5ea3-4a55-8321-0d6a92722149](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7b1a102b-5ea3-4a55-8321-0d6a92722149.png)
+# 存储系统
+
+## !!!!页式存储!!!!! 页表的深入和TLB的大致原理
+
+![62bbb4d0-e921-4271-8510-c22c1c212087](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/62bbb4d0-e921-4271-8510-c22c1c212087.png)
+
+![7f2babd7-c9ed-4bb7-9150-1ff2cdf4878e](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7f2babd7-c9ed-4bb7-9150-1ff2cdf4878e.png)
+
+
+
+所有进程的虚拟地址VA（独属于自己的一份虚拟空间）从0开始，<u>并且在共享同一份内核区</u>（由操作系统管理, 在物理上的同一份内核区）
+
+运行程序时，操作系统将进程装入内存的同时，（建立进程的页表）将进程的虚拟空间与物理空间的映射记录到内存的页表（本质为数组，数组元素即页表项为一个struct结构体）中（内核区），进程的PCB存放<u>页表在内存中的起始物理地址</u>。（当进程被调度时，OS将进程PCB中的页表始址写入页表始址寄存器）
+
+![7f81bc59-5c51-4a84-94ea-87722d8e9102](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7f81bc59-5c51-4a84-94ea-87722d8e9102.png)
+
+
+
+![c775d6d6-3c88-41cf-9dfb-08776daf0d25](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/c775d6d6-3c88-41cf-9dfb-08776daf0d25.png)![40f516d0-f9d7-4543-bfac-446c575dcd9d](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/40f516d0-f9d7-4543-bfac-446c575dcd9d.png)
+
+
+
+第一个页目录号的页框号为下一级页表（每个页目录对应一个页表, 即内存中有多个页表）的物理起始地址
+
+![7b33e2c3-a2ed-4bb9-989f-0e27ed745032](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/7b33e2c3-a2ed-4bb9-989f-0e27ed745032.png) 
+
+
+
+一级页表常驻内存，二级页表可能不在
+
+![586ca357-d8b1-4ed3-900b-2554f8fb3eb9](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/586ca357-d8b1-4ed3-900b-2554f8fb3eb9.png)
+
+
+
+
+
+
+
+
+
+
+
+### 真题
+
+![e28ba9d0-2f1f-4a34-8866-bcd1b7a1928c](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/e28ba9d0-2f1f-4a34-8866-bcd1b7a1928c.png)
+
+![8eeae2f2-5e85-4aca-beb7-bd0f851e9776](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/8eeae2f2-5e85-4aca-beb7-bd0f851e9776.png)
+
+
+
+
+
+![297b43a6-9973-4425-b574-bb80ff24b453](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/297b43a6-9973-4425-b574-bb80ff24b453.png)![9047f68b-2af8-47bc-a9e2-e3d9a9ede46b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/9047f68b-2af8-47bc-a9e2-e3d9a9ede46b.png)
+
+![702c0670-742d-4fd0-8ade-b774362ff77f](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/702c0670-742d-4fd0-8ade-b774362ff77f.png)![896b874c-8dee-4c47-892c-95c55793611f](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/896b874c-8dee-4c47-892c-95c55793611f.png)![46e0baf8-7284-47d0-88f6-3831e79802cb](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/46e0baf8-7284-47d0-88f6-3831e79802cb.png)
+
+
+
+
+
+
+
+# 文件系统
+
+![e9a29551-2ace-4985-9834-7fbf4fe6275e](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/e9a29551-2ace-4985-9834-7fbf4fe6275e.png)![c921bc3f-9343-4d84-b2a8-3ad06eaf78a2](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/c921bc3f-9343-4d84-b2a8-3ad06eaf78a2.png)
+
+5次IO磁盘， 通过创建进程打开文件表项，指向系统打开文件表对应文件inode编号的表项，若没有则将该inode结点从磁盘读入内核缓冲区，在系统打开文件表中创建新项，打开计数初始化为1，将进程打开文件表的对应项指向该项。最终返回给用户文件描述符（该文件在系统文件表的的索引号）![c86eb0ce-0da8-4d19-a052-87d046eab890](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/c86eb0ce-0da8-4d19-a052-87d046eab890.png)![a4d7d1cb-3327-4ce4-addb-bb93ec25f760](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/a4d7d1cb-3327-4ce4-addb-bb93ec25f760.png)
+
+read读磁盘的操作次数 ![773638a0-af31-4052-9aef-993eebeb1737](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/773638a0-af31-4052-9aef-993eebeb1737.png)![f0711c3e-c356-4154-99f9-69973d02b72b](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/f0711c3e-c356-4154-99f9-69973d02b72b.png)![58124105-1128-4d29-a3b1-32ccfcbf3fe6](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/58124105-1128-4d29-a3b1-32ccfcbf3fe6.png)
+
+
+
+
+
+# IO大题
+
+![cb6be1d6-75e3-42bc-987d-b0f4df4ab006](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/cb6be1d6-75e3-42bc-987d-b0f4df4ab006.png)![2a82d928-c9b5-428e-b6e6-7f11b98029a1](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/2a82d928-c9b5-428e-b6e6-7f11b98029a1.png)![28f23eb0-3fc8-4a57-94c5-e0725e93a219](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/28f23eb0-3fc8-4a57-94c5-e0725e93a219.png)![798e3c71-5e97-4a42-ad88-5d7d53447e67](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/798e3c71-5e97-4a42-ad88-5d7d53447e67.png)![14f50cea-2397-4cb1-b831-f968926fe796](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/14f50cea-2397-4cb1-b831-f968926fe796.png)![9a75e56c-28fa-4e76-8c68-ccfef9bb7f36](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/9a75e56c-28fa-4e76-8c68-ccfef9bb7f36.png)
+
+IO模型![2d1c28d7-1de9-43af-9145-47bd75c31d0a](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/2d1c28d7-1de9-43af-9145-47bd75c31d0a.png)![d5849bcb-6b26-4474-9c22-e509129685d7](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/d5849bcb-6b26-4474-9c22-e509129685d7.png)![9e6ebd20-1b1c-44f5-a0d0-aeba47ae1d06](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/9e6ebd20-1b1c-44f5-a0d0-aeba47ae1d06.png)![73de562e-5024-4aa5-916c-eeccaa3364cf](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/73de562e-5024-4aa5-916c-eeccaa3364cf.png)![3cd983b8-0f16-4e5d-a548-23788be47c5a](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3cd983b8-0f16-4e5d-a548-23788be47c5a.png)![3b6a698c-7936-49d1-93ef-e468195c83d7](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3b6a698c-7936-49d1-93ef-e468195c83d7.png) ![af160173-92f3-4275-a8a3-378234761021](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/af160173-92f3-4275-a8a3-378234761021.png)![3c6137ad-ba86-43ca-b567-16de2d2aa556](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/3c6137ad-ba86-43ca-b567-16de2d2aa556.png)![de19faff-b377-4980-aa3f-f50bc1430968](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/de19faff-b377-4980-aa3f-f50bc1430968.png)![b4e3ffcc-d5ef-490e-ae23-699bc3366d87](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/b4e3ffcc-d5ef-490e-ae23-699bc3366d87.png)![dbaad35a-e155-42e2-aa78-b8c23fd6c985](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/dbaad35a-e155-42e2-aa78-b8c23fd6c985.png)
+
+#### DMA
+
+
+
+![a5b1c5b9-8d52-4ec5-8d87-c8cbe2a52875](file:///C:/Users/DELL/Desktop/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/408Notes/Typedown/a5b1c5b9-8d52-4ec5-8d87-c8cbe2a52875.png)

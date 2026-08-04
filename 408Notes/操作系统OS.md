@@ -2433,7 +2433,17 @@ Belady异常，当分配的内存块增大时，缺页次数反而增加
   
   
 
-![4cbbdd2c-6828-4360-b57c-c960e990b12b](file:///C:/Users/DELL/Pictures/Typedown/4cbbdd2c-6828-4360-b57c-c960e990b12b.png)![e2eda119-9423-407a-8e89-e425ba43a806](file:///C:/Users/DELL/Pictures/Typedown/e2eda119-9423-407a-8e89-e425ba43a806.png)![17648332-ef53-4364-be36-2f5dd469d2a6](file:///C:/Users/DELL/Pictures/Typedown/17648332-ef53-4364-be36-2f5dd469d2a6.png)![1139058a-bfb0-40a6-a616-c0bcb830cc28](file:///C:/Users/DELL/Pictures/Typedown/1139058a-bfb0-40a6-a616-c0bcb830cc28.png)![6ba7f821-6ac1-4b04-9524-e34529c5da60](file:///C:/Users/DELL/Pictures/Typedown/6ba7f821-6ac1-4b04-9524-e34529c5da60.png)![0ae0c312-c46b-4c85-ba41-39372a8157db](file:///C:/Users/DELL/Pictures/Typedown/0ae0c312-c46b-4c85-ba41-39372a8157db.png)![537d2333-a8b2-4561-a44b-5c528af3bb2e](file:///C:/Users/DELL/Pictures/Typedown/537d2333-a8b2-4561-a44b-5c528af3bb2e.png)![237e7255-3a7c-4140-b16a-fda61c3fae36](file:///C:/Users/DELL/Pictures/Typedown/237e7255-3a7c-4140-b16a-fda61c3fae36.png)![e7b6a630-68d1-4d4c-9151-aebd80874125](file:///C:/Users/DELL/Pictures/Typedown/e7b6a630-68d1-4d4c-9151-aebd80874125.png)
+![4cbbdd2c-6828-4360-b57c-c960e990b12b](file:///C:/Users/DELL/Pictures/Typedown/4cbbdd2c-6828-4360-b57c-c960e990b12b.png)![e2eda119-9423-407a-8e89-e425ba43a806](file:///C:/Users/DELL/Pictures/Typedown/e2eda119-9423-407a-8e89-e425ba43a806.png)![17648332-ef53-4364-be36-2f5dd469d2a6](file:///C:/Users/DELL/Pictures/Typedown/17648332-ef53-4364-be36-2f5dd469d2a6.png)![1139058a-bfb0-40a6-a616-c0bcb830cc28](file:///C:/Users/DELL/Pictures/Typedown/1139058a-bfb0-40a6-a616-c0bcb830cc28.png)
+
+
+
+
+
+磁盘的对换区（Swap区） 
+
+
+
+![6ba7f821-6ac1-4b04-9524-e34529c5da60](file:///C:/Users/DELL/Pictures/Typedown/6ba7f821-6ac1-4b04-9524-e34529c5da60.png)![0ae0c312-c46b-4c85-ba41-39372a8157db](file:///C:/Users/DELL/Pictures/Typedown/0ae0c312-c46b-4c85-ba41-39372a8157db.png)![537d2333-a8b2-4561-a44b-5c528af3bb2e](file:///C:/Users/DELL/Pictures/Typedown/537d2333-a8b2-4561-a44b-5c528af3bb2e.png)![237e7255-3a7c-4140-b16a-fda61c3fae36](file:///C:/Users/DELL/Pictures/Typedown/237e7255-3a7c-4140-b16a-fda61c3fae36.png)![e7b6a630-68d1-4d4c-9151-aebd80874125](file:///C:/Users/DELL/Pictures/Typedown/e7b6a630-68d1-4d4c-9151-aebd80874125.png)
 
 ![b598dfd0-0c41-4b69-9eca-51438886129d](file:///C:/Users/DELL/Pictures/Typedown/b598dfd0-0c41-4b69-9eca-51438886129d.png)
 
