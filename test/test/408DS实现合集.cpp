@@ -244,15 +244,15 @@ namespace My408
 #pragma endregion
     //归并排序 ：最好最坏均为 时间：O(nlogn), 暂存数组空间:O(n) 稳定
 #pragma region 归并排序
-    void MergeSort(int a[], int n, int l, int r)
+    void MergeSort(int a[], int l, int r)
     {
         if (l >= r)return; // 划分至最小的子数组，只有一个元素
 
         int m = (l + r) / 2;
         //分治，二路归并，划分左右子数组
         //划分右数组
-        MergeSort(a, n, l, m);
-        MergeSort(a, n, m + 1, r);
+        MergeSort(a, l, m);
+        MergeSort(a, m + 1, r);
         //合并 
 
         //暂存左右子数组待合并元素， 通过比较修改主数组的元素，从而排序
@@ -433,7 +433,7 @@ namespace My408
     {
         int next;
         int data;
-    }Node, * LinkTable;
+    }Node, * LinkTable; 
     void RadixSort(int a[], int n)
     {
 
@@ -2015,7 +2015,34 @@ BTree* CreateBNode(const char* data, BTree* left = nullptr, BTree* right = nullp
 }
 #pragma endregion
 
+#pragma region 图
+struct MGraph
+{
+    char ver[MaxSize];
+    int weigh[MaxSize][MaxSize];
 
+    int verNum, arcNum;
+};
+
+struct ArcNode
+{
+    int weigh;
+    int verIndex;
+
+    ArcNode* next;
+};
+struct VNode
+{
+    char data;
+    ArcNode* first;
+};
+struct AdjList
+{
+    VNode ver[MaxSize];
+    int verNum, arcNum;
+};
+
+#pragma endregion
 
 int main() {
     //// 使用哈希表构建无向图的邻接表表示

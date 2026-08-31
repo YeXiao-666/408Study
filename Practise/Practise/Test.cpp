@@ -3,6 +3,11 @@
 #include <vector>
 #include <string>
 using namespace std;
+
+#pragma region 线性表
+
+#pragma endregion
+
 #pragma region Stack
 
 #pragma region 共享栈
@@ -259,111 +264,78 @@ namespace DoubleStack
 }
 
 #pragma endregion
-int Patition(int a[], int n, int l, int r)
+
+#pragma region 排序算法
+
+void QuickSort(int a[], int l, int r)
 {
-	int i = l, j = r;
+    if (l >= r)return;
 
-	while (i < j)
-	{
-		while (i<j && a[j]>=a[l])--j;
-		while (i<j && a[i]<=a[l])++i;
-		swap(a[i], a[j]);
-	}
-	swap(a[i], a[l]);
-	return i;
-}
-void QuickSort(int a[], int n, int l, int r)
+    int i = l, j = r;
+    while (i < j)
+    {
+        while (i<j && a[j]>=a[l])--j;
+        while (i<j && a[i]<=a[l])++i;
+        swap(a[i], a[j]);
+    }
+    swap(a[l], a[i]);
+    QuickSort(a, l, i - 1);
+    QuickSort(a, i+1, r);
+}   
+
+void MergeSort(int a[], int l, int r)
 {
-	if (l >= r)return;
+    if (l >= r)return;
 
-	int i = Patition(a, n, l, r);
+    int m = (l + r) >> 1;
 
-	QuickSort(a, n, 0, l - 1);
-	QuickSort(a, n, l+1, r);
+    MergeSort(a, l, m);
+    MergeSort(a, m+1, r);
+
+    int* tmp = new int[r-l+1];
+    for (int i = l; i <= r; ++i)tmp[i - l] = a[i];
+
+    int i = 0, j = m - l + 1;
+
+    for (int k = l; k <= r; ++k)
+    {
+        if (i == m - l + 1) a[k] = tmp[j++];
+        else if (j == r - l + 1 || tmp[j] >= tmp[i])a[k] = tmp[i++];
+        else a[k] = tmp[j++];
+    }
+    delete[] tmp;
 }
 
-//void MergeSort(int a[], int n, int l, int r)
-//{
-//	if (l >= r)return;
-//
-//	int m = (l + r) / 2;
-//
-//	MergeSort(a, n, l, m);
-//	MergeSort(a, n, m+1, r);
-//
-//	int* tmp = new int[r - l + 1];
-//	for (int i = l; i <= r; ++i) tmp[i - l] = a[i]; 
-//
-//	int i = 0, j = m- l + 1;
-//
-//	for (int k = l; k <= r; ++k)
-//	{
-//		if (i == m - l + 1)a[k] = tmp[j++];
-//		else if (j == r - l + 1 || tmp[j] >= tmp[i])a[k] = tmp[i++];
-//		else a[k] = tmp[j++];
-//	}
-//	delete[] tmp;
-//}
+void ShellSort(int a[], int n, int step)
+{
+    for (int gap = step; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n ; ++i)
+        {
+            int t = a[i];
+            int j;
+            for (int j = i - gap; j >= 0 && a[j + gap] < t; j-=gap)
+            {
+                a[j + gap] = a[j];
+            }
+            a[j + gap] = t;
+        }
+    }
+}
+#pragma endregion
 
-
+#pragma region 并查集UFS
 // 宏定义 10 个元素
 constexpr int N = 10;
 int UFS[N];
-
-// --- 辅助可视化函数 ---
-void PrintArray(const char* msg) {
-    std::cout << msg << "\n[ ";
-    for (int i = 0; i < N; ++i) {
-        if (UFS[i] >= 0) std::cout << " "; // 对齐负号
-        std::cout << UFS[i] << (i == N - 1 ? " " : ", ");
-    }
-    std::cout << "]\n";
-}
-
-// 递归打印单棵树的层级结构
-void PrintTreeRecursive(int node, int depth, const std::string& prefix) {
-    if (depth == 0) {
-        std::cout << "根节点 " << node << " (集合规模: " << -UFS[node] << ")\n";
-    }
-
-    // 收集该节点的所有子节点
-    std::vector<int> children;
-    for (int i = 0; i < N; ++i) {
-        if (UFS[i] == node) {
-            children.push_back(i);
-        }
-    }
-
-    // 递归打印子树
-    for (size_t i = 0; i < children.size(); ++i) {
-        int child = children[i];
-        std::cout << prefix << (i == children.size() - 1 ? "└── " : "├── ");
-        std::cout << "子节点 " << child << "\n";
-        // 继续向下查找该子节点的后代
-        PrintTreeRecursive(child, depth + 1, prefix + (i == children.size() - 1 ? "    " : "│   "));
-    }
-}
-
-// 打印整个森林（所有根节点及子树）
-void PrintForest(const char* msg) {
-    std::cout << "\n==== " << msg << " ====\n";
-    for (int i = 0; i < N; ++i) {
-        if (UFS[i] < 0) { // 负数代表该节点是当前集合的根
-            PrintTreeRecursive(i, 0, "");
-        }
-    }
-    std::cout << "========================\n";
-}
-
 // 初始化：全部置为 -1，代表10个独立的集合，规模均为 1
-void Init() {
+void Init() 
+{
     for (int i = 0; i < N; ++i) UFS[i] = -1;
-    PrintArray("==== 初始化 (Initial State) ====");
-    PrintForest("初始树形状态 (10 个孤立节点)");
 }
-
 // 核心操作 1：查 (带路径压缩)
-int Find(int x) {
+int Find(int x) 
+{
     // 递归基：值为负数，说明找到了龙头老大
     if (UFS[x] < 0) return x;
 
@@ -372,11 +344,9 @@ int Find(int x) {
 
     // 核心考点：递归回溯阶段执行路径压缩
     // 如果当前节点的直接父亲不是根节点，则将其拍平挂到根节点下
-    if (UFS[x] != root) {
-        std::cout << "  -> 触发路径压缩: 将节点 " << x
-            << " 的父节点从 " << UFS[x] << " 直接修改为根节点 " << root << "\n";
+    if (UFS[x] != root) 
+    {
         UFS[x] = root; // 核心压缩赋值
-        PrintArray("  -> 压缩后数组状态:");
     }
 
     return root;
@@ -389,24 +359,116 @@ void Union(int x, int y) {
 
     if (root_x == root_y) return; // 已在同一集合
 
-    std::cout << "\n执行 Union(" << x << ", " << y << "): \n";
-
     // 注意：存的是负数规模，值越小说明绝对规模越大 (小树并入大树)
     if (UFS[root_x] <= UFS[root_y]) {
         UFS[root_x] += UFS[root_y]; // 大树合并小树规模
         UFS[root_y] = root_x;       // 小树根节点认大树根节点为父
-        std::cout << "  (规模判定: " << root_x << " 规模 >= " << root_y << ") 将节点 "
-            << root_y << " 挂载到 " << root_x << " 下\n";
     }
     else {
         UFS[root_y] += UFS[root_x];
         UFS[root_x] = root_y;
-        std::cout << "  (规模判定: " << root_y << " 规模 > " << root_x << ") 将节点 "
-            << root_x << " 挂载到 " << root_y << " 下\n";
     }
-    PrintArray("  => Union完成后的状态:");
 }
 
+
+
+// 测试代码
+// // --- 辅助可视化函数 ---
+//void PrintArray(const char* msg) {
+//    std::cout << msg << "\n[ ";
+//    for (int i = 0; i < N; ++i) {
+//        if (UFS[i] >= 0) std::cout << " "; // 对齐负号
+//        std::cout << UFS[i] << (i == N - 1 ? " " : ", ");
+//    }
+//    std::cout << "]\n";
+//}
+//// 递归打印单棵树的层级结构
+//void PrintTreeRecursive(int node, int depth, const std::string& prefix) {
+//    if (depth == 0) {
+//        std::cout << "根节点 " << node << " (集合规模: " << -UFS[node] << ")\n";
+//    }
+//
+//    // 收集该节点的所有子节点
+//    std::vector<int> children;
+//    for (int i = 0; i < N; ++i) {
+//        if (UFS[i] == node) {
+//            children.push_back(i);
+//        }
+//    }
+//
+//    // 递归打印子树
+//    for (size_t i = 0; i < children.size(); ++i) {
+//        int child = children[i];
+//        std::cout << prefix << (i == children.size() - 1 ? "└── " : "├── ");
+//        std::cout << "子节点 " << child << "\n";
+//        // 继续向下查找该子节点的后代
+//        PrintTreeRecursive(child, depth + 1, prefix + (i == children.size() - 1 ? "    " : "│   "));
+//    }
+//}
+//
+//// 打印整个森林（所有根节点及子树）
+//void PrintForest(const char* msg) {
+//    std::cout << "\n==== " << msg << " ====\n";
+//    for (int i = 0; i < N; ++i) {
+//        if (UFS[i] < 0) { // 负数代表该节点是当前集合的根
+//            PrintTreeRecursive(i, 0, "");
+//        }
+//    }
+//    std::cout << "========================\n";
+//}
+//
+//// 初始化：全部置为 -1，代表10个独立的集合，规模均为 1
+//void Init() {
+//    for (int i = 0; i < N; ++i) UFS[i] = -1;
+//    PrintArray("==== 初始化 (Initial State) ====");
+//    PrintForest("初始树形状态 (10 个孤立节点)");
+//}
+//// 核心操作 1：查 (带路径压缩)
+//int Find(int x) {
+//    // 递归基：值为负数，说明找到了龙头老大
+//    if (UFS[x] < 0) return x;
+//
+//    // 递归向上传递寻找根节点
+//    int root = Find(UFS[x]);
+//
+//    // 核心考点：递归回溯阶段执行路径压缩
+//    // 如果当前节点的直接父亲不是根节点，则将其拍平挂到根节点下
+//    if (UFS[x] != root) {
+//        std::cout << "  -> 触发路径压缩: 将节点 " << x
+//            << " 的父节点从 " << UFS[x] << " 直接修改为根节点 " << root << "\n";
+//        UFS[x] = root; // 核心压缩赋值
+//        PrintArray("  -> 压缩后数组状态:");
+//    }
+//
+//    return root;
+//}
+//// 核心操作 2：并 (按规模合并 Union by Size)
+//void Union(int x, int y) {
+//    int root_x = Find(x);
+//    int root_y = Find(y);
+//
+//    if (root_x == root_y) return; // 已在同一集合
+//
+//    std::cout << "\n执行 Union(" << x << ", " << y << "): \n";
+//
+//    // 注意：存的是负数规模，值越小说明绝对规模越大 (小树并入大树)
+//    if (UFS[root_x] <= UFS[root_y]) {
+//        UFS[root_x] += UFS[root_y]; // 大树合并小树规模
+//        UFS[root_y] = root_x;       // 小树根节点认大树根节点为父
+//        std::cout << "  (规模判定: " << root_x << " 规模 >= " << root_y << ") 将节点 "
+//            << root_y << " 挂载到 " << root_x << " 下\n";
+//    }
+//    else {
+//        UFS[root_y] += UFS[root_x];
+//        UFS[root_x] = root_y;
+//        std::cout << "  (规模判定: " << root_y << " 规模 > " << root_x << ") 将节点 "
+//            << root_x << " 挂载到 " << root_y << " 下\n";
+//    }
+//    PrintArray("  => Union完成后的状态:");
+//}
+#pragma endregion
+
+#pragma region 25年最大乘积
 void CalMulSum(int a[], int res[], int n)
 {
     int NerMax = INT_MAX;
@@ -442,7 +504,7 @@ void CalMulSum(int a[], int res[], int n)
 
             }
         }
-        
+
         //////!!!!!!!
         if (a[i] < 0) res[i] = a[i] * NerMax;
         else res[i] = a[i] * PosMax;
@@ -456,7 +518,7 @@ void CalMulSumPro(int a[], int res[], int n)
 {
     int NerMax = a[n - 1];
     int PosMax = a[n - 1];
-    for (int i = n - 1; i >=0; --i)
+    for (int i = n - 1; i >= 0; --i)
     {
 
         //////!!!!!!! 
@@ -479,6 +541,7 @@ void printArray(int a[], int n) {
     }
     cout << endl;
 }
+#pragma endregion
 
 #pragma region 2010算法数组循环左移p真题
 
@@ -526,41 +589,10 @@ void MoveArray(int a[], int n, int p)
     }
 }
 #include <fstream>
+#include <bitset>
 #pragma endregion
 
 
-
-void MergeSort(int a[], int n, int l, int r)
-{
-    if (l >= r) return;
-
-    int m = (l + r) >> 1;
-     
-    MergeSort(a, n, l, m);
-    MergeSort(a, n, m+1, r);
-
-    int* tmp = new int[r - l + 1];
-
-    for (int i = l; i <= r; ++i) tmp[i - l] = a[i];
-
-    int i = 0, j = m - l + 1;
-    for (int k = l; k <= r; ++k)
-    {
-        if (i == m - l + 1)
-        {
-            a[k] = tmp[j++];
-        }
-        else if (j == r - l + 1 || tmp[j] >= tmp[i])
-        {
-            a[k] = tmp[i++];
-        }
-        else
-        {
-            a[k] = tmp[j++];
-        }
-    }
-    delete[] tmp;
-}
 
 struct TreeNode {
     int data;
@@ -623,22 +655,23 @@ struct TreeNode* searchBST(struct TreeNode* root, int k)
 //        
 //}
 
+#pragma region 串的匹配KMP算法
 
 int match(char a[], int n, char b[], int m)
 {
-    for (int i = 0; i <= n-m; ++i)
+    for (int i = 0; i <= n - m; ++i)
     {
         int j;
         for (j = 0; j < m; ++j)
         {
             if (a[i + j] != b[j]) break;
-            
-        } 
+
+        }
         if (j == m) return i;
     }
     return -1;
 }
- 
+
 /**
  * 构建 next 数组（前缀表），同时打印构造过程。
  * @param a 模式串
@@ -754,6 +787,8 @@ int KMP(char a[], int n, char b[], int m) {
     delete[] next;
     return -1;
 }
+#pragma endregion
+
 #pragma region 2026算法题二叉树搜索真题
 //res[0]初始化为INT_MAX
 ///递归到叶节点，自底向上运行
@@ -822,12 +857,14 @@ void FindClosetNodes(TreeNode* root, int k)
 }
 #pragma endregion
 
-
-
+#pragma region 二叉搜索树
+/// <summary>
+/// 线索二叉树,线索化及其遍历
+/// </summary>
 struct ThreadNode
 {
     int ltag, rtag;
-    ThreadNode* left, * right, *parent;
+    ThreadNode* left, * right, * parent;
     int data;
 };
 
@@ -908,7 +945,7 @@ void PreThread(ThreadNode* root, ThreadNode* pre)
         root->left = pre;
         root->ltag = 1;
     }
-    
+
     if (pre != nullptr && pre->right == nullptr)
     {
         pre->right = root;
@@ -931,7 +968,301 @@ ThreadNode* NextNode(ThreadNode* root)
     if (root->ltag == 0) return root->left;
     else return root->right;
 }
+#pragma endregion
 
+#pragma region 图的遍历算法
+
+//邻接矩阵
+struct GraphMatrix
+{
+    int n, e;
+    int adjMatrix[MaxSize][MaxSize];
+};
+// ==================== 2. 邻接表实现（静态数组模拟链表） ====================
+struct Edge {
+    int to;       // 目标顶点
+    int next;     // 同起点的下一条边在 edges 中的下标
+};
+// 2. 邻接表 (Adjacency List)
+typedef struct ArcNode {   // 边节点
+    int adjvex;            // 该弧所指向的顶点的位置
+    struct ArcNode* next;  // 指向下一条弧的指针
+    // int weight;         // 网的边权值，此处视无权图省略
+} ArcNode;
+
+typedef struct {           // 顶点表节点
+    int data;              // 顶点信息
+    ArcNode* firstarc;     // 指向第一条依附该顶点的弧的指针
+} VNode, AdjList[MaxSize]; //邻接表的的顶点 即VNode数组
+
+typedef struct {
+    AdjList vertices;      // 邻接表
+    int n, e;              // 顶点数 n, 边数 e
+} ALGraph;               //提供邻接表的边 顶点信息
+
+// 全局访问标记数组
+bool visited[MaxSize];
+
+
+// 邻接矩阵的 DFS
+void DFS_M(GraphMatrix G, int cur) {
+    cout<< "DFS访问 : " << cur << " "<<endl;             // 访问初始顶点 (伪代码，比如 printf)
+    visited[cur] = true;     // 标记为已访问
+
+    // 扫描邻接矩阵的第 v 行 , 先搜 该起始节点 v --> 出度 相连的节点 
+    
+    for (int i = 0; i < G.n; ++i)
+    {
+        if (G.adjMatrix[cur][i] == 1 && !visited[i]) DFS_M(G, i);
+    }
+    //cout << "退栈前，逆拓扑序列：DFS访问 : " << cur << " " << endl;
+}
+
+// 邻接表 DFS 核心
+void DFS_AdjT(AdjList adj, int cur)
+{
+    cout << "AdjList DFS邻接表访问 : " << cur << " " << endl;             // 访问初始顶点 (伪代码，比如 printf)
+    visited[cur] = true;     // 标记为已访问
+
+    // 扫描邻接矩阵的第 v 行 , 先搜 该起始节点 v --> 出度 相连的节点 
+    ArcNode* node = adj[cur].firstarc;
+    // 【修复】必须遍历整个链表，在内部判断
+    for (; node; node = node->next) {
+        if (!visited[node->adjvex]) 
+            DFS_AdjT(adj, node->adjvex);
+        
+    }
+    //cout << "退栈前，逆拓扑序列：DFS访问 : " << cur << " " << endl;
+}
+
+// 邻接矩阵 DFS 包装 (处理非连通)
+void DFS(GraphMatrix G, int cur = 0)
+{
+    for (int i = 0; i < G.n; ++i) visited[i] = false;
+
+    DFS_M(G, cur);
+    for (int i = 0; i < G.n; ++i)
+    {
+        if (!visited[i])
+        {
+            cout << " 调用 Call DFS " << endl;
+            if (!visited[i]) DFS_M(G, i);
+        }
+        
+        // 【重要考点】这里调用 DFS/BFS 的次数，等于该无向图的连通分量个数！
+    }
+    cout << endl;
+}
+
+// 邻接表 DFS 包装 (处理非连通)
+void DFS_ALG(ALGraph G, int start = 0) {
+    for (int i = 0; i < G.n; ++i) visited[i] = false;
+    DFS_AdjT(G.vertices, start);
+
+    for (int i = 0; i < G.n; ++i) {
+        
+        if (!visited[i])
+        {
+            cout << " 调用 Call DFS " << endl;
+            DFS_AdjT(G.vertices, i);
+        }
+            
+    }
+    cout << endl;
+}
+
+// 邻接矩阵 BFS 核心
+void BFS_M(GraphMatrix G, int cur = 0)
+{
+    int* queue = new int[G.n];
+    int front = 0, rear = 0;
+
+    cout << "邻接矩阵BFS访问 : " << cur << " " << endl;
+    //入队前必须 ！！！标记已经访问！！！
+    visited[cur] = true;
+    queue[rear++] = cur;
+    while (rear!=front)
+    {
+        //队头元素
+        int top = queue[front++];//front++出队
+        
+        for (int i = 0; i < G.n; ++i)
+        {
+            if (G.adjMatrix[top][i] == 1 && !visited[i])
+            {
+                cout << "邻接矩阵BFS访问 : " << i << " " << endl;
+                //入队前必须 ！！！标记已经访问！！！
+                visited[i] = true;
+                queue[rear++] = i;
+            }
+        }
+    }
+    delete[] queue;
+}
+
+void BFS_AdjT(ALGraph adj, int cur = 0)
+{
+    int* queue = new int[adj.n];
+    int front = 0, rear = 0;
+    cout << "BFS AdjList 邻接表访问 : " << cur << " " << endl;             // 访问初始顶点 (伪代码，比如 printf)
+    visited[cur] = true;     // 标记为已访问
+    queue[rear++] = cur;
+
+    while (rear != front)
+    {
+        //队头元素
+        int top = queue[front++];//front++出队
+
+        // 扫描邻接矩阵的第 v 行 , 先搜 该起始节点 v --> 出度 相连的节点 
+        ArcNode* node = adj.vertices[top].firstarc;
+        for (; node; node = node->next)
+        {
+            if (!visited[node->adjvex]) 
+            {
+                visited[node->adjvex] = true;
+                cout << "BFS AdjList 邻接表访问 : " << node->adjvex << " " << endl;
+                queue[rear++] = node->adjvex;
+            }
+
+            
+        }
+    }
+    //释放开辟的堆空间
+    delete[] queue;
+    //cout << "退栈前，逆拓扑序列：BFS访问 : " << cur << " " << endl;
+}
+
+void BFS(GraphMatrix G, int cur = 0)
+{
+    for (int i = 0; i < G.n; ++i)visited[i] = false;
+    cout << "BFS_M 遍历序列: ";
+    for (int i = 0; i < G.n; ++i)
+    {
+        if (!visited[i])
+        {
+            cout << " 调用 Call BFS " << endl;
+            BFS_M(G, i);
+        }
+    }
+    cout << endl;
+}
+void BFS_ALG(ALGraph G, int start = 0) {
+    for (int i = 0; i < G.n; ++i) visited[i] = false;
+    cout << "BFS_AL 遍历序列: ";
+    BFS_AdjT(G, start);
+    for (int i = 0; i < G.n; ++i) 
+    {
+        if (!visited[i])
+        {
+            cout << " 调用 Call BFS " << endl;
+            BFS_AdjT(G, i);
+        }
+    }
+    cout << endl;
+}
+
+// ==================== 构建测试图 ====================
+
+// 辅助函数：为无向图邻接矩阵添加边
+void addEdgeM(GraphMatrix& G, int u, int v) {
+    G.adjMatrix[u][v] = 1;
+    G.adjMatrix[v][u] = 1;
+}
+
+// 辅助函数：为无向图邻接表添加边 (头插法)
+void addEdgeAL(ALGraph& G, int u, int v) {
+    ArcNode* node1 = new ArcNode{ v, G.vertices[u].firstarc };
+    G.vertices[u].firstarc = node1;
+
+    ArcNode* node2 = new ArcNode{ u, G.vertices[v].firstarc };
+    G.vertices[v].firstarc = node2;
+}
+
+// 辅助函数：初始化图
+void initGraphs(GraphMatrix& GM, ALGraph& ALG, int n) {
+    GM.n = ALG.n = n;
+    GM.e = ALG.e = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            GM.adjMatrix[i][j] = 0;
+        }
+        ALG.vertices[i].data = i;
+        ALG.vertices[i].firstarc = NULL;
+    }
+}
+
+#pragma endregion
+
+
+int testA[MaxSize];
+void InitMyUFS(int k)
+{
+    for (int i = 0; i < MaxSize; ++i) testA[i] = -1;
+}
+int MyFind(int k)
+{
+    if (testA[k] < 0) return k;
+    //如果不是根节点，继续向上查，直至查到根节点，
+    int root = MyFind(testA[k]);
+
+    //并且实现路径压缩
+    if (testA[k] != root)
+    {
+        testA[k] = root; //压缩
+        return root;//将根依次传递给其他调用栈
+    }
+}
+bool MyUnion(int a, int b)
+{
+
+    int rootA = MyFind(a);
+    int rootB = MyFind(b);
+
+    if (rootA == rootB) return false;
+
+    if (testA[rootA] <= testA[rootB])
+    {
+        testA[rootA] += testA[rootB];
+        testA[rootB] = rootA;
+    }
+    else
+    {
+        testA[rootB] += testA[rootA];
+        testA[rootA] = rootB;
+    }
+}
+
+
+void printFloatBitsManual(float f) {
+    unsigned char* bytePtr = reinterpret_cast<unsigned char*>(&f);
+    // 从最后一个字节开始，以按大端序输出（更符合阅读习惯）
+    for (int i = sizeof(float) - 1; i >= 0; --i) {
+        std::cout << std::bitset<8>(bytePtr[i]) << " ";
+    }
+    std::cout << std::endl;
+}
+
+
+
+int Mid(int a[], int b[], int L)
+{
+    int p1 = 0, p2 = 0, c=0;
+    while (c<L)
+    {
+        if (a[p1] <= b[p2])
+        {
+            c++; 
+            if (c == L)return a[p1];
+            p1++;
+        }
+        else
+        {
+            c++;
+            if (c == L)return b[p2];
+            p2++;
+        }
+    }
+}
 int main() {
     
 
@@ -1108,9 +1439,71 @@ int main() {
 //cout << endl;
 #pragma endregion
 
-SingleStack2::SingleStack s;
-SingleStack2::InitStack(s);
-SingleStack2::Push(s, 1);
-SingleStack2::Push(s, 2);
+//SingleStack2::SingleStack s;
+//SingleStack2::InitStack(s);
+//SingleStack2::Push(s, 1);
+//SingleStack2::Push(s, 2);
 
+
+// ==========================================
+    // 场景 1：连通无向图 (8个节点)
+    // ==========================================
+#pragma region DFS，BFS遍历案例
+//cout << "========== 测试场景 1：连通图 (8个节点) ==========" << endl;
+//GraphMatrix GM1; ALGraph ALG1;
+//initGraphs(GM1, ALG1, 8);
+//
+//int edges1[][2] = { {0,1}, {0,2}, {1,3}, {1,4}, {2,5}, {2,6}, {3,7}, {4,7} };
+//for (auto& e : edges1) {
+//    addEdgeM(GM1, e[0], e[1]);
+//    addEdgeAL(ALG1, e[0], e[1]);
+//}
+//
+//DFS(GM1);      // 预期输出: 0 1 3 7 4 2 5 6 
+//DFS_ALG(ALG1); // 头插法邻接表输出顺序会因为链表次序不同而与矩阵不同
+//BFS(GM1);      // 预期输出: 0 1 2 3 4 5 6 7 
+//BFS_ALG(ALG1);
+//
+//// ==========================================
+//// 场景 2：非连通无向图 (9个节点，3个连通分量)
+//// ==========================================
+//cout << "\n========== 测试场景 2：非连通图 (9个节点，孤岛测试) ==========" << endl;
+//GraphMatrix GM2; ALGraph ALG2;
+//initGraphs(GM2, ALG2, 9);
+//
+//int edges2[][2] = {
+//    {0,1}, {1,2}, {2,3}, {0,3}, // 分量1: 0,1,2,3 形成环
+//    {4,5}, {5,6}, {6,7}         // 分量2: 4,5,6,7 链状
+//    // 分量3: 8 孤立
+//};
+//for (auto& e : edges2) {
+//    addEdgeM(GM2, e[0], e[1]);
+//    addEdgeAL(ALG2, e[0], e[1]);
+//}
+//
+//// 注意观察输出序列，外层for循环会强制唤醒不同分量的遍历
+//DFS(GM2);      // 预期: (0 1 2 3) (4 5 6 7) (8)
+//DFS_ALG(ALG2);
+//BFS(GM2);      // 预期: (0 1 3 2) (4 5 6 7) (8)
+//BFS_ALG(ALG2);
+#pragma endregion
+
+//long long mod = pow(2, 32);
+//cout << (-4294967298) % mod;
+//float a = FLT_MAX;
+//float N = FLT_MIN;
+//printFloatBitsManual(a);
+//printFloatBitsManual(N);
+//float s = 0.0f;
+//float res = 1.0f / s;
+//cout << res << endl;
+
+//int a[5] = { 2,4,6,8,20 };
+//int b[5] = { 11,13,15,17,19 };
+//
+//cout << Mid(a, b, 5) << endl;
+
+int case2[] = { 2, 5, 0, 3, 8, 1, 9, 4, 7, 6, 1 };
+MergeSort(case2, 0, 10);
+printArray(case2, 11);
 }

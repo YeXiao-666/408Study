@@ -67,6 +67,97 @@ void dfs(int start, int depth)
 
 	}
 }
+
+const int MOD = 998244353;
+
+// 树状数组 (Fenwick Tree) 模板
+struct FenwickTree {
+	int n;
+	vector<int> tree;
+
+	FenwickTree(int n) : n(n), tree(n + 1, 0) {}
+
+	// 获取最低位的 1
+	inline int lowbit(int x) {
+		return x & (-x);
+	}
+
+	// 单点增加：在位置 i 加上 delta
+	void add(int i, int delta) {
+		while (i <= n) {
+			tree[i] += delta;
+			i += lowbit(i);
+		}
+	}
+
+	// 区间查询：求 [1, i] 的前缀和
+	int query(int i) 
+	{
+		int sum = 0;
+		while (i > 0) 
+		{
+			sum += tree[i];
+			i -= lowbit(i);
+		}
+	}
+};
+//void testTree() {
+//	// 优化输入输出流
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(NULL);
+//
+//	int n;
+//	if (!(cin >> n)) return 0;
+//
+//	vector<int> a(n);
+//	vector<int> temp(n);
+//	for (int i = 0; i < n; ++i) {
+//		cin >> a[i];
+//		temp[i] = a[i];
+//	}
+//
+//	// 1. 离散化：去重并排序，以便将任意大小的值映射到 1~n
+//	sort(temp.begin(), temp.end());
+//	temp.erase(unique(temp.begin(), temp.end()), temp.end());
+//
+//	// rank_max 是离散化后的最大相对排名
+//	int rank_max = temp.size();
+//
+//	// 将原数组替换为离散化后的排名 (1-based index)
+//	for (int i = 0; i < n; ++i) {
+//		a[i] = lower_bound(temp.begin(), temp.end(), a[i]) - temp.begin() + 1;
+//	}
+//
+//	vector<int> L(n, 0);
+//	vector<int> R(n, 0);
+//
+//	// 2. 求 L 数组 (左侧比 a[j] 小的个数)
+//	FenwickTree bit_left(rank_max);
+//	for (int j = 0; j < n; ++j) {
+//		L[j] = bit_left.query(a[j] - 1);
+//		bit_left.add(a[j], 1);
+//	}
+//
+//	// 3. 求 R 数组 (右侧比 a[j] 大的个数)
+//	FenwickTree bit_right(rank_max);
+//	for (int j = n - 1; j >= 0; --j) {
+//		// 总数减去 <= a[j] 的数，即为 > a[j] 的数
+//		R[j] = bit_right.query(rank_max) - bit_right.query(a[j]);
+//		bit_right.add(a[j], 1);
+//	}
+//
+//	// 4. 统计答案并取模
+//	long long ans = 0;
+//	for (int j = 0; j < n; ++j) {
+//		// L[j] 和 R[j] 相乘可能会超过 int 的范围，转换为 long long
+//		long long current_triplets = (1LL * L[j] * R[j]) % MOD;
+//		ans = (ans + current_triplets) % MOD;
+//	}
+//
+//	cout << ans << "\n";
+//
+//	return 0;
+//}
 #pragma endregion
 
 #pragma region 滑动窗口最小覆盖子串
@@ -955,7 +1046,7 @@ namespace 通配符匹配双指针贪心算法
 //逆波兰表达式
 //逆波兰表达式求值(RPN) - 算法可视化
 //使用栈来计算后缀表达式的值。遇到数字入栈，遇到运算符出栈计算并入栈。
-	int mergeSort(int l, int r, vector<int>& record, vector<int>& tmp) {
+int mergeSort(int l, int r, vector<int>& record, vector<int>& tmp) {
 		// 终止条件
 		if (l >= r) return 0;
 		// 递归划分
@@ -977,3 +1068,49 @@ namespace 通配符匹配双指针贪心算法
 		}
 		return res;
 	}
+
+
+//网络迪杰斯特拉
+int networkDelayTime(vector<vector<int>>& times, int n, int k) 
+{
+	//邻接表
+	unordered_map<int, vector<pair<int, int>>> graph;
+	for (auto& edge : times)
+	{
+		int u = edge[0], v = edge[1], w = edge[2];
+		graph[u].push_back({ v, w });
+	}
+	//初始化距离向量数组，默认距离不可达无穷大
+	vector<int>dis(n + 1, INT_MAX);
+	// 优先队列，小根堆，优先边权值最短
+	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+	// 插入起始节点k
+	pq.push({ 0, k });
+	dis[k] = 0;
+
+	while (!pq.empty())
+	{
+		auto [d, u] = pq.top(); pq.pop();
+		// 无效旧数据，跳过
+		if (d > dis[u]) continue;
+		for (auto& [v, w] : graph[u])
+		{
+			//发现更短路径,将距离和顶点v插入队列,
+			//再从v洪泛松弛其邻居
+			if (dis[u] + w < dis[v])
+			{
+				dis[v] = dis[u] + w;
+				pq.push({ dis[v], v });
+			}
+		}
+	}
+	int res = 0;
+	//遍历所有节点，取最大距离即为答案
+	//最大距离即为，单源最短路径，从当前节点出发，到各节点的最短距离
+	for (int i = 1; i <= n; ++i)
+	{
+		if (dis[i] == INT_MAX) return -1;
+		res = max(res, dis[i]);
+	}
+	return res;
+}
