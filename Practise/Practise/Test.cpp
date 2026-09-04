@@ -314,7 +314,7 @@ void ShellSort(int a[], int n, int step)
         {
             int t = a[i];
             int j;
-            for (int j = i - gap; j >= 0 && a[j + gap] < t; j-=gap)
+            for (j = i - gap; j >= 0 && a[j + gap] < t; j-=gap)
             {
                 a[j + gap] = a[j];
             }
