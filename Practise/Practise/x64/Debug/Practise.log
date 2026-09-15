@@ -1,5 +1,6 @@
 ﻿  Test.cpp
-C:\Users\DELL\Desktop\学习笔记\Practise\Practise\Test.cpp(1233,1): warning C4715: “MyUnion”: 不是所有的控件路径都返回值
-C:\Users\DELL\Desktop\学习笔记\Practise\Practise\Test.cpp(1214,1): warning C4715: “MyFind”: 不是所有的控件路径都返回值
-C:\Users\DELL\Desktop\学习笔记\Practise\Practise\Test.cpp(1265,1): warning C4715: “Mid”: 不是所有的控件路径都返回值
+C:\Users\DELL\Desktop\学习笔记\Practise\Practise\Test.cpp(1655,11): warning C4101: “dummy”: 未引用的局部变量
+C:\Users\DELL\Desktop\学习笔记\Practise\Practise\Test.cpp(1276,1): warning C4715: “MyUnion”: 不是所有的控件路径都返回值
+C:\Users\DELL\Desktop\学习笔记\Practise\Practise\Test.cpp(1257,1): warning C4715: “MyFind”: 不是所有的控件路径都返回值
+C:\Users\DELL\Desktop\学习笔记\Practise\Practise\Test.cpp(1389,1): warning C4715: “Mid”: 不是所有的控件路径都返回值
   Practise.vcxproj -> C:\Users\DELL\Desktop\学习笔记\Practise\x64\Debug\Practise.exe

@@ -324,7 +324,7 @@ namespace My408
             //a[l] 第一个大于key的数,需要将其向后移动, 所以要注意大于等于!!!!!!
             for (int j = i - 1; j >= l; --j)
             {
-                if (a[j] == key) cout << "不稳定" << endl;
+                if (a[j] == key) cout << "稳定" << endl;
                 a[j + 1] = a[j];
                 
             }
@@ -507,7 +507,7 @@ namespace My408
     }
 #pragma endregion
 
-
+    
 
     void BubbleSort(int a[], int n)
     {

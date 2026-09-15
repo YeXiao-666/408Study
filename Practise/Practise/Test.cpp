@@ -267,6 +267,41 @@ namespace DoubleStack
 
 #pragma region 排序算法
 
+
+void InsertSort(int a[], int n)
+{
+    for (int i = 1; i < n; ++i)
+    {
+        int key = a[i];
+        int j = i - 1;
+        while (j >= 0 && a[j] > key)
+        {
+            a[j + 1] = a[j];
+            --j;
+        }
+        a[j+1] = key;
+    }
+}
+void InsertSort2(int a[], int n)
+{
+    for (int i = 1; i < n; ++i)
+    {
+        int key = a[i];
+        int r = i - 1, l = 0;
+        while (l <= r)
+        {
+            int m = (l + r) >> 1;
+            if (a[m] > key) r = m-1;
+            else l = m + 1;
+        }
+        for (int k = i - 1; k >= l; --k)
+        {
+            a[k + 1] = a[k];
+        }
+        a[l] = key;
+    }
+}
+
 void QuickSort(int a[], int l, int r)
 {
     if (l >= r)return;
@@ -545,6 +580,14 @@ void printArray(int a[], int n) {
 
 #pragma region 2010算法数组循环左移p真题
 
+void MyReverseArray(int a[], int l, int r)
+{
+    //循环次数向上取整
+    for (int i = 0; i < (r-l+1)/2; ++i)
+    {
+        swap(a[l+i],a[r - i]);
+    }
+}
 void ReverseArray(int a[], int b, int e)
 {
     while (b < e)
@@ -1243,7 +1286,88 @@ void printFloatBitsManual(float f) {
 }
 
 
+struct LinkNode
+{
+    int val;
+    LinkNode* next;
+};
 
+LinkNode* reverseLinkList(LinkNode* head)
+{
+    LinkNode* pre = nullptr;
+    LinkNode* cur = head;
+    while (cur)
+    {
+        LinkNode* node = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = node;
+    }
+    return pre;
+}
+LinkNode* ReverseList(LinkNode* head)
+{
+    if (!head || !head->next || !head->next->next)return head;
+    LinkNode* f = head->next, * s = head->next;
+    //后半个链表的个数大于等于前半个链表 
+    while (f->next && f->next->next)
+    {
+        f = f->next->next;
+        s = s->next;
+    }
+    LinkNode* rhead = s->next;
+    s->next = nullptr;
+
+    
+    LinkNode* r = reverseLinkList(rhead);
+
+    LinkNode* l = head->next;
+    //后半个链表的个数大于等于前半个链表 
+    // 4. 交替合并两个链表
+    LinkNode* cur = head; // 指向头结点，用于串联新链表
+    while (r&&l) {
+        LinkNode* tempL = l->next;
+        LinkNode* tempR = r->next;
+
+        cur->next = l;
+        cur = cur->next;
+
+        cur->next = r;
+        cur = cur->next;
+
+        l = tempL;
+        r = tempR;
+    }
+    // 4. 如果有剩余节点（链表长度为奇数时，前半部分多1个），直接接在后面
+    if (l) {
+        cur->next = l;
+    }
+    return head->next;
+}
+// 创建带头结点的链表
+LinkNode* createList(int arr[], int n) {
+    LinkNode* head = new LinkNode(); // 创建头结点（不存数据）
+    head->next = nullptr;
+    LinkNode* tail = head;
+    for (int i = 0; i < n; ++i) {
+        LinkNode* newNode = new LinkNode();
+        newNode->val = arr[i];
+        newNode->next = nullptr;
+        tail->next = newNode;
+        tail = newNode;
+    }
+    return head;
+}
+// 打印链表（从第一个数据节点开始打印）
+void printList(LinkNode* head) {
+    LinkNode* cur = head->next;
+    while (cur) {
+        printf("%d", cur->val);
+        if (cur->next) printf(" -> ");
+        cur = cur->next;
+    }
+    printf("\n");
+}
 int Mid(int a[], int b[], int L)
 {
     int p1 = 0, p2 = 0, c=0;
@@ -1265,6 +1389,27 @@ int Mid(int a[], int b[], int L)
 }
 int main() {
     
+    // 测试用例1：12个节点（偶数）
+    int arr1[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+    int n = sizeof(arr1) / sizeof(arr1[0]);
+
+    // 创建带头结点的链表
+    LinkNode* head1 = createList(arr1, n);
+    cout << "偶数节点（12个）修改前：";
+    printList(head1);
+    ReverseList(head1);
+    cout << "偶数节点（12个）修改后：";
+    printList(head1);
+    cout << "----------------------------------" << endl;
+
+    // 测试用例2：11个节点（奇数）
+    int arr2[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+    LinkNode* head2 = createList(arr2, 11);
+    cout << "奇数节点（11个）修改前：";
+    printList(head2);
+    LinkNode* result2 = ReverseList(head2);
+    cout << "奇数节点（11个）修改后：";
+    printList(result2);
 
 #pragma region  并查集
     //Init(); // 初始状态已在内部打印
@@ -1328,20 +1473,20 @@ int main() {
     //CalMulSumPro(case4, res3, n4);
     //cout << endl;
 
-   /* int case1[] = { 0, 1,2,3,4,5,6,7,8 };
-    int case2[] = { 0, 1,2,3,4,5,6,7,8 };
-    int case3[] = { 0, 1,2,3,4,5,6,7,8 };
-    int case4[] = { 0, 1,2,3,4,5,6,7,8 };
-    int case5[] = { 0, 1,2,3,4,5,6,7,8 };
-    MoveArray(case1, 9, 1);
-    cout << endl;
-    MoveArray(case2, 9, 2);
-    cout << endl;
-    MoveArray(case3, 9, 3);
-    cout << endl;
-    MoveArray(case4, 9, 4);
-    cout << endl;
-    MoveArray(case5, 9, 5);*/
+    //int case1[] = { 0, 1,2,3,4,5,6,7,8 };
+    //int case2[] = { 0, 1,2,3,4,5,6,7,8 };
+    //int case3[] = { 0, 1,2,3,4,5,6,7,8 };
+    //int case4[] = { 0, 1,2,3,4,5,6,7,8 };
+    //int case5[] = { 0, 1,2,3,4,5,6,7,8 };
+    //MoveArrayPro(case1, 9, 1);
+    //cout << endl;
+    //MoveArrayPro(case2, 9, 2);
+    //cout << endl;
+    //MoveArrayPro(case3, 9, 3);
+    //cout << endl;
+    //MoveArray(case4, 9, 4);
+    //cout << endl;
+    //MoveArray(case5, 9, 5);
 
 
     /*int case1[] = { 0, 1,2,3,4,5,6,7,8 };
@@ -1503,7 +1648,11 @@ int main() {
 //
 //cout << Mid(a, b, 5) << endl;
 
-int case2[] = { 2, 5, 0, 3, 8, 1, 9, 4, 7, 6, 1 };
-MergeSort(case2, 0, 10);
-printArray(case2, 11);
+//int case2[] = { 2, 5, 0, 3, 8, 1, 9, 4, 7, 6, 1 };
+//InsertSort2(case2, 11);
+
+
+LinkNode* dummy;
+
+
 }
